@@ -9,9 +9,6 @@
    [Sobre o projeto](#sobre-o-projeto) • [Tecnologias utilizadas](#tecnologias-utilizadas) • [Desenvolvedores](#desenvolvedores) 
    
 </div>
-<br>
-<b> Link da plataforma:</b> https://mind-2.vercel.app/
-<p>Login: snoopy | Senha: 1950</p>
 
 ## Sobre o projeto
 
