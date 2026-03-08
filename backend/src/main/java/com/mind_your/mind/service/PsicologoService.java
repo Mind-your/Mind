@@ -8,6 +8,7 @@ import com.mind_your.mind.dto.response.PsicologoResponseDTO;
 import com.mind_your.mind.dto.response.UploadImagemResponseDTO;
 import com.mind_your.mind.mapper.PsicologoMapper;
 import com.mind_your.mind.models.Psicologo;
+import com.mind_your.mind.models.RefreshToken;
 import com.mind_your.mind.repository.PsicologoRepository;
 import com.mind_your.mind.security.JwtUtil;
 
@@ -42,6 +43,9 @@ public class PsicologoService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
 
     // Cadastrar
     public PsicologoCadastroResponseDTO cadastrar(PsicologoCadastroRequestDTO dados) {
@@ -123,7 +127,8 @@ public class PsicologoService {
                     );
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     String token = jwtUtil.generateJwtToken(authentication);
-                    return new JwtResponseDTO(token, p.getLogin(), "psicologo");
+                    RefreshToken refreshToken = refreshTokenService.criar(p.getLogin());
+                    return new JwtResponseDTO(token, p.getLogin(), "psicologo", refreshToken.getToken());
                 });
     }
 

@@ -17,11 +17,12 @@ export const authService = {
         }
 
         const data = await res.json();
-        // data = { token, type, username, tipo }
+        // data = { token, type, username, tipo, refreshToken }
 
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
         localStorage.setItem("tipo", data.tipo);
+        localStorage.setItem("refreshToken", data.refreshToken);
 
         return data;
     },
@@ -42,6 +43,28 @@ export const authService = {
 
         const data = await res.json();
         return { ...data, tipo };
+    },
+
+    // Renovar JWT usando o refresh token
+    async refreshJwt() {
+        const refreshToken = this.getRefreshToken();
+
+        if (!refreshToken) throw new Error("Sem refresh token");
+
+        const res = await fetch(`${API_URL}/api/auth/refresh`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ refreshToken }),
+        });
+
+        if (!res.ok) {
+            this.logout();
+            throw new Error("Sessão expirada. Faça login novamente.");
+        }
+
+        const data = await res.json();
+        localStorage.setItem("token", data.token);
+        return data.token;
     },
 
     // Cadastrar paciente
@@ -80,11 +103,25 @@ export const authService = {
         return res.json();
     },
 
-    // Logout
-    logout() {
+    // Logout — invalida o refresh token no backend
+    async logout() {
+        const token = this.getToken();
+
+        if (token) {
+            try {
+                await fetch(`${API_URL}/api/auth/logout`, {
+                    method: "POST",
+                    headers: { "Authorization": `Bearer ${token}` },
+                });
+            } catch (e) {
+                // Ignorar erro de rede no logout
+            }
+        }
+
         localStorage.removeItem("token");
         localStorage.removeItem("username");
         localStorage.removeItem("tipo");
+        localStorage.removeItem("refreshToken");
         localStorage.removeItem("user");
     },
 
@@ -94,37 +131,37 @@ export const authService = {
     },
 
     // Getters
-    getToken() {
-        return localStorage.getItem("token");
-    },
+    getToken() { return localStorage.getItem("token"); },
+    getUsername() { return localStorage.getItem("username"); },
+    getTipo() { return localStorage.getItem("tipo"); },
+    getRefreshToken() { return localStorage.getItem("refreshToken"); },
 
-    getUsername() {
-        return localStorage.getItem("username");
-    },
-
-    getTipo() {
-        return localStorage.getItem("tipo");
-    },
-
-    // Requisição autenticada
+    // Requisição autenticada — renova o JWT automaticamente se expirar
     async authenticatedFetch(url, options = {}) {
         const token = this.getToken();
 
-        if (!token) {
-            throw new Error("Não autenticado");
-        }
+        if (!token) throw new Error("Não autenticado");
 
-        const headers = {
-            ...options.headers,
-            "Authorization": `Bearer ${token}`,
-            "Content-Type": "application/json",
-        };
+        const makeRequest = (t) => fetch(url, {
+            ...options,
+            headers: {
+                ...options.headers,
+                "Authorization": `Bearer ${t}`,
+                "Content-Type": "application/json",
+            },
+        });
 
-        const res = await fetch(url, { ...options, headers });
+        let res = await makeRequest(token);
 
+        // Se receber 401, tenta renovar o JWT e repetir
         if (res.status === 401) {
-            this.logout();
-            throw new Error("Sessão expirada. Faça login novamente.");
+            try {
+                const novoToken = await this.refreshJwt();
+                res = await makeRequest(novoToken);
+            } catch (e) {
+                this.logout();
+                throw new Error("Sessão expirada. Faça login novamente.");
+            }
         }
 
         return res;

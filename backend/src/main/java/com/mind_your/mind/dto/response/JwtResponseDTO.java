@@ -5,11 +5,13 @@ public class JwtResponseDTO {
     private String type = "Bearer";
     private String username;
     private String tipo;
+    private String refreshToken;
 
-    public JwtResponseDTO(String token, String username, String tipo) {
+    public JwtResponseDTO(String token, String username, String tipo, String refreshToken) {
         this.token = token;
         this.username = username;
         this.tipo = tipo;
+        this.refreshToken = refreshToken;
     }
 
     public String getToken() { return token; }
@@ -23,4 +25,7 @@ public class JwtResponseDTO {
 
     public String getTipo() { return tipo; }
     public void setTipo(String tipo) { this.tipo = tipo; }
+
+    public String getRefreshToken() { return refreshToken; }
+    public void setRefreshToken(String refreshToken) { this.refreshToken = refreshToken; }
 }

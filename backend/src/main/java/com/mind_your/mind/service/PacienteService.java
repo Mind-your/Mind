@@ -20,6 +20,8 @@ import java.nio.file.Paths;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
+import com.mind_your.mind.models.RefreshToken;
+import com.mind_your.mind.service.RefreshTokenService;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -42,6 +44,9 @@ public class PacienteService {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private RefreshTokenService refreshTokenService;
 
     public PacienteCadastroResponseDTO cadastrar(PacienteCadastroRequestDTO dados) {
         Paciente paciente = new Paciente();
@@ -137,7 +142,8 @@ public class PacienteService {
                     );
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     String token = jwtUtil.generateJwtToken(authentication);
-                    return new JwtResponseDTO(token, p.getLogin(), "paciente");
+                    RefreshToken refreshToken = refreshTokenService.criar(p.getLogin());
+                    return new JwtResponseDTO(token, p.getLogin(), "paciente", refreshToken.getToken());
                 });
     }
 

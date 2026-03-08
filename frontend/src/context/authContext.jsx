@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
         setLoading(true);
         setError("");
         try {
-            // 1. Autentica e recebe o token
+            // 1. Autentica e recebe token + refreshToken
             const authData = await authService.login(login, senha, tipo);
 
             // 2. Busca dados completos do usuário
@@ -74,9 +74,9 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // Logout
-    function logout() {
-        authService.logout();
+    // Logout — invalida refresh token no backend
+    async function logout() {
+        await authService.logout();
         setUser(null);
     }
 

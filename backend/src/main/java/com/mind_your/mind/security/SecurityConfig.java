@@ -17,10 +17,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import com.mind_your.mind.UserDetailsServiceImpl;
+import com.mind_your.mind.security.AuthEntryPointJwt;
+import com.mind_your.mind.security.AuthTokenFilter;
 
 import java.util.Arrays;
 import org.springframework.http.HttpMethod;
+import com.mind_your.mind.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -77,6 +79,9 @@ public class SecurityConfig {
                 .requestMatchers("/pacientes/login", "/pacientes/cadastrar").permitAll()
                 .requestMatchers("/psicologos/login", "/psicologos/cadastrar").permitAll()
                 .requestMatchers("/voluntarios/login", "/voluntarios/cadastrar").permitAll()
+
+                // Refresh token público, logout exige autenticação
+                .requestMatchers("/api/auth/refresh").permitAll()
 
                 // Imagens públicas
                 .requestMatchers("/api/images/**").permitAll()
