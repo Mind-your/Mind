@@ -1,12 +1,15 @@
 const API_URL = "http://localhost:8080";
 
 export const authService = {
-    // 🔹 Login com JWT
-    async login(username, password) {
-        const res = await fetch(`${API_URL}/api/auth/signin`, {
+
+    // Login — chama o endpoint correto baseado no tipo
+    async login(login, senha, tipo) {
+        const endpoint = tipo === "psicologo" ? "/psicologos/login" : "/pacientes/login";
+
+        const res = await fetch(`${API_URL}${endpoint}`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ username, password }),
+            body: JSON.stringify({ login, senha }),
         });
 
         if (!res.ok) {
@@ -14,43 +17,34 @@ export const authService = {
         }
 
         const data = await res.json();
+        // data = { token, type, username, tipo }
 
-        // Salvar token e username no localStorage
         localStorage.setItem("token", data.token);
         localStorage.setItem("username", data.username);
+        localStorage.setItem("tipo", data.tipo);
 
         return data;
     },
 
-    // 🔹 Buscar dados completos (paciente, psicólogo ou voluntário)
-    async getUserData(username) {
+    // Busca dados completos do usuário após o login
+    async getUserData(username, tipo) {
         const token = this.getToken();
+        const endpoint = tipo === "psicologo" ? "psicologos" : "pacientes";
 
-        const fetchWithAuth = async (endpoint) => {
-            const res = await fetch(`${API_URL}/${endpoint}/login/${username}`, {
-                headers: {
-                    "Authorization": `Bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-            });
-            if (res.ok) return res.json();
-            return null;
-        };
+        const res = await fetch(`${API_URL}/${endpoint}/login/${username}`, {
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+        });
 
-        // Tentar nas 3 entidades conhecidas
-        const paciente = await fetchWithAuth("pacientes");
-        if (paciente) return { ...paciente, tipo: "paciente" };
+        if (!res.ok) throw new Error("Erro ao buscar dados do usuário");
 
-        const psicologo = await fetchWithAuth("psicologos");
-        if (psicologo) return { ...psicologo, tipo: "psicologo" };
-
-        const voluntario = await fetchWithAuth("voluntarios");
-        if (voluntario) return { ...voluntario, tipo: "voluntario" };
-
-        throw new Error("Usuário não encontrado");
+        const data = await res.json();
+        return { ...data, tipo };
     },
 
-    // 🔹 Cadastrar paciente
+    // Cadastrar paciente
     async registerPaciente(userData) {
         const res = await fetch(`${API_URL}/pacientes/cadastrar`, {
             method: "POST",
@@ -58,12 +52,11 @@ export const authService = {
             body: JSON.stringify(userData),
         });
 
-
         if (!res.ok) throw new Error("Erro ao cadastrar paciente");
         return res.json();
     },
 
-    // 🔹 Cadastrar psicólogo
+    // Cadastrar psicólogo
     async registerPsicologo(userData) {
         const res = await fetch(`${API_URL}/psicologos/cadastrar`, {
             method: "POST",
@@ -75,7 +68,7 @@ export const authService = {
         return res.json();
     },
 
-    // 🔹 Cadastrar voluntário ✅ (novo)
+    // Cadastrar voluntário
     async registerVoluntario(userData) {
         const res = await fetch(`${API_URL}/voluntarios/cadastrar`, {
             method: "POST",
@@ -87,19 +80,20 @@ export const authService = {
         return res.json();
     },
 
-    // 🔹 Logout
+    // Logout
     logout() {
         localStorage.removeItem("token");
         localStorage.removeItem("username");
+        localStorage.removeItem("tipo");
         localStorage.removeItem("user");
     },
 
-    // 🔹 Verificar se está autenticado
+    // Verificar se está autenticado
     isAuthenticated() {
         return !!this.getToken();
     },
 
-    // 🔹 Obter token e username
+    // Getters
     getToken() {
         return localStorage.getItem("token");
     },
@@ -108,7 +102,11 @@ export const authService = {
         return localStorage.getItem("username");
     },
 
-    // 🔹 Requisição autenticada
+    getTipo() {
+        return localStorage.getItem("tipo");
+    },
+
+    // Requisição autenticada
     async authenticatedFetch(url, options = {}) {
         const token = this.getToken();
 

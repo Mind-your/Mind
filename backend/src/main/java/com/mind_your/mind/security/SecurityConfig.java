@@ -1,4 +1,4 @@
-package com.mind_your.mind;
+package com.mind_your.mind.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,6 +16,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.mind_your.mind.UserDetailsServiceImpl;
+
 import java.util.Arrays;
 import org.springframework.http.HttpMethod;
 
@@ -26,7 +29,7 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000")); // Permitir o frontend
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type"));
         configuration.setAllowCredentials(true);
@@ -70,37 +73,31 @@ public class SecurityConfig {
             .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // Endpoints públicos - autenticação e cadastro
-                .requestMatchers("/api/auth/**").permitAll()
+                // Login e cadastro públicos
                 .requestMatchers("/pacientes/login", "/pacientes/cadastrar").permitAll()
                 .requestMatchers("/psicologos/login", "/psicologos/cadastrar").permitAll()
                 .requestMatchers("/voluntarios/login", "/voluntarios/cadastrar").permitAll()
-                
-                // Testes
-                .requestMatchers("/api/test/**").permitAll()
-                
+
                 // Imagens públicas
                 .requestMatchers("/api/images/**").permitAll()
-                
-                // Listar psicólogos - PERMITIR SEM AUTENTICAÇÃO
+
+                // Listar psicólogos público
                 .requestMatchers(HttpMethod.GET, "/psicologos").permitAll()
-                
-                // Swagger/OpenAPI endpoints
+
+                // Swagger/OpenAPI
                 .requestMatchers("/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/api-docs/**", "/swagger-resources/**", "/webjars/**").permitAll()
-                
+
                 // OPTIONS para CORS
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                
-                // Todas as outras requisições exigem autenticação
+
+                // Tudo mais exige autenticação
                 .anyRequest().authenticated()
             );
-        
-        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
-        
-        http.authenticationProvider(authenticationProvider());
 
+        http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
+        http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
-        
+
         return http.build();
     }
 }

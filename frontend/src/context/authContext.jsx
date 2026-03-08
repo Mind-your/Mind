@@ -8,34 +8,28 @@ export function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    // 🔹 Verifica se há usuário logado
+    // Recarrega usuário do localStorage no refresh da página
     useEffect(() => {
-        async function loadUser() {
-            const token = authService.getToken();
-            const username = authService.getUsername();
+        const token = authService.getToken();
+        const savedUser = localStorage.getItem("user");
 
-            if (token && username) {
-                try {
-                    const userData = await authService.getUserData(username);
-                    setUser(userData);
-                } catch (err) {
-                    console.error("Erro ao carregar usuário:", err);
-                    authService.logout();
-                }
-            }
-            setLoading(false);
+        if (token && savedUser) {
+            setUser(JSON.parse(savedUser));
         }
-
-        loadUser();
+        setLoading(false);
     }, []);
 
-    // 🔹 Login
-    async function login(username, password) {
+    // Login
+    async function login(login, senha, tipo) {
         setLoading(true);
         setError("");
         try {
-            await authService.login(username, password);
-            const userData = await authService.getUserData(username);
+            // 1. Autentica e recebe o token
+            const authData = await authService.login(login, senha, tipo);
+
+            // 2. Busca dados completos do usuário
+            const userData = await authService.getUserData(authData.username, authData.tipo);
+
             setUser(userData);
             localStorage.setItem("user", JSON.stringify(userData));
             return { success: true, user: userData };
@@ -48,15 +42,13 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // 🔹 Cadastro genérico (para paciente, psicólogo e voluntário)
+    // Cadastro genérico (paciente, psicólogo ou voluntário)
     async function registerUser(userData) {
         setLoading(true);
         setError("");
 
         try {
             let newUser;
-
-            // Decide qual serviço chamar
             const tipo = userData.tipo || userData.tipoUsuario;
 
             if (tipo === "paciente") {
@@ -69,9 +61,8 @@ export function AuthProvider({ children }) {
                 throw new Error("Tipo de usuário inválido");
             }
 
-
-            // Faz login automático após cadastro
-            await login(userData.email, userData.senha);
+            // Login automático após cadastro
+            await login(userData.email, userData.senha, tipo);
 
             return { success: true, user: newUser };
         } catch (err) {
@@ -83,14 +74,13 @@ export function AuthProvider({ children }) {
         }
     }
 
-    // 🔹 Logout
+    // Logout
     function logout() {
         authService.logout();
         setUser(null);
-        localStorage.removeItem("user");
     }
 
-    // 🔹 Atualizar usuário no estado e localStorage
+    // Atualizar usuário no estado e localStorage
     function updateUser(newData) {
         const updatedUser = { ...user, ...newData };
         setUser(updatedUser);
@@ -102,7 +92,7 @@ export function AuthProvider({ children }) {
         loading,
         error,
         login,
-        registerUser, // ✅ função genérica usada pelo InputCadastro
+        registerUser,
         logout,
         updateUser,
         isAuthenticated: !!user,

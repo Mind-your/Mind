@@ -1,4 +1,4 @@
-package com.mind_your.mind;
+package com.mind_your.mind.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
