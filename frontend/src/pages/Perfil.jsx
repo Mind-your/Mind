@@ -2,8 +2,8 @@ import { useAuth } from "../context/AuthContext";
 import { useParams, Navigate } from "react-router-dom";
 
 // importa as sections específicas
-import SectionPsicologo from "../components/perfil-page/sectionPsicologo";
-import SectionPaciente from "../components/perfil-page/sectionPaciente";
+import SectionPsicologo from "../components/perfil-page/SectionPsicologo";
+import SectionPaciente from "../components/perfil-page/SectionPaciente";
 
 export default function Perfil() {
   const { user, loading } = useAuth();
