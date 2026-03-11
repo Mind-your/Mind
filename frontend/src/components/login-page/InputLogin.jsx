@@ -3,7 +3,7 @@ import { useNavigate, Link, useLocation } from "react-router";
 import background from "../../assets/img/background_input.png";
 import '../../assets/styles/input_login.css';
 import OptionsLogin from "./optionsLogin";
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { toast } from 'react-toastify';
 
 export default function InputLogin() {

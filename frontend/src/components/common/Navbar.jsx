@@ -5,7 +5,7 @@ import NavDesktop from './NavbarDesktop'
 import NavMobile from './NavbarMobile'
 import { NavLink } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { useAuth } from '../../context/authContext'
+import { useAuth } from '../../context/AuthContext'
 
 export default function Navbar() {
     const [resize, setResize] = useState(true);

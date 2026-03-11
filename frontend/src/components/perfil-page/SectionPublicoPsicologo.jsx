@@ -1,6 +1,6 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { usePsicologos } from "../../context/psicologos";
+import { usePsicologos } from "../../context/Psicologos";
 import InfoPublicoPsicologo from "./infoPublicoPsicologo.jsx";
 import Calendario from "./calendario.jsx";
 import SobrePsicologo from "./sobrePsicologo.jsx";

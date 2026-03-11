@@ -1,4 +1,4 @@
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import { useParams, Navigate } from "react-router-dom";
 
 // importa as sections específicas

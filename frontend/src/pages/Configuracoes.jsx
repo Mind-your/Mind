@@ -10,7 +10,7 @@ import { getImageUrl, getDefaultAvatar } from "../utils/imageHelper";
 
 import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom"
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import { atualizar, deletar, uploadImagem } from "../services/pacienteService";
 import { atualizar as atualizarPsicologo, deletar as deletarPsicologo, uploadImagem as uploadImagemPsicologo } from "../services/psicologoService";
 

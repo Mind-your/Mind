@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import { getImageUrl, getDefaultAvatar } from '../../utils/imageHelper';
 import * as pacienteService from '../../services/pacienteService';
 import * as psicologoService from '../../services/psicologoService';

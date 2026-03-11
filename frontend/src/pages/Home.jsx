@@ -3,7 +3,7 @@ import AreaCards from "../components/home-page/AreaCards";
 import VerPsi from "../components/pop-ups/Verpsi";
 import ActiveFilters from "../components/home-page/ActiveFilters";
 import { useState } from "react";
-import { usePsicologos } from "../context/psicologos";
+import { usePsicologos } from "../context/Psicologos";
 import '../assets/styles/home/filtros-home.css';
 import '../assets/styles/home/card-psicologo.css';
 
