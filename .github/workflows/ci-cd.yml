@@ -7,9 +7,16 @@ on:
     branches: [main]
 
 jobs:
+  # BACKEND — Build e Testes
   backend:
     name: Backend (Spring Boot)
     runs-on: ubuntu-latest
+
+    services:
+      mongodb:
+        image: mongo:7
+        ports:
+          - 27017:27017
 
     steps:
       - name: Checkout código
@@ -30,10 +37,14 @@ jobs:
 
       - name: Build e testes
         run: cd backend && mvn clean verify
+        env:
+          SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/mindDB
 
       - name: Gerar JAR
         if: github.ref == 'refs/heads/main'
         run: cd backend && mvn clean package -DskipTests
+        env:
+          SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/mindDB
 
       - name: Upload JAR como artefato
         if: github.ref == 'refs/heads/main'
@@ -42,6 +53,7 @@ jobs:
           name: backend-jar
           path: backend/target/*.jar
 
+  # FRONTEND — Build
   frontend:
     name: Frontend (React)
     runs-on: ubuntu-latest
@@ -70,6 +82,7 @@ jobs:
           name: frontend-build
           path: frontend/dist
 
+  # DEPLOY BACKEND — só na main
   deploy-backend:
     name: Deploy Backend
     runs-on: ubuntu-latest
@@ -82,10 +95,10 @@ jobs:
         with:
           name: backend-jar
 
-
       - name: Deploy pendente
         run: echo "Configure o deploy do backend descomentando o bloco da sua plataforma."
 
+  # DEPLOY FRONTEND — só na main
   deploy-frontend:
     name: Deploy Frontend
     runs-on: ubuntu-latest
@@ -99,4 +112,4 @@ jobs:
           name: frontend-build
 
       - name: Deploy pendente
-        run: echo "Deploy sera configurado em breve"
+        run: echo "Deploy será configurado em breve"
