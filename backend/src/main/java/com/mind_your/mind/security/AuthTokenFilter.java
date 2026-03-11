@@ -1,4 +1,4 @@
-package com.mind_your.mind;
+package com.mind_your.mind.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

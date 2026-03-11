@@ -31,7 +31,7 @@ export default function InputLogin() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const result = await login(form.login, form.senha);
+        const result = await login(form.login, form.senha, tipoUsuario);
         
         if (result.success) {
             const { user } = result;

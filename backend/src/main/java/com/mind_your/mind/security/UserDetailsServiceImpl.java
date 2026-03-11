@@ -1,4 +1,4 @@
-package com.mind_your.mind;
+package com.mind_your.mind.security;
 
 import com.mind_your.mind.models.Paciente;
 import com.mind_your.mind.models.Psicologo;

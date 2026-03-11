@@ -1,4 +1,4 @@
-package com.mind_your.mind;
+package com.mind_your.mind.security;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -23,11 +23,16 @@ public class JwtUtil {
         return Keys.hmacShaKeyFor(jwtSecret.getBytes());
     }
 
+    // Gerar JWT a partir de Authentication
     public String generateJwtToken(Authentication authentication) {
         UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+        return generateJwtTokenFromUsername(userPrincipal.getUsername());
+    }
 
+    // Gerar JWT a partir do username (usado no refresh)
+    public String generateJwtTokenFromUsername(String username) {
         return Jwts.builder()
-                .subject((userPrincipal.getUsername()))
+                .subject(username)
                 .issuedAt(new Date())
                 .expiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(getSigningKey(), Jwts.SIG.HS512)
@@ -56,8 +61,6 @@ public class JwtUtil {
         } catch (IllegalArgumentException e) {
             System.out.println("JWT claims string is empty: " + e.getMessage());
         }
-
         return false;
     }
 }
-
