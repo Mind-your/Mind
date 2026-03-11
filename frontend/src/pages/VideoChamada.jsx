@@ -1,4 +1,4 @@
-import { useAuth } from '../context/authContext';
+import { useAuth } from '../context/AuthContext';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Video, VideoOff, Mic, MicOff, PhoneOff } from 'lucide-react';

@@ -1,0 +1,20 @@
+import '../../assets/styles/perfil.css';
+import InfoPsicologo from './InfoPsicologo.jsx';
+import Calendario from './Calendario.jsx';
+import SobrePsicologo from './SobrePsicologo.jsx';
+import Notificacoes from './Notificacoes.jsx';
+
+export default function SectionPsicologo({ id }) {
+    return (
+        <div className="container-section-perfil">
+            <div className="perfil-container">
+                <InfoPsicologo id={id} />
+                <Calendario id={id} />
+            </div>
+            <div className="sobre-notif-container">
+                <SobrePsicologo id={id} />
+                <Notificacoes id={id} />
+            </div>
+        </div>
+    );
+}

@@ -2,7 +2,7 @@
 // import { useNavigate, Link, useLocation } from "react-router";
 // import background from "../../assets/img/background_input.png";
 // import "../../assets/styles/input_login.css";
-// import { useAuth } from "../../context/authContext";
+// import { useAuth } from "../../context/AuthContext";
 
 // export default function LoginPage() {
 //     const { login, error, loading, logout } = useAuth();
