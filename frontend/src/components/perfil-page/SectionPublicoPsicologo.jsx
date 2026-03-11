@@ -1,9 +1,9 @@
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { usePsicologos } from "../../context/Psicologos";
-import InfoPublicoPsicologo from "./infoPublicoPsicologo.jsx";
-import Calendario from "./calendario.jsx";
-import SobrePsicologo from "./sobrePsicologo.jsx";
+import InfoPublicoPsicologo from "./InfoPublicoPsicologo.jsx";
+import Calendario from "./Calendario.jsx";
+import SobrePsicologo from "./SobrePsicologo.jsx";
 import VerPsi from "../pop-ups/Verpsi.jsx";
 
 export default function PerfilPublicoPsicologo() {
