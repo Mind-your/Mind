@@ -1,8 +1,8 @@
 import '../../assets/styles/perfil.css';
-import Info from './info.jsx';
+import Info from './Info.jsx';
 import Calendario from './Calendario.jsx';
-import Sobre from './sobre.jsx';
-import Notificacoes from './notificacoes.jsx';
+import Sobre from './Sobre.jsx';
+import Notificacoes from './Notificacoes.jsx';
 
 
 export default function Section() {

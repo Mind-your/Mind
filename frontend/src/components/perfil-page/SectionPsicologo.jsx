@@ -1,8 +1,8 @@
 import '../../assets/styles/perfil.css';
-import InfoPsicologo from './infoPsicologo.jsx';
+import InfoPsicologo from './InfoPsicologo.jsx';
 import Calendario from './Calendario.jsx';
 import SobrePsicologo from './SobrePsicologo.jsx';
-import Notificacoes from './notificacoes.jsx';
+import Notificacoes from './Notificacoes.jsx';
 
 export default function SectionPsicologo({ id }) {
     return (

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import background from "../../assets/img/background_input.png";
 import "../../assets/styles/input_cadastro.css";
-import OptionsCadastro from "./optionsCadastro";
+import OptionsCadastro from "./OptionsCadastro";
 import { useAuth } from "../../context/AuthContext";
 import { HiChevronLeft } from "react-icons/hi";
 import { toast } from 'react-toastify';
