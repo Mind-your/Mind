@@ -12,18 +12,24 @@ export default function InfoPsicologo() {
   return (
     <div className="card-perfil-content">
       <div className="foto-perfil">
+        <div className="banner-perfil"></div>
         <img id="perfilFoto" src={user.foto || fotoPsi} alt="Foto do Psicólogo" />
         <div className="info-perfil">
           <h3 id="perfilNome">{user.nome}</h3>
 
           <div className="container-info">
             <p id="perfilIdade">Idade:</p>
-            <label>{user.idade || "—"}</label>
+            <label>{user.idade || "idade teste"}</label>
           </div>
 
           <div className="container-info">
             <p id="perfilLocal">Local:</p>
-            <label>{user.local || "—"}</label>
+            <label>{user.local || "local teste"}</label>
+          </div>
+
+          <div className="container-info">
+            <p id="perfilLocal">CRP:</p>
+            <label>{user.crp || ""}</label>
           </div>
         </div>
       </div>

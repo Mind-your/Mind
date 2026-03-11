@@ -1,39 +1,53 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
+import { Bookmark, Clock } from "lucide-react";
 import '../../assets/styles/perfil.css';
 
 export default function Notificacoes() {
-    const { user } = useAuth();
+  const { user } = useAuth();
 
-    return (
-        <>
-            <div className="card-notif-container">
-                <div className="notificacoes">
-                    <h1 className="notif-titulo">Notificações</h1>
-                    
-                    <div id="notifSide" className="card-notif-session">
-                        <div>
-                            Sessão do dia 25/10 <br/>começa às 18:00
-                        </div>
-                        <div>
-                            <Link to={`/${user.tipo}/perfil/${user.id}/video-chamada`}>
-                                <button className="button-confirm">Entrar</button>
-                            </Link>
-                        </div>
-                    </div>
-                    
-                    <div id="notifSide" className="card-notif-session">
-                        <div>
-                            Sessão do dia 28/10 <br/>começa às 18:00
-                        </div>
-                        <div>
-                            <Link to={`/${user.tipo}/perfil/${user.id}/video-chamada`}>
-                                <button className="button-confirm">Entrar</button>
-                            </Link>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>
-    );
+  return (
+    <div className="notif-container">
+
+      <div className="notif-header">
+        <h1>Próximas</h1>
+      </div>
+
+      <div className="notif-card">
+        <div className="notif-left">
+          <div className="icon-green">
+            <Bookmark size={28} />
+          </div>
+          <span className="notif-date">13/03</span>
+        </div>
+
+        <Link to={`/${user.tipo}/perfil/${user.id}/video-chamada`}>
+          <button className="btn-start">Iniciar</button>
+        </Link>
+      </div>
+
+      <div className="notif-card">
+        <div className="notif-left">
+          <div className="icon-orange">
+            <Clock size={28} />
+          </div>
+          <span className="notif-date">20/03</span>
+        </div>
+
+        <button className="btn-view">Ver</button>
+      </div>
+
+      <div className="notif-card">
+        <div className="notif-left">
+          <div className="icon-green">
+            <Bookmark size={28} />
+          </div>
+          <span className="notif-date">27/03</span>
+        </div>
+
+        <button className="btn-view">Ver</button>
+      </div>
+
+    </div>
+  );
 }

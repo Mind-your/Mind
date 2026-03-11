@@ -55,13 +55,12 @@ public class PsicologoService {
         psicologo.setSobrenome(dados.getSobrenome());
         psicologo.setEmail(dados.getEmail());
         psicologo.setLogin(
-            (dados.getLogin() == null || dados.getLogin().isEmpty())
-                ? dados.getEmail()
-                : dados.getLogin()
-        );
+                (dados.getLogin() == null || dados.getLogin().isEmpty())
+                        ? dados.getEmail()
+                        : dados.getLogin());
         psicologo.setSenha(passwordEncoder.encode(dados.getSenha()));
         psicologo.setCrp(dados.getCrp());
-        psicologo.setEspecialidade(dados.getEspecialidade());
+        psicologo.setEspecialidades(dados.getEspecialidades());
 
         Psicologo salvo = psicologoRepository.save(psicologo);
         return PsicologoMapper.toCadastroResponseDTO(salvo);
@@ -123,8 +122,7 @@ public class PsicologoService {
                 .filter(p -> passwordEncoder.matches(senha, p.getSenha()))
                 .map(p -> {
                     Authentication authentication = authenticationManager.authenticate(
-                            new UsernamePasswordAuthenticationToken(p.getLogin(), senha)
-                    );
+                            new UsernamePasswordAuthenticationToken(p.getLogin(), senha));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                     String token = jwtUtil.generateJwtToken(authentication);
                     RefreshToken refreshToken = refreshTokenService.criar(p.getLogin());

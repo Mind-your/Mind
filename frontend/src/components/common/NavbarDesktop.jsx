@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { HiOutlineUser, HiOutlineSearch } from "react-icons/hi";
+import { HiOutlineUser, HiOutlineSearch, HiOutlineBell } from "react-icons/hi";
 import { useAuth } from '../../context/authContext';
 
 export default function NavDesktop() {
@@ -30,6 +30,14 @@ export default function NavDesktop() {
         };
     }, []);
 
+
+    const [isNotifOpen, setNotifOpen] = useState(false);
+
+    const notificacoes = [
+        { id: 1, texto: "Sessão amanhã às 18:00" },
+        { id: 2, texto: "Novo artigo disponível" },
+        { id: 3, texto: "Sessão confirmada para 27/03" }
+    ];
     return (
         <>
             <nav id="nav-desktop">
@@ -61,34 +69,64 @@ export default function NavDesktop() {
                         </>
                     )}
                 </ul>
+                {isAuthenticated && (
+                    <div className="notif-wrapper">
+                        <button
+                            className="notif-btn"
+                            onClick={() => setNotifOpen(prev => !prev)}
+                        >
+                            <HiOutlineBell className="icon-ui" />
+
+                            {notificacoes.length > 0 && (
+                                <span className="notif-badge">
+                                    {notificacoes.length}
+                                </span>
+                            )}
+                        </button>
+
+                        {isNotifOpen && (
+                            <div className="notif-dropdown">
+                                {notificacoes.length === 0 ? (
+                                    <p>Sem notificações</p>
+                                ) : (
+                                    notificacoes.map((notif) => (
+                                        <div key={notif.id} className="notif-item">
+                                            {notif.texto}
+                                        </div>
+                                    ))
+                                )}
+                            </div>
+                        )}
+                    </div>
+                )}
                 <div className="nav-right-buttons" ref={dropdownRef}>
                     {!isAuthenticated ? (
                         <>
-                        <Link to="login=0">
-                    <button
-                        type="button"
-                        className="nav-btn-login"
-                        onClick={() => setDropdownOpen(prev => !prev)}
-                    >
-                        {isAuthenticated ? user.nome : "Login"}
-                    </button>
-                    </Link>
+                            <Link to="login=0">
+                                <button
+                                    type="button"
+                                    className="nav-btn-login"
+                                    onClick={() => setDropdownOpen(prev => !prev)}
+                                >
+                                    {isAuthenticated ? user.nome : "Login"}
+                                </button>
+                            </Link>
                         </>
 
-                    ):(
+                    ) : (
                         <>
-                         <button
-                        type="button"
-                        className="nav-btn-login"
-                        onClick={() => setDropdownOpen(prev => !prev)}
-                    >
-                        {isAuthenticated ? user.nome : "Login"}
-                    </button>
+                            <button
+                                type="button"
+                                className="nav-btn-login"
+                                onClick={() => setDropdownOpen(prev => !prev)}
+                            >
+                                {isAuthenticated ? user.nome : "Login"}
+                            </button>
                         </>
                     )}
-                        
-                    
-                    
+
+
+
 
                     <div className={`nav-login-drop-wrapper ${isAuthenticated && isDropdownOpen ? "show" : ""}`}>
                         <div className="nav-login-drop">

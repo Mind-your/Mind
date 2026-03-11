@@ -1,6 +1,7 @@
 package com.mind_your.mind.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PsicologoUpdateRequestDTO {
 
@@ -18,7 +19,7 @@ public class PsicologoUpdateRequestDTO {
     private String medicamentos;
     private String preferencias;
     private String crp;
-    private String especialidade;
+    private List<String> especialidades;
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
@@ -62,6 +63,6 @@ public class PsicologoUpdateRequestDTO {
     public String getCrp() { return crp; }
     public void setCrp(String crp) { this.crp = crp; }
 
-    public String getEspecialidade() { return especialidade; }
-    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
+    public List<String> getEspecialidades() { return especialidades; }
+    public void setEspecialidades(List<String> especialidades) { this.especialidades = especialidades; }
 }

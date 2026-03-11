@@ -1,0 +1,33 @@
+import '../../assets/styles/perfil.css';
+import { useAuth } from '../../context/authContext';
+import { HiOutlineLogout } from "react-icons/hi";
+
+export default function Logout() {
+    const { user, isAuthenticated, logout } = useAuth();
+      const handleLogout = () => {
+        logout();
+        navigate("landing");
+    };
+
+    return (
+        
+            <div className={`container-sair`}>
+                            {isAuthenticated ? (
+                                    <button
+                                        type="button"
+                                        className='icon-sair'
+                                        onClick={() => {
+                                            handleLogout();
+                                            setDropdownOpen(false);
+                                        }}
+                                    >
+                                        <HiOutlineLogout/>
+                                    </button>
+                            ) : (
+                                <>
+                                </>
+                            )}
+                    </div>
+        
+    );
+}

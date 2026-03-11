@@ -4,51 +4,71 @@
 
 .container-section-perfil {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-direction: row;
+  align-items: start;
   width: 100%;
-  max-width: 1200px;
   margin: 0 auto;
   padding-inline: 1rem;
+  padding-inline: 10%;
+  gap: 20px;
 }
 
 /* Container principal com fundo verde claro */
 .perfil-container {
   display: flex;
-  background: var(--green-light-default-100);
-  padding: 20px;
   border-radius: 12px;
   justify-content: space-between;
-  height: 400px;
   margin-bottom: 2rem;
-  width: 100%;
+  width: 50%;
   gap: 1rem;
+  flex-direction: column;
+}
+.sobre-notif-container{
+  width: 100%;
 }
 
 /* Card de perfil */
 .card-perfil-content {
-  background: var(--white-default-100);
+  background: var(--bege-default-100);
   border-radius: var(--border-radius-md);
   padding: 24px 32px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
+  position: relative;
+}
+
+.banner-perfil {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90px;
+  border-radius: var(--border-radius-md) var(--border-radius-md) 0px 0px;
+
+  background-image: url("../img/fundo-perfil.png");
+  background-size: cover;
+  background-position: center;
+
+  z-index: 0;
 }
 
 /* Foto e informações */
-.foto-perfil, #perfilFoto {
+.foto-perfil,
+#perfilFoto {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 18px;
+  z-index: 2;
 }
 
-.foto-perfil img, #perfilFoto img {
+.foto-perfil img,
+#perfilFoto img {
   width: 100px;
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  border: 2px solid var(--green-light-default-100);
 }
 
 .container-info {
@@ -57,9 +77,14 @@
   gap: 10px;
 }
 
+.container-info p {
+  font-weight: 600;
+}
+
 .info-perfil h3 {
   margin: 0 0 6px 0;
   font-size: 1.2rem;
+  font-weight: 600;
 }
 
 
@@ -78,12 +103,14 @@
   align-items: center;
   gap: 8px;
 }
-.container-contatos{
+
+.container-contatos {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-.container-config-artigos{
+
+.container-config-artigos {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -112,108 +139,166 @@
 }
 
 
-
-/* Calendário */
-.container-calendario {
-  background: var(--white-default-100);
+/* =========================
+   Button Sair
+========================= */
+.container-sair {
+  background-color: var(--apricot-100);
+  padding: 10px;
   border-radius: 10px;
-  padding: 12px 16px;
-  max-width: 700px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: auto;
-}
-
-.semana-nav {
-  display: flex;
-  align-items: start;
-  gap: 12px;
-}
-
-.dias {
-  display: flex;
-  gap: 10px;
-  margin: 18px 0 0 0;
-}
-
-.coluna-dia {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  height:auto;
-  /* altura suficiente para 3 horários + botão */
-  justify-content: flex-start;
-  position: relative;
-  margin-bottom: 10px;
-}
-
-.coluna-dia .footer-dia {
-  margin-top: auto;
-  /* empurra o botão para o final da coluna */
-}
-
-.dia {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.dia strong {
-  font-size: 1rem;
-  color: var(--green-default-100);
-}
-
-.dia small {
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.horario {
-  margin: 6px 0;
-  padding: 10px 10px;
-  border-radius: 8px;
-  font-size: 1rem;
-  background: var(--green-light-default-100);
-  color: var(--black-default-100);
-  font-weight: 500;
-  text-align: center;
-}
-
-.horario:hover {
-  background: var(--green-default-100);
-  color: var(--white-default-100);
-  cursor: pointer;
-  transition: 300ms;
-}
-
-.footer-dia {
-  margin-top: auto;
-  width: 100%;
   display: flex;
   justify-content: center;
 }
 
-.footer-dia button {
+
+
+
+
+
+
+/* =========================
+   CALENDÁRIO
+========================= */
+
+.container-calendario {
+  background: var(--bege-default-100);
+  border-radius: 10px;
+  width: 100%;
+  margin: 0 auto;
+  height: max-content;
+}
+
+/* Título */
+.container-calendario h1 {
+  text-align: center;
+  background: var(--orange-default-100);
+  border-radius: 10px 10px 0px 0px;
+  padding: 5px;
+}
+
+/* =========================
+   HEADER (MÊS + SETAS)
+========================= */
+
+.header-calendario {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-calendario h2 {
+  font-size: 1.4rem;
+  color: var(--black-default-100);
+  text-transform: capitalize;
+  margin: 10px 0 0 0;
+}
+
+/* Botões de navegação */
+
+.button-seta-calendario {
   background: var(--gray-100);
   border: none;
   border-radius: 8px;
-  padding: 10px 10px;
-  font-size: 1rem;
+  padding: 8px;
   cursor: pointer;
   transition: background 0.2s;
-  width: 100%;
-  max-width: 90px;
-  box-sizing: border-box;
 }
 
-.footer-dia button:hover {
-  background: var(--dove-gray-100);
+.button-seta-calendario svg {
+  width: 30px;
+  height: 30px;
 }
 
-/* Modal */
+.button-seta-calendario:hover {
+  scale: 1.05;
+}
+
+/* =========================
+   GRID DO CALENDÁRIO
+========================= */
+
+.grid-calendario {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  padding-inline: 10px;
+  padding-bottom: 20px;
+}
+
+/* Nome dos dias da semana */
+
+.dia-semana {
+  text-align: center;
+  font-weight: 600;
+  padding: 8px 0;
+  color: var(--black-default-100);
+}
+
+/* =========================
+   DIA DO CALENDÁRIO
+========================= */
+
+.dia-calendario {
+  background: var(--alabaster-100);
+  border: 1px solid var(--alto-100);
+  border-radius: 10px;
+  padding: 8px;
+  min-height: max-content;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.dia-calendario:hover {
+  background: var(--green-default-100);
+  color: var(--white-default-100);
+}
+
+/* Número do dia */
+
+.numero-dia {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Dia atual */
+
+.dia-hoje {
+  background: var(--green-default-100);
+  color: var(--white-default-100);
+}
+
+/* =========================
+   HORÁRIOS DO DIA
+========================= */
+
+.horarios-dia {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.horario {
+  font-size: 0.75rem;
+  background: var(--white-default-100);
+  padding: 2px 6px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+/* "+ X mais" */
+
+.mais-horarios {
+  font-size: 0.7rem;
+  opacity: 0.7;
+}
+
+/* =========================
+   MODAL
+========================= */
+
 .modal {
   position: fixed;
   top: 0;
@@ -225,54 +310,40 @@
   align-items: center;
   justify-content: center;
   z-index: 100;
-  width: 100%;
 }
 
 .modal-content {
-  width: 50%;
-  height: 50%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 420px;
   background: var(--white-default-100);
   border-radius: 12px;
-  padding: 32px 40px;
+  padding: 30px;
   position: relative;
 }
 
+/* Botão fechar */
+
 .fechar {
   position: absolute;
-  top: 12px;
-  right: 18px;
-  font-size: 2rem;
-  color: var(--black-default-100);
+  top: 10px;
+  right: 15px;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
 
-#modal-select-dia {
-  width: 100%;
-  padding: 10px;
-  border-radius: 10px;
-  margin-top: 20px;
-  font-size: 1rem;
-}
+/* Horários dentro do modal */
 
-#modal-select-dia:focus {
-  outline: none;
-  border: 2px solid var(--green-default-100);
-}
-
-#modal-horarios {
+.modal-horarios {
   display: flex;
-  width: 100%;
   flex-wrap: wrap;
   gap: 10px;
-  max-height: 200px;
-  overflow-y: auto;
+  margin-top: 15px;
 }
 
 .ocupado-modal {
-  width: max-content;
+  background: var(--green-light-default-100);
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
 }
 
 /* Sobre ----------------------------- */
@@ -294,8 +365,9 @@
 }
 
 .card-info-container h4 {
-  font-size: 1.1rem;
+  font-size: 1rem;
   width: max-content;
+  font-weight: 600;
 }
 
 .card-ficha-container {
@@ -305,25 +377,30 @@
   border: 1px solid #666666;
   padding: 10px;
 }
-.card-ficha-container-psi{
+
+.card-ficha-container-psi {
   width: 100%;
   height: 100px;
   border-radius: 10px;
   border: 1px solid #666666;
   padding: 10px;
 }
-.container-horarios-psi h4{
+
+.container-horarios-psi h4 {
   font-size: 1.1rem;
   width: max-content;
+  font-weight: 600;
 }
-.container-horario-atendimento-psi{
+
+.container-horario-atendimento-psi {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 10px;
   gap: 20px;
 }
-.container-horario-atendimento-psi p{
+
+.container-horario-atendimento-psi p {
   border: 1px solid #555;
   width: 100%;
   border-radius: 15px;
@@ -333,64 +410,78 @@
 
 /* Notificacoes ----------------------------- */
 
-.card-notif-container {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  border-radius: 10px;
-  margin-left: 0;
-  overflow: hidden;
-}
-
-.notificacoes {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  overflow-Y: scroll;
-  padding-right: 10px;
-  scrollbar-width: thin;
-  border-radius: 15px;
-  background-color: var(--red-default-100);
+.notif-container{
   width: 100%;
   height: 100%;
+  background: var(--bege-default-100);
+  border-radius: 20px;
+  padding-bottom: 20px;
 }
 
-.notif-titulo {
-  font-size: 1.1rem;
-  color: var(--white-default-100);
-  margin: 10px;
+.notif-header{
+  background: var(--orange-default-100);
+  padding: 20px;
+  border-radius: 20px 20px 0 0;
+  text-align: center;
 }
 
-.card-notif-session {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--white-default-100);
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 1rem;
-  width: 95%;
-  margin: 10px
+.notif-header h1{
+  margin:0;
+  font-size: 28px;
 }
 
-.notificacoes::-webkit-scrollbar {
-  width: 12px;
+.notif-card{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:var(--grayish-white-100);
+  margin:20px;
+  padding:20px;
+  border-radius:20px;
 }
 
-/* Section--------------------------- */
-
-.sobre-notif-container {
-  display: flex;
-  flex-direction: row;
-  gap: 24px;
-  justify-content: center;
-  margin-bottom: 10rem;
-  width: 100%;
-
+.notif-left{
+  display:flex;
+  align-items:center;
+  gap:20px;
 }
 
+.notif-date{
+  font-size:25px;
+  font-weight:600;
+}
 
+.icon-green{
+  background:#9cd18b;
+  padding:12px;
+  border-radius:15px;
+}
+
+.icon-orange{
+  background:#f2a45f;
+  padding:12px;
+  border-radius:15px;
+}
+
+.btn-start{
+  background:#245c3d;
+  color:white;
+  border:none;
+  padding:14px 30px;
+  border-radius:15px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+.btn-view{
+  background:#cf5c38;
+  color:black;
+  border:none;
+  padding:14px 30px;
+  border-radius:15px;
+  font-size:18px;
+  cursor:pointer;
+}
 /* ------------------MEDIA--------------------------- */
 @media (max-width: 480px) {
   .container-section-perfil {
@@ -521,7 +612,7 @@
     width: 100%;
     margin-inline: 0;
     padding-inline: 2rem;
-    
+
   }
 
   .perfil-container {
@@ -631,8 +722,9 @@
   }
 
 }
-@media (min-width: 800px) and (max-width: 1046px){
-  .horario{
+
+@media (min-width: 800px) and (max-width: 1046px) {
+  .horario {
     padding: 5px;
   }
 }

@@ -6,7 +6,6 @@ export default function Visualizacao({ visualizacao, setVisualizacao }) {
     return (
         <>
             <div className="container-visualizacao">
-                <h3>Visualização</h3>
                 <div className="col-and-row">
                     <button
                         title="Cards na vertical"
