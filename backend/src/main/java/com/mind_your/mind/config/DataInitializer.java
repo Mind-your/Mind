@@ -94,7 +94,7 @@ public class DataInitializer {
         p.setEndereco(local);
         p.setImgPerfil(imgPerfil);
         p.setCrp(crp);
-        p.setEspecialidades(List.of(especialidade));
+        p.setEspecialidade(especialidade);
         return p;
     }
 }

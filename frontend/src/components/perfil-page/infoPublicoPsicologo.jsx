@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";
 import fotoPsi from '../../assets/img/perfil-default.png';
-import "../../assets/styles/perfil/info.css";
+import '../../assets/styles/perfil.css';
 import VerPsi from "../pop-ups/Verpsi"; // 🔹 Importa o pop-up
 
 export default function InfoPublicoPsicologo() {
