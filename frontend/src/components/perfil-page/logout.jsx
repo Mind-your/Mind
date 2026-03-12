@@ -1,4 +1,4 @@
-import '../../assets/styles/perfil.css';
+import "../../assets/styles/perfil/logout.css";
 import { useAuth } from '../../context/authContext';
 import { HiOutlineLogout } from "react-icons/hi";
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext";
 import { Bookmark, Clock } from "lucide-react";
-import '../../assets/styles/perfil.css';
+import "../../assets/styles/perfil/notificacoes.css";
 
 export default function Notificacoes() {
   const { user } = useAuth();

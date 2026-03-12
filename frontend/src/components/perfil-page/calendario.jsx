@@ -1,21 +1,15 @@
 import React, { useState } from "react";
-import "../../assets/styles/perfil.css";
+import "../../assets/styles/perfil/calendario.css";
 import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const diasSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
-
-const consultasPadrao = {
-  "2026-03-21": ["12:13", "14:30"],
-  "2026-04-22": ["10:15"],
-  "2026-04-24": ["09:00", "10:00", "16:45"],
-  "2026-04-25": ["21:00"]
-};
 
 function formatDia(date) {
   return date.toISOString().split("T")[0];
 }
 
 function gerarDiasCalendario(data) {
+
   const ano = data.getFullYear();
   const mes = data.getMonth();
 
@@ -27,27 +21,39 @@ function gerarDiasCalendario(data) {
   const inicio = primeiroDia.getDay();
   const totalDias = ultimoDia.getDate();
 
-  for (let i = 0; i < inicio; i++) {
-    dias.push(null);
+  const ultimoDiaMesAnterior = new Date(ano, mes, 0).getDate();
+
+  // dias do mês anterior
+  for (let i = inicio - 1; i >= 0; i--) {
+    dias.push(new Date(ano, mes - 1, ultimoDiaMesAnterior - i));
   }
 
+  // dias do mês atual
   for (let i = 1; i <= totalDias; i++) {
     dias.push(new Date(ano, mes, i));
   }
 
+  // dias do próximo mês
+  let proxDia = 1;
+
+  while (dias.length % 7 !== 0) {
+    dias.push(new Date(ano, mes + 1, proxDia));
+    proxDia++;
+  }
+
   return dias;
 }
+
 
 export default function Calendario() {
 
   const hoje = new Date();
 
   const [mesAtual, setMesAtual] = useState(new Date());
-  const [consultas] = useState(consultasPadrao);
-  const [modalAberto, setModalAberto] = useState(false);
-  const [diaModal, setDiaModal] = useState(null);
+  
 
   const diasCalendario = gerarDiasCalendario(mesAtual);
+
 
   function mesAnterior() {
     const novaData = new Date(mesAtual);
@@ -59,34 +65,6 @@ export default function Calendario() {
     const novaData = new Date(mesAtual);
     novaData.setMonth(novaData.getMonth() + 1);
     setMesAtual(novaData);
-  }
-
-  function abrirModal(dia) {
-    setDiaModal(formatDia(dia));
-    setModalAberto(true);
-  }
-
-  function fecharModal() {
-    setModalAberto(false);
-  }
-
-  function renderHorariosModal() {
-    if (!diaModal) return null;
-
-    const horarios = consultas[diaModal] || [];
-
-    if (horarios.length === 0) {
-      return <p>Nenhum horário registrado</p>;
-    }
-
-    return horarios
-      .slice()
-      .sort((a, b) => a.localeCompare(b))
-      .map((h, i) => (
-        <div key={i} className="horario ocupado-modal">
-          {h}
-        </div>
-      ));
   }
 
   return (
@@ -115,6 +93,8 @@ export default function Calendario() {
       <div className="grid-calendario">
 
         {diasSemana.map((dia, i) => (
+
+
           <div key={i} className="dia-semana">
             {dia}
           </div>
@@ -128,66 +108,38 @@ export default function Calendario() {
             dia.getMonth() === hoje.getMonth() &&
             dia.getFullYear() === hoje.getFullYear();
 
-          const horarios = dia ? consultas[formatDia(dia)] || [] : [];
+          const isOutroMes =
+            dia && dia.getMonth() !== mesAtual.getMonth();
 
           return (
             <div
               key={i}
-              className={`dia-calendario ${isHoje ? "dia-hoje" : ""}`}
-              onClick={() => dia && abrirModal(dia)}
+              className={`dia-calendario 
+      ${isHoje ? "dia-hoje" : ""} 
+      ${isOutroMes ? "dia-outro-mes" : ""}`}
+
             >
 
               <div className="numero-dia">
                 {dia ? dia.getDate() : ""}
               </div>
 
-             
-
-                {horarios.slice(0, 2).map((h, idx) => (
-                  <div key={idx} className="horario ocupado">
-                    {h}
-                  </div>
-                ))}
-
-                {horarios.length > 2 && (
-                  <div className="mais-horarios">
-                    +{horarios.length - 2} mais
-                  </div>
-                )}
-
-              </div>
-
-            
+            </div>
           );
         })}
 
+
       </div>
-
-      {modalAberto && (
-        <div
-          className="modal"
-          onClick={(e) => {
-            if (e.target.className === "modal") fecharModal();
-          }}
-        >
-
-          <div className="modal-content">
-
-            <span className="fechar" onClick={fecharModal}>
-              &times;
-            </span>
-
-            <h2>{diaModal}</h2>
-
-            <div className="modal-horarios">
-              {renderHorariosModal()}
-            </div>
-
-          </div>
-
+      <div className="container-legenda">
+        <div className="block-legenda">
+          <span className="consulta-marcada"></span>
+          <p>Consuta-marcada</p>
         </div>
-      )}
-
+        <div className="block-legenda">
+          <span className="consulta-nao-confirmada"></span>
+          <p>Consulta não confirmada</p>
+        </div>
+      </div>
     </div>
   );
 }

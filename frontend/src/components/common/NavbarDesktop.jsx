@@ -36,7 +36,8 @@ export default function NavDesktop() {
     const notificacoes = [
         { id: 1, texto: "Sessão amanhã às 18:00" },
         { id: 2, texto: "Novo artigo disponível" },
-        { id: 3, texto: "Sessão confirmada para 27/03" }
+        { id: 3, texto: "Sessão confirmada para 27/03" },
+        { id: 4, texto: "Sessão confirmada para 27/03" }
     ];
     return (
         <>
