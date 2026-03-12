@@ -44,7 +44,7 @@ export default function Informacoes() {
         </div>
         <div className="btn-ver-mais">
           <Link to="/artigos">
-            <button>Ver main <HiArrowNarrowUp className="icon-btn-ver-mais"/></button>
+            <button>Ver mais <HiArrowNarrowUp className="icon-btn-ver-mais"/></button>
           </Link>
         </div>
       </section>

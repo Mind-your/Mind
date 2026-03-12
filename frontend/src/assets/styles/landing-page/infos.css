@@ -40,6 +40,7 @@
     display: flex;
     justify-content: flex-end;
     padding-right:20%;
+    
 }
 
 .btn-ver-mais button{
@@ -48,6 +49,7 @@
     font-size: 1rem;
     color: var(--green-default-100);
     cursor: pointer;
+    font-weight: 600;
 }
 
 .btn-ver-mais button:hover{

@@ -1,4 +1,4 @@
-import '../../assets/styles/perfil.css';
+import "../../assets/styles/perfil/section.css";
 import Info from './info.jsx';
 import Calendario from './calendario.jsx';
 import Sobre from './sobre.jsx';
