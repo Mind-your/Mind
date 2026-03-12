@@ -32,7 +32,7 @@ main.main::after {
     height: 100%;
     background: linear-gradient(
     90deg,
-    var(--bege-default) 30%,
+    var(--bege-default-100) 30%,
     transparent
     );
     z-index: -1;
@@ -76,64 +76,33 @@ main.main p{
     font-size: clamp(.8rem, 2vw, 1.3rem);
     max-width: clamp(200px, 60vw, 380px);
 }
-.buttons-hero{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.btn-hero{
-    background-color: transparent !important;
-}
-.btn-hero:hover{
-    background-color: #daf7eb !important;
-}
-
-
 
 /* Apresentação Section-------------------- */
 
 #apresentacao{
-    background-color: var(--white-default-100);
+    background-color: var(--green-light-default-100);
     display: flex;
     flex-direction: row;
     gap: var(--spacing-xl);
     padding: var(--spacing-lg);
-    padding-inline: 5%;
     color: var(--dark-default-100);
 }
 
-.sessoes-online-box{
+div.sessoes-online-box{
     display:flex;
     flex-direction: column;
     width:100%;
     height: auto;
-    align-items: center;
-}
-.tittle-box{
-    background-color: var(--green-light-default-100) ;
-    border-radius: var(--border-radius-md);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-}
-
-.tittle-box h3{
-    text-align: center;
-    width: 100%;
-    padding: 5px;
 }
 
 /* Conteudo de cada box da seção de apresentação*/
 
 .apres-box{
-    background-color: var(--green-light-default-100);
+    background-color: #4c6a4242;
     border-radius: var(--spacing-xs);
     display:flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
     max-width: 100%;
     padding: var(--spacing-md);
     color: var(--black-default-100);
@@ -150,17 +119,17 @@ main.main p{
 /* Headings ------------------- */
 
 .sessoes-online-box h3{
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1.6rem;
-    color: var(--green-default-100);
+    margin-bottom: var(--spacing-md);
 }
 
 .apres-box h4{
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
-.destaque{
+.apres-box .destaque{
     color: var(- --green-light-default-100)
 }
 
@@ -214,9 +183,5 @@ img.apres-img{
         width: 100%;
         flex-direction: row;
         justify-content: space-between;
-        flex-wrap: wrap
-    }
-    .buttons-hero{
-        gap: var(--spacing-sm);
     }
 }

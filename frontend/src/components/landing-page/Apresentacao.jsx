@@ -8,9 +8,7 @@ export default function Apresentacao() {
       <section id="apresentacao">
 
         <div className="sessoes-online-box">
-          <div className="tittle-box">
-            <h3>Cuide-se</h3>
-          </div>
+          <h3>Cuide-se</h3>
           <article className="apres-box">
             <div>
               <h4>Sessões <span className="destaque">Online</span></h4>
@@ -18,7 +16,7 @@ export default function Apresentacao() {
             </div>
             <span className="btn-article">
               <Link to="/sobre-nos">
-                <button className="conhecer-btn button-confirm">Conhecer!</button>
+                <button className="conhecer-btn button-confirm">Conhecer</button>
               </Link>
             </span>
           </article>

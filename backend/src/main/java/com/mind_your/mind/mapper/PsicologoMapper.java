@@ -6,8 +6,6 @@ import com.mind_your.mind.dto.response.PsicologoResponseDTO;
 import com.mind_your.mind.models.Psicologo;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
-
 public class PsicologoMapper {
 
     public static PsicologoResponseDTO toResponseDTO(Psicologo p) {
@@ -19,7 +17,7 @@ public class PsicologoMapper {
                 p.getLogin(),
                 p.getImgPerfil(),
                 p.getCrp(),
-                p.getEspecialidades(),
+                p.getEspecialidade(),
                 p.getGenero(),
                 p.getTelefone(),
                 p.getEndereco(),
@@ -34,7 +32,7 @@ public class PsicologoMapper {
                 p.getEmail(),
                 p.getLogin(),
                 p.getCrp(),
-                p.getEspecialidades()
+                p.getEspecialidade()
         );
     }
 
@@ -53,6 +51,6 @@ public class PsicologoMapper {
         if (dto.getMedicamentos() != null) psicologo.setMedicamentos(dto.getMedicamentos());
         if (dto.getPreferencias() != null) psicologo.setPreferencias(dto.getPreferencias());
         if (dto.getCrp() != null) psicologo.setCrp(dto.getCrp());
-        if (dto.getEspecialidades() != null) psicologo.setEspecialidades(dto.getEspecialidades());
+        if (dto.getEspecialidade() != null) psicologo.setEspecialidade(dto.getEspecialidade());
     }
 }
