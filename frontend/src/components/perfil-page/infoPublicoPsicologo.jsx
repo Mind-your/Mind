@@ -37,7 +37,8 @@ export default function InfoPublicoPsicologo() {
         <>
             <div className="card-perfil-content">
                 <div className="foto-perfil">
-                    <img id="perfilFoto" src={perfil.foto || fotoPsi} alt="Foto do Psicólogo" />
+                    <div className="banner-perfil"></div>
+                    <img id="perfilFoto" src={fotoPsi} alt="Foto do Psicólogo" />
                     <div className="info-perfil">
                         <h3 id="perfilNome">{perfil.nome}</h3>
 
