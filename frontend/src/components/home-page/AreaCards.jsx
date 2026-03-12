@@ -10,7 +10,7 @@ export default function AreaCards({
   return (
     <>
         <section className="section-home">
-            <div className={`area-card-psicologos ${visualizacao}`}>
+            <div className="area-card-psicologos">
                 {perfis.length === 0 ? (
                     <div style={{ margin: '2rem', textAlign: 'center' }}>Nenhum resultado encontrado.</div>
                 ) : (

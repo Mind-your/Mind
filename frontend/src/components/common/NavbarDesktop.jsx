@@ -1,7 +1,11 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
+<<<<<<< HEAD
 import { HiOutlineUser, HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
+=======
+import { HiOutlineUser, HiOutlineSearch } from "react-icons/hi";
+>>>>>>> bf07d5ecea854510a1fddee30998c386a19c98de
 import { useAuth } from '../../context/authContext';
 import foto from '../../assets/img/perfil-default.png'
 
@@ -31,6 +35,7 @@ export default function NavDesktop() {
         };
     }, []);
 
+<<<<<<< HEAD
 
     const [isNotifOpen, setNotifOpen] = useState(false);
     const [openNotif, setOpenNotif] = useState(null);
@@ -77,6 +82,8 @@ export default function NavDesktop() {
             foto: "../../assets/img/perfil-default.png"
         },
     ];
+=======
+>>>>>>> bf07d5ecea854510a1fddee30998c386a19c98de
     return (
         <>
             <nav id="nav-desktop">
@@ -107,6 +114,7 @@ export default function NavDesktop() {
                             </NavLink>
                         </>
                     )}
+<<<<<<< HEAD
                     {isAuthenticated && (
                     <div className="notif-wrapper">
                         <button
@@ -250,34 +258,37 @@ export default function NavDesktop() {
                 )}
                 </ul>
                 
+=======
+                </ul>
+>>>>>>> bf07d5ecea854510a1fddee30998c386a19c98de
                 <div className="nav-right-buttons" ref={dropdownRef}>
                     {!isAuthenticated ? (
                         <>
-                            <Link to="login=0">
-                                <button
-                                    type="button"
-                                    className="nav-btn-login"
-                                    onClick={() => setDropdownOpen(prev => !prev)}
-                                >
-                                    {isAuthenticated ? user.nome : "Login"}
-                                </button>
-                            </Link>
+                        <Link to="login=0">
+                    <button
+                        type="button"
+                        className="nav-btn-login"
+                        onClick={() => setDropdownOpen(prev => !prev)}
+                    >
+                        {isAuthenticated ? user.nome : "Login"}
+                    </button>
+                    </Link>
                         </>
 
-                    ) : (
+                    ):(
                         <>
-                            <button
-                                type="button"
-                                className="nav-btn-login"
-                                onClick={() => setDropdownOpen(prev => !prev)}
-                            >
-                                {isAuthenticated ? user.nome : "Login"}
-                            </button>
+                         <button
+                        type="button"
+                        className="nav-btn-login"
+                        onClick={() => setDropdownOpen(prev => !prev)}
+                    >
+                        {isAuthenticated ? user.nome : "Login"}
+                    </button>
                         </>
                     )}
-
-
-
+                        
+                    
+                    
 
                     <div className={`nav-login-drop-wrapper ${isAuthenticated && isDropdownOpen ? "show" : ""}`}>
                         <div className="nav-login-drop">

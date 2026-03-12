@@ -1,7 +1,6 @@
 /* Seções gerais (titulo) ------------ */
 .section{
-    padding-inline: 10%;
-    margin-top: 1rem;
+    margin: 7% var(--spacing-lg);
     display: flex;
     flex-direction: column;
 }
@@ -24,7 +23,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    gap: var(--spacing-md)
+    gap: var(--spacing-xs)
 }
 
 .goal{
@@ -79,10 +78,7 @@
 
 @media(max-width:800px){
     .section{
-        padding-inline: 5%;
-    }
-    .goal{
-        padding: 10px 20px;
+        margin: var(--spacing-sm)
     }
     .container-goals{
         grid-template-columns: auto;

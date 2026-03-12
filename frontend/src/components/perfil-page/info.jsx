@@ -5,7 +5,6 @@ import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { getImageUrl, getDefaultAvatar } from '../../utils/imageHelper';
 import * as pacienteService from '../../services/pacienteService';
 import * as psicologoService from '../../services/psicologoService';
-import "../../assets/styles/perfil/info.css";
 
 export default function Info({ id }) {
     const { user, updateUser } = useAuth();

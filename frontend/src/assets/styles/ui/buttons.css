@@ -9,6 +9,7 @@
     font-weight: 600;
     font-size: 1.2rem;
     border: 3px solid var(--green-default-100);
+;
     border-radius: var(--spacing-xs);
     cursor: pointer;
 }

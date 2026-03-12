@@ -72,6 +72,7 @@ a {
   width: 100%;
 }
 
+<<<<<<< HEAD
 .nav-login-drop button:hover {
   background-color: var(--green-light-default-100);
   border-radius: var(--border-radius-sm);
@@ -126,6 +127,12 @@ a {
 
 .notif-item:last-child {
   border-bottom: none;
+=======
+.nav-login-drop button:hover{
+    background-color: var(--green-light-default-100);
+    border-radius: var(--border-radius-sm);
+    color: var(--dark-100)
+>>>>>>> bf07d5ecea854510a1fddee30998c386a19c98de
 }
 
 .notif-item:hover {
