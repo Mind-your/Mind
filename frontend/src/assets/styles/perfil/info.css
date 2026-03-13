@@ -113,3 +113,9 @@
   text-decoration: none;
   color: inherit;
 }
+
+@media (max-width:430px){
+  .settings{
+    flex-direction: column;
+  }
+}

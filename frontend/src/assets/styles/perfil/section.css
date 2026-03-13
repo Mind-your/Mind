@@ -28,6 +28,9 @@
 .sobre-notif-container{
   width: 100%;
 }
+.sobre-info-container{
+  width: 100%;
+}
 @media (max-width:1024px){
   .container-section-perfil{
     padding-inline: 2%;
@@ -37,5 +40,13 @@
 @media (max-width:950px){
   .container-section-perfil{
     flex-direction: column;
+  }
+}
+@media (max-width:768px){
+  .perfil-container{
+    width: 100%;
+  }
+  .container-sair{
+    order: 3;
   }
 }
