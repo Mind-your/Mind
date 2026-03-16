@@ -2,6 +2,9 @@
     text-align: justify;
     margin: -20px 8%;
 }
+.section-info h1{
+    padding: 3rem;
+}
 
 .info-grid{
     display: grid;

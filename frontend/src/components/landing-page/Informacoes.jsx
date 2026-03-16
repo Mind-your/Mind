@@ -29,7 +29,7 @@ export default function Informacoes() {
 
   return (
     <>
-      <section className="section section-info">
+      <section className="section-info">
         <h1>A terapia online pode ti apoiar</h1>
         <p> A mind oferece um espaço seguro e sigiloso para falar sobre suas emoções sem precisar sair de casa. Podendo ser útil em situações do dia a dia — como dificuldades no trabalho, desafios nos relacionamentos, crises de ansiedade ou momentos de incerteza.</p>
         <div className="info-grid">
