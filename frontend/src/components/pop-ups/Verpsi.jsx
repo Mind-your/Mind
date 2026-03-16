@@ -1,10 +1,6 @@
 import { CgProfile } from "react-icons/cg";
 import fotoPsi from '../../assets/img/perfil-default.png'
-<<<<<<< HEAD
 import Calendario from '../perfil-page/calendario';
-=======
-import Calendario from '../perfil-page/Calendario';
->>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
 import "../../assets/styles/pop-ups/verpsi.css";
 import { useNavigate } from "react-router-dom";
 

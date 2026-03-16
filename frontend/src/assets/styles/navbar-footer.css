@@ -109,7 +109,7 @@ a {
 .notif-dropdown {
   position: absolute;
   top: 38px;
-  right: 0;
+  right: 100%;
   width: 260px;
   background: white;
   border-radius: 10px;

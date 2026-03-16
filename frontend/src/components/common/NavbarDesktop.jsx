@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { HiOutlineUser, HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
 import { useAuth } from '../../context/authContext';
-import foto from '../../assets/img/perfil-default.png'
-import { useAuth } from '../../context/authContext';
+import foto from '../../assets/img/perfil-default.png';
 
 
 export default function NavDesktop() {

@@ -10,17 +10,14 @@
   import Artigos from "./pages/Artigos";
   import Login from "./pages/Login";
   import Perfil from "./pages/Perfil";
-<<<<<<< HEAD
   import PerfilPublicoPsicologo from "./components/perfil-page/sectionPublicoPsicologo";
-=======
-  import PerfilPublicoPsicologo from "./components/perfil-page/SectionPublicoPsicologo"
->>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
   import SobreNos from "./pages/SobreNos";
   import AddArtigos from "./pages/AddArtigos";
   import Configuracoes from "./pages/Configuracoes";
   import TermosCondicoes from "./pages/TermosCondicoes";
   import VideoChamada from "./pages/VideoChamada";
   import Cadastro from "./pages/Cadastro";
+  import RecuperarSenha from "./pages/RecuperarSenha";
   import ProtectedRoute from './components/ProtectedRoute';
   import ErrorPage from './pages/ErrorPage';
 
@@ -54,6 +51,7 @@
             <Route path='cadastro=0' element={<Cadastro />} />
             <Route path='cadastro=1' element={<Cadastro />} />
             <Route path='cadastro=2' element={<Cadastro />} />
+            <Route path='recuperar-senha' element={<RecuperarSenha />} />
 
             {/* Rotas protegidas - QUALQUER tipo de usuário */}
             <Route
