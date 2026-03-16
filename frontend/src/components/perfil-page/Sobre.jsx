@@ -1,5 +1,5 @@
-import '../../assets/styles/perfil.css';
-import { useAuth } from "../../context/AuthContext";
+import '../../assets/styles/perfil/sobre.css';
+import { useAuth } from "../../context/authContext";
 
 export default function Sobre() {
     const { user } = useAuth();

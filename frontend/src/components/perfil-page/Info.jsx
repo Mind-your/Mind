@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../context/authContext';
+import { Link } from "react-router-dom";
+import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { getImageUrl, getDefaultAvatar } from '../../utils/imageHelper';
 import * as pacienteService from '../../services/pacienteService';
 import * as psicologoService from '../../services/psicologoService';
+import "../../assets/styles/perfil/info.css";
 
 export default function Info({ id }) {
     const { user, updateUser } = useAuth();
@@ -68,10 +71,11 @@ export default function Info({ id }) {
     };
 
     return (
-        <div className="info-container">
+        <div className="card-perfil-content">
             <div className="foto-perfil">
-                <img 
-                    id="perfilFoto" 
+                <div className="banner-perfil"></div>
+                <img
+                    id="perfilFoto"
                     src={imageUrl}
                     alt="Foto de Perfil"
                     onError={(e) => {
@@ -81,7 +85,7 @@ export default function Info({ id }) {
                         }
                     }}
                 />
-                
+
 
                 <input
                     id="upload-foto"
@@ -91,25 +95,51 @@ export default function Info({ id }) {
                     disabled={uploading}
                     style={{ display: 'none' }}
                 />
-                
+
                 {uploadError && (
                     <div className="upload-error" style={{ color: 'red', marginTop: '10px' }}>
                         {uploadError}
                     </div>
                 )}
+                <div className="info-perfil">
+                    <h3>{user?.nome} {user?.sobrenome}</h3>
+                    <div className="container-info">
+                        <p id="perfilIdade">Idade:</p>
+                        <label>{user.idade || "idade teste"}</label>
+                    </div>
+                    <div className="container-info">
+                        <p id="perfilIdade">Local:</p>
+                        <label>{user.local || "local teste"}</label>
+                    </div>
+                </div>
+            </div>
+            <div className="settings">
+                <div className="container-contatos">
+                    <div className="contato">
+                        <button
+                            type="button"
+                            className="icon-btn icon-ui"
+                            onClick={() => navigator.clipboard.writeText(user.telefone || "")}
+                        >
+                            <HiOutlinePhone />
+                        </button>
+                        <span>{user.telefone || "+55 11 9000-0000"}</span>
+                    </div>
+                </div>
+
+                <div className="container-config-artigos">
+                    <Link to={`/${user.tipo}/perfil/${user.id}/configuracoes`} className="button-config btn-mob">
+                        Configurações
+                    </Link>
+                </div>
+
+
+
+
+
             </div>
 
-            <div className="info-details">
-                <h2>{user?.nome} {user?.sobrenome}</h2>
-                <p>{user?.email}</p>
-                <p>{user?.telefone}</p>
-                {user?.tipo === 'psicologo' && (
-                    <>
-                        <p>CRP: {user?.crp}</p>
-                        <p>Especialidade: {user?.especialidade}</p>
-                    </>
-                )}
-            </div>
         </div>
+
     );
 }
