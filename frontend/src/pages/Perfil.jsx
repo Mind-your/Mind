@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 import { useAuth } from "../context/authContext";
 import { useParams, Navigate } from "react-router-dom";
 
 // importa as sections específicas
 import SectionPsicologo from "../components/perfil-page/sectionPsicologo";
 import SectionPaciente from "../components/perfil-page/sectionPaciente";
+=======
+import { useAuth } from "../context/AuthContext";
+import { useParams, Navigate } from "react-router-dom";
+
+// importa as sections específicas
+import SectionPsicologo from "../components/perfil-page/SectionPsicologo";
+import SectionPaciente from "../components/perfil-page/SectionPaciente";
+>>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
 
 export default function Perfil() {
   const { user, loading } = useAuth();

@@ -2,7 +2,11 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { HiOutlineUser, HiOutlineSearch } from "react-icons/hi";
+<<<<<<< HEAD
 import { useAuth } from '../../context/authContext';
+=======
+import { useAuth } from '../../context/AuthContext';
+>>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
 
 export default function NavDesktop() {
     const [isDropdownOpen, setDropdownOpen] = useState(false);

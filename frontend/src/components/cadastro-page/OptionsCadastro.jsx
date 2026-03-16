@@ -1,48 +1,41 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link, useLocation } from "react-router";
-import { useAuth } from "../../context/AuthContext";
+import { Link, useLocation } from "react-router";
+import "../../assets/styles/landing-page/hero-apresentacao.css";
 
-import '../../assets/styles/landing-page/hero-apresentacao.css';
-
-export default function OptionsLogin() {
-
-    const { login, error, loading, logout } = useAuth();
-    const [form, setForm] = useState({ login: "", senha: "" });
+export default function OptionsCadastro() {
     const [tipoUsuario, setTipoUsuario] = useState("paciente");
-
-    const navigate = useNavigate();
     const location = useLocation();
 
     // Detectar tipo de usuário pela URL
     useEffect(() => {
         const path = location.pathname;
 
-        if (path === "/login=0" || path === "/login") {
+        if (path === "/cadastro=0" || path === "/cadastro") {
             setTipoUsuario("paciente");
-        } else if (path === "/login=1") {
+        } else if (path === "/cadastro=1") {
             setTipoUsuario("psicologo");
-        } else if (path === "/login=2") {
+        } else if (path === "/cadastro=2") {
             setTipoUsuario("voluntario");
         }
     }, [location.pathname]);
 
     return (
         <div className="container-options">
-            <Link to="/login=0">
+            <Link to="/cadastro=0">
                 <button className={tipoUsuario === "paciente" ? "active" : ""}>
                     Paciente
                 </button>
             </Link>
-            <Link to="/login=1">
+            <Link to="/cadastro=1">
                 <button className={tipoUsuario === "psicologo" ? "active" : ""}>
-                    Psicologo
+                    Psicólogo
                 </button>
             </Link>
-            <Link to="/login=2">
+            <Link to="/cadastro=2">
                 <button className={tipoUsuario === "voluntario" ? "active" : ""}>
-                    Voluntario
+                    Voluntário
                 </button>
             </Link>
         </div>
-    )
+    );
 }
