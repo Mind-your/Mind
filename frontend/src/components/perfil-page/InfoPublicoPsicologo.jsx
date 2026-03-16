@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";
 import fotoPsi from '../../assets/img/perfil-default.png';
-import "../../assets/styles/perfil/info.css";
+import '../../assets/styles/perfil.css';
 import VerPsi from "../pop-ups/Verpsi"; // 🔹 Importa o pop-up
 
 export default function InfoPublicoPsicologo() {
@@ -37,8 +37,7 @@ export default function InfoPublicoPsicologo() {
         <>
             <div className="card-perfil-content">
                 <div className="foto-perfil">
-                    <div className="banner-perfil"></div>
-                    <img id="perfilFoto" src={fotoPsi} alt="Foto do Psicólogo" />
+                    <img id="perfilFoto" src={perfil.foto || fotoPsi} alt="Foto do Psicólogo" />
                     <div className="info-perfil">
                         <h3 id="perfilNome">{perfil.nome}</h3>
 

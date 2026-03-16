@@ -2,8 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router";
 import background from "../../assets/img/background_input.png";
 import '../../assets/styles/input_login.css';
+<<<<<<< HEAD
 import OptionsLogin from "./optionsLogin";
 import { useAuth } from "../../context/authContext";
+=======
+import OptionsLogin from "./OptionsLogin";
+import { useAuth } from "../../context/AuthContext";
+>>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
 import { toast } from 'react-toastify';
 
 export default function InputLogin() {

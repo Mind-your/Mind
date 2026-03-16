@@ -10,12 +10,24 @@ import { getImageUrl, getDefaultAvatar } from "../utils/imageHelper";
 
 import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom"
+<<<<<<< HEAD
 import { useAuth } from "../context/authContext";
+import { atualizar, deletar, uploadImagem } from "../services/pacienteService";
+import { atualizar as atualizarPsicologo, deletar as deletarPsicologo, uploadImagem as uploadImagemPsicologo } from "../services/psicologoService";
+import { usePsicologos } from "../context/psicologos"; // Novo import
+
+
+export default function Configuracoes() {
+    const navigate = useNavigate();
+    const { recarregar: recarregarPsicologos } = usePsicologos(); // Novo
+=======
+import { useAuth } from "../context/AuthContext";
 import { atualizar, deletar, uploadImagem } from "../services/pacienteService";
 import { atualizar as atualizarPsicologo, deletar as deletarPsicologo, uploadImagem as uploadImagemPsicologo } from "../services/psicologoService";
 
 export default function Configuracoes() {
     const navigate = useNavigate();
+>>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
     const { user, loading, updateUser, logout } = useAuth();
     const [imgPerfil, setImgPerfil] = useState('');
     const [novaImagem, setNovaImagem] = useState(null); // Armazena o arquivo selecionado
@@ -145,6 +157,19 @@ export default function Configuracoes() {
                 updateUser({ ...usuarioAtualizado, tipo: user.tipo });
             }
 
+<<<<<<< HEAD
+            // Recarregar lista de psicólogos para pacientes verem alterações
+            if (user.tipo === 'psicologo') { 
+                try {
+                    await recarregarPsicologos();
+                    console.log('✅ Lista de psicólogos recarregada com sucesso');
+                } catch (err) {
+                    console.warn('⚠️ Erro ao recarregar psicólogos (não crítico):', err);
+                }
+            }
+
+=======
+>>>>>>> e9fad7f3509b744706a069fdb2c58aa2c1b9ffc5
             toast.success('Configurações atualizadas com sucesso!');
             
             // Limpar campo de senha

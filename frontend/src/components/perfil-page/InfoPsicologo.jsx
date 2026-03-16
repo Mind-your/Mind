@@ -1,7 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import fotoPsi from '../../assets/img/perfil-default.png';
-import "../../assets/styles/perfil/info.css";
+import '../../assets/styles/perfil.css';
 import { Link } from "react-router-dom";
 
 export default function InfoPsicologo() {
@@ -12,24 +12,18 @@ export default function InfoPsicologo() {
   return (
     <div className="card-perfil-content">
       <div className="foto-perfil">
-        <div className="banner-perfil"></div>
         <img id="perfilFoto" src={user.foto || fotoPsi} alt="Foto do Psicólogo" />
         <div className="info-perfil">
           <h3 id="perfilNome">{user.nome}</h3>
 
           <div className="container-info">
             <p id="perfilIdade">Idade:</p>
-            <label>{user.idade || "idade teste"}</label>
+            <label>{user.idade || "—"}</label>
           </div>
 
           <div className="container-info">
             <p id="perfilLocal">Local:</p>
-            <label>{user.local || "local teste"}</label>
-          </div>
-
-          <div className="container-info">
-            <p id="perfilLocal">CRP:</p>
-            <label>{user.crp || ""}</label>
+            <label>{user.local || "—"}</label>
           </div>
         </div>
       </div>
