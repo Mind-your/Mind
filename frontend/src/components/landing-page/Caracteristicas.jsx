@@ -34,7 +34,7 @@ export default function Caracteristicas() {
 
   return (
     <>
-      <section className="section section-caract">
+      <section className="section-caract">
         <h1>Aqui você encontra</h1>
 
         <article class="container-goals">

@@ -1,4 +1,4 @@
-import '../../assets/styles/perfil.css';
+import "../../assets/styles/perfil/sobre.css";
 
 
 export default function SobrePsicologo() {

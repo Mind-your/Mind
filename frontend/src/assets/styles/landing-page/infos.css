@@ -2,6 +2,9 @@
     text-align: justify;
     margin: -20px 8%;
 }
+.section-info h1{
+    padding: 3rem;
+}
 
 .info-grid{
     display: grid;
@@ -40,6 +43,7 @@
     display: flex;
     justify-content: flex-end;
     padding-right:20%;
+    
 }
 
 .btn-ver-mais button{
@@ -48,6 +52,7 @@
     font-size: 1rem;
     color: var(--green-default-100);
     cursor: pointer;
+    font-weight: 600;
 }
 
 .btn-ver-mais button:hover{

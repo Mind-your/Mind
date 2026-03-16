@@ -34,13 +34,13 @@ export default function PerfilPublicoPsicologo() {
 
   return (
     <div className="container-section-perfil">
-      <div className="perfil-container">
+      <div className="sobre-notif-container">
         <InfoPublicoPsicologo />
-        <Calendario  />
+        <SobrePsicologo />
       </div>
 
-      <div className="sobre-notif-container">
-        <SobrePsicologo />
+      <div className="perfil-container">
+        <Calendario  />
          {openPsi && perfil && (
           <VerPsi
             open={openPsi}
