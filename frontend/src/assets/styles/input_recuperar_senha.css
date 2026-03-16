@@ -1,0 +1,48 @@
+.container-input-login {
+    padding-bottom: 4rem;
+}
+
+.inputs-recuperarsenha {
+    margin-top: var(--spacing-lg);
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 60px;
+
+    & .login-titulo {
+        width: 100%;
+        right: 10px;
+        color: var(--dark-100);
+        display: flex;
+        padding: 5px;
+        letter-spacing: 2px;
+        font-weight: 600;
+    }
+
+    & input {
+        padding: 15px;
+        border: 1px solid var(--gray-100);
+        outline: none;
+        font-size: 15px;
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    & .container-cadastrar-entrar {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        column-gap: 20px;
+        flex-wrap: wrap;
+        padding: 30px 20px;
+    }
+
+    & .link-cadastro {
+        padding: 10px 25px 10px 0;
+        text-decoration: underline;
+    }
+
+    & .link-cadastro:hover {
+        color: var(--deep-cerulean-100)
+    }
+}

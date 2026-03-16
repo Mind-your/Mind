@@ -1,4 +1,4 @@
-import "../../assets/styles/perfil/sobre.css";
+import '../../assets/styles/perfil/sobre.css';
 import { useAuth } from "../../context/authContext";
 
 export default function Sobre() {
