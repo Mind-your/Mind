@@ -1,4 +1,4 @@
-import { useAuth } from "../../context/authContext";
+import { useAuth } from "../../context/AuthContext";
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import fotoPsi from '../../assets/img/perfil-default.png';
 import "../../assets/styles/perfil/info.css";

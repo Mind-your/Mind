@@ -1,4 +1,4 @@
-import { usePsicologos } from "../../context/psicologos";
+import { usePsicologos } from "../../context/Psicologos";
 import { useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { HiOutlineMail } from "react-icons/hi";

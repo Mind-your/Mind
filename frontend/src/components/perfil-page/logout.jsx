@@ -1,5 +1,5 @@
 import "../../assets/styles/perfil/logout.css";
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import { HiOutlineLogout } from "react-icons/hi";
 
 export default function Logout() {

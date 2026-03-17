@@ -1,4 +1,4 @@
-import SectionRecuperarSenha from "../components/recuperarsenha/recuperarsenha.jsx"
+import SectionRecuperarSenha from "../components/RecuperarSenha/RecuperarSenha.jsx"
 
 export default function RecuperarSenha() {
     

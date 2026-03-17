@@ -1,5 +1,5 @@
 import { Navigate } from "react-router-dom";
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 
 // Componente para proteger rotas que precisam de autenticação
 export default function ProtectedRoute({ children, requirePsicologo = false }) {

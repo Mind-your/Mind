@@ -10,7 +10,7 @@
   import Artigos from "./pages/Artigos";
   import Login from "./pages/Login";
   import Perfil from "./pages/Perfil";
-  import PerfilPublicoPsicologo from "./components/perfil-page/sectionPublicoPsicologo";
+  import PerfilPublicoPsicologo from "./components/perfil-page/SectionPublicoPsicologo";
   import SobreNos from "./pages/SobreNos";
   import AddArtigos from "./pages/AddArtigos";
   import Configuracoes from "./pages/Configuracoes";

@@ -1,10 +1,10 @@
 import "../../assets/styles/perfil/section.css";
-import InfoPsicologo from './infoPsicologo.jsx';
-import Calendario from './calendario.jsx';
-import SobrePsicologo from './sobrePsicologo.jsx';
-import Notificacoes from './notificacoes.jsx';
-import Logout from './logout.jsx';
-import ArtigosPerfil from './artigos-perfil.jsx';
+import InfoPsicologo from './InfoPsicologo.jsx';
+import Calendario from './Calendario.jsx';
+import SobrePsicologo from './SobrePsicologo.jsx';
+import Notificacoes from './Notificacoes.jsx';
+import Logout from './Logout.jsx';
+import ArtigosPerfil from './ArtigosPerfil.jsx';
 
 export default function SectionPsicologo({ id }) {
     return (

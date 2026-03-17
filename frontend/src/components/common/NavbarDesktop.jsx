@@ -2,7 +2,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
 import { HiOutlineUser, HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import foto from '../../assets/img/perfil-default.png';
 
 

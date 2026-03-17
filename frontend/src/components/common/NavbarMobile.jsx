@@ -7,7 +7,7 @@ import {
   HiOutlineNewspaper, 
   HiOutlineQuestionMarkCircle 
 } from "react-icons/hi";
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 
 export default function NavMobile() {
   const [activeIndex, setActiveIndex] = useState(2);

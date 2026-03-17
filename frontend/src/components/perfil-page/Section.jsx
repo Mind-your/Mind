@@ -1,6 +1,6 @@
 import '../../assets/styles/perfil.css';
 import Info from './Info.jsx';
-import Calendario from './calendario.jsx';
+import Calendario from './Calendario.jsx';
 import Sobre from './Sobre.jsx';
 import Notificacoes from './Notificacoes.jsx';
 

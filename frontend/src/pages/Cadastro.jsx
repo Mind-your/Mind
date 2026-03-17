@@ -1,4 +1,4 @@
-import InputCadastro from "../components/cadastro-page/inputCadastro.jsx"
+import InputCadastro from "../components/cadastro-page/InputCadastro.jsx"
 
 export default function Cadastro() {
     

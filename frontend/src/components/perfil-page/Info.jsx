@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '../../context/authContext';
+import { useAuth } from '../../context/AuthContext';
 import { Link } from "react-router-dom";
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import { getImageUrl, getDefaultAvatar } from '../../utils/imageHelper';
