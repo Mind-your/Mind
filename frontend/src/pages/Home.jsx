@@ -2,7 +2,7 @@ import SearchSection from "../components/home-page/SearchSection";
 import AreaCards from "../components/home-page/AreaCards";
 import VerPsi from "../components/pop-ups/Verpsi";
 import ActiveFilters from "../components/home-page/ActiveFilters";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { usePsicologos } from "../context/psicologos";
 import '../assets/styles/home/filtros-home.css';
 import '../assets/styles/home/card-psicologo.css';
@@ -19,7 +19,15 @@ export default function Home() {
   const [openPsi, setOpenPsi] = useState(false);
   const [selectedPerfil, setSelectedPerfil] = useState(null);
 
-  const { psicologos, loading, error } = usePsicologos();
+  const { psicologos, loading, error, recarregar } = usePsicologos();
+
+  // Ao montar a Home, se a lista estiver vazia (erro ou fetch falhou antes do backend subir),
+  // tenta buscar os dados de novo. O [] garante que só roda uma vez por montagem.
+  useEffect(() => {
+    if (!loading && (error || psicologos.length === 0)) {
+      recarregar();
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Mapear os dados dos psicólogos
   const perfis = (psicologos || []).map(p => ({
@@ -75,6 +83,8 @@ export default function Home() {
           setSelectedDays={setSelectedDays}
           visualizacao={visualizacao}
           setVisualizacao={setVisualizacao}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
         <div style={{ 
           textAlign: 'center', 
@@ -104,6 +114,8 @@ export default function Home() {
           setSelectedDays={setSelectedDays}
           visualizacao={visualizacao}
           setVisualizacao={setVisualizacao}
+          searchText={searchText}
+          setSearchText={setSearchText}
         />
         <div style={{ 
           textAlign: 'center', 

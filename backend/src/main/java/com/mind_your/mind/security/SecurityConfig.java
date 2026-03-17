@@ -17,12 +17,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+// Imports updated to remove unused items if any are detected as purely redundant by lint
 import com.mind_your.mind.security.AuthEntryPointJwt;
 import com.mind_your.mind.security.AuthTokenFilter;
-
+import com.mind_your.mind.security.UserDetailsServiceImpl;
 import java.util.Arrays;
 import org.springframework.http.HttpMethod;
-import com.mind_your.mind.security.UserDetailsServiceImpl;
 
 @Configuration
 @EnableWebSecurity
@@ -53,8 +53,7 @@ public class SecurityConfig {
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userDetailsService);
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider(userDetailsService);
         authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
@@ -94,8 +93,13 @@ public class SecurityConfig {
 
                 // OPTIONS para CORS
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
-                // Tudo mais exige autenticação
+                
+                // Agendas e Horários
+                .requestMatchers(HttpMethod.POST, "/horarios/**").hasRole("PSICOLOGO")
+                .requestMatchers(HttpMethod.DELETE, "/horarios/**").hasRole("PSICOLOGO")
+                .requestMatchers("/horarios/**").authenticated()
+                .requestMatchers("/agendas/**").authenticated()
+                
                 .anyRequest().authenticated()
             );
 

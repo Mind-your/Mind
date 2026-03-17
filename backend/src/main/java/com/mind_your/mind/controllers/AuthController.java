@@ -39,10 +39,13 @@ public class AuthController {
             return ResponseEntity.status(401).body("Refresh token expirado. Faça login novamente.");
         }
 
-        // Gerar novo JWT
-        String novoJwt = jwtUtil.generateJwtTokenFromUsername(refreshToken.getUsername());
+        // Rotacionar o refresh token
+        RefreshToken novoRefreshToken = refreshTokenService.rotacionar(refreshToken);
 
-        return ResponseEntity.ok(new JwtResponseDTO(novoJwt, refreshToken.getUsername(), null, refreshToken.getToken()));
+        // Gerar novo JWT
+        String novoJwt = jwtUtil.generateJwtTokenFromUsername(novoRefreshToken.getUsername());
+
+        return ResponseEntity.ok(new JwtResponseDTO(novoJwt, novoRefreshToken.getUsername(), null, novoRefreshToken.getToken()));
     }
 
     // Logout — invalida o refresh token

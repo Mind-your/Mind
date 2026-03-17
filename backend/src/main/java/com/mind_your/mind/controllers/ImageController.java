@@ -19,7 +19,7 @@ public class ImageController {
     private final Path imageStorageLocation = Paths.get("uploads/users-pictures").toAbsolutePath().normalize();
 
     @GetMapping("/{filename:.+}")
-    public ResponseEntity<Resource> getImage(@PathVariable String filename) {
+    public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) {
         try {
             Path filePath = imageStorageLocation.resolve(filename).normalize();
             Resource resource = new UrlResource(filePath.toUri());
