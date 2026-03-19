@@ -19,6 +19,12 @@ export default function InputCadastro() {
         dataNascimento: "",
         email: "",
         localidade: "",
+
+        cep: "",
+        uf: "",
+        cidade: "",
+        bairro: "",
+
         telefone: "",
         genero: "",
         crp: "",
@@ -111,8 +117,8 @@ export default function InputCadastro() {
                 {/* Desativa a validação automática do navegador */}
                 <form className="inputs" onSubmit={handleSubmit} noValidate>
                     <div className="cadastro-input">
-                        <div className="input">
-                            <span className="login-titulo"><label>Nome</label></span>
+                        <div className="input full">
+                            <label>Nome</label>
                             <input
                                 type="text"
                                 name="nome"
@@ -122,7 +128,7 @@ export default function InputCadastro() {
                             />
                         </div>
                         <div className="input">
-                            <span className="login-titulo"><label>Data de Nascimento</label></span>
+                            <label>Data de Nascimento</label>
                             <input
                                 name="dataNascimento"
                                 type="date"
@@ -131,23 +137,53 @@ export default function InputCadastro() {
                             />
                         </div>
                         <div className="input">
-                            <span className="login-titulo"><label>E-mail</label></span>
+                            <label>CPF</label>
                             <input
-                                name="email"
-                                type="email"
-                                value={form.email}
+                                name="cpf"
+                                type="cpf"
+                                value={form.cpf}
                                 onChange={handleChange}
-                                placeholder="exemplo@email.com"
+                                placeholder="000.000.000-00"
                             />
                         </div>
                         <div className="input">
-                            <span className="login-titulo"><label>Localidade</label></span>
+                            <label>CEP</label>
+                            <input
+                                name="cep"
+                                type="text"
+                                value={form.cep}
+                                onChange={handleChange}
+                                placeholder="00000-000"
+                            />
+                        </div>
+                        <div className="input">
+                            <label>UF</label>
+                            <input
+                                name="uf"
+                                type="text"
+                                value={form.uf}
+                                onChange={handleChange}
+                                placeholder="SP"
+                            />
+                        </div>
+                        <div className="input">
+                            <label>Cidade</label>
+                            <input
+                                name="cidade"
+                                type="text"
+                                value={form.cidade}
+                                onChange={handleChange}
+                                placeholder="Diadema"
+                            />
+                        </div>
+                        <div className="input">
+                            <label>Bairro</label>
                             <input
                                 name="localidade"
                                 type="text"
                                 value={form.localidade}
                                 onChange={handleChange}
-                                placeholder="Cidade / Estado"
+                                placeholder="Centro"
                             />
                         </div>
 
@@ -155,7 +191,7 @@ export default function InputCadastro() {
                         {tipoUsuario === "paciente" && (
                             <>
                                 <div className="input">
-                                    <span className="login-titulo"><label>Telefone</label></span>
+                                    <label>Telefone</label>
                                     <input
                                         name="telefone"
                                         type="text"
@@ -165,7 +201,7 @@ export default function InputCadastro() {
                                     />
                                 </div>
                                 <div className="input">
-                                    <span className="login-titulo"><label>Gênero</label></span>
+                                    <label>Gênero</label>
                                     <input
                                         name="genero"
                                         type="text"
@@ -180,7 +216,7 @@ export default function InputCadastro() {
                         {tipoUsuario === "psicologo" && (
                             <>
                                 <div className="input">
-                                    <span className="login-titulo"><label>CRP</label></span>
+                                    <label>CRP</label>
                                     <input
                                         name="crp"
                                         type="text"
@@ -190,7 +226,7 @@ export default function InputCadastro() {
                                     />
                                 </div>
                                 <div className="input">
-                                    <span className="login-titulo"><label>Especialidade</label></span>
+                                    <label>Especialidade</label>
                                     <input
                                         name="especialidade"
                                         type="text"
@@ -205,7 +241,7 @@ export default function InputCadastro() {
                         {tipoUsuario === "voluntario" && (
                             <>
                                 <div className="input">
-                                    <span className="login-titulo"><label>R.A</label></span>
+                                    <label>R.A</label>
                                     <input
                                         name="ra"
                                         type="text"
@@ -215,7 +251,7 @@ export default function InputCadastro() {
                                     />
                                 </div>
                                 <div className="input">
-                                    <span className="login-titulo"><label>Token</label></span>
+                                    <label>Token</label>
                                     <input
                                         name="token"
                                         type="text"
@@ -227,7 +263,7 @@ export default function InputCadastro() {
                             </>
                         )}
                         <div className="input">
-                            <span className="login-titulo"><label>Senha</label></span>
+                            <label>Senha</label>
                             <input
                                 name="senha"
                                 type="password"
@@ -236,7 +272,7 @@ export default function InputCadastro() {
                             />
                         </div>
                         <div className="input">
-                            <span className="login-titulo"><label>Confirmar Senha</label></span>
+                            <label>Confirmar Senha</label>
                             <input
                                 name="confirmarSenha"
                                 type="password"
