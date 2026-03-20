@@ -19,12 +19,14 @@ section.config h1{
     margin:20px 0;
 }
 .input-e-span input,
-.input-e-span select{
+.input-e-span select,
+.tags-especializacoes-input{
     width:100%;
     padding:10px;
     border-radius: var(--border-radius-sm);
-    border: 1px solid #3d3d3d;
+    border: 1px solid var(--gray-100);
     font-size: 1rem;
+    margin-top:2px;
 }
 
 .container-perfil h1{
@@ -55,16 +57,34 @@ section.config h1{
     border: 1px solid #ccc;
 }  
 
+/* Imagem de wallpaper */
+
+.img-wallpaper{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.img-edit-wallpaper{
+    width: 100%;
+    height: clamp(150px, 20vw, 180px);
+    border-radius: 10px;
+    background-color: #29292969;
+    border: 1px solid #ccc;
+}
+
 /* Indice da página -------------------- */
 
 .atalhos {
+    width:clamp(160px, 30vw, 250px);
     display: flex;
     flex-direction: column;
     gap: 10px;
     padding:10px;
     border: 1px solid black;
     border-radius: 12px;
-    width: max-content;
 }
 
 #Geral,
@@ -129,7 +149,6 @@ section.config h1{
 .container-sobre-mim span, 
 .container-medicamento span, 
 .container-preferencias span,  
-.container-especializacoes span, 
 .container-horario-atendimento span,
 .containers-articles span{
     opacity: 70%;
@@ -168,6 +187,37 @@ section.config h1{
     outline: 0;
     border-color: var(--orange-default-100);
     box-shadow: 0 0 0 0.2rem #f8a76498;
+}
+
+/* Tags de especializações */
+
+div.tags-list{
+    display: flex;
+    flex-wrap: row;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+div.tags-list > .tag-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background-color: var(--tertiary-light-green-700);
+    color: var(--black-900);
+    padding: 5px 10px;
+    border-radius: var(--border-radius-lg);
+    margin-top: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.btn-remove-tag{
+    background: none;
+    border: none;
+    display: flex; 
+    color: var(--black-900);
+    cursor: pointer;
+    font-size: 0.9rem;
 }
 
 /* Botão de atualizar ------ */

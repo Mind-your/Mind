@@ -107,7 +107,7 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
                         type="button" 
                         id="abrir-options-agendamento"
                         onClick={() => setDropdownOpen(!isDropdownOpen)}
-                        className={isDropdownOpen ? "active" : ""}>
+                        className={isDropdownOpen ? "" : "active" }>
                         <HiChevronDown />
                     </button>
 
@@ -117,7 +117,14 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
             <div 
                 className="container-confirmar" 
                 id="options-agendamento" 
-                style={{ display: isDropdownOpen ? 'flex' : 'none' }}>
+                style={{ display: isDropdownOpen ? 'none' : 'flex' }}>
+
+                <button 
+                  className="cancelar-agendamento button-cancelar" 
+                  onClick={handleCancelarOuDeletar}
+                  disabled={loading}>
+                   {!isExisting ? "Cancelar" : (loading ? "Deletando..." : "Deletar")}
+                </button>
 
                 {!isExisting && (
                   <button 
@@ -127,12 +134,6 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
                      {loading ? "Salvando..." : "Confirmar"}
                   </button>
                 )}
-                <button 
-                  className="cancelar-agendamento button-cancelar" 
-                  onClick={handleCancelarOuDeletar}
-                  disabled={loading}>
-                   {!isExisting ? "Cancelar" : (loading ? "Deletando..." : "Deletar")}
-                </button>
             </div>
         </div>
     </>
