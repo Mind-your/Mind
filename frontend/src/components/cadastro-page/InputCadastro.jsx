@@ -11,19 +11,24 @@ export default function InputCadastro() {
     const location = useLocation();
     const navigate = useNavigate();
     const { registerUser, loading, error } = useAuth();
+    const [errors, setErrors] = useState({});
 
     const [tipoUsuario, setTipoUsuario] = useState("paciente");
 
     const [form, setForm] = useState({
         nome: "",
+        
         dataNascimento: "",
         email: "",
         localidade: "",
+        cpf: "",
 
+        sobrenome:"",
         cep: "",
         uf: "",
         cidade: "",
         bairro: "",
+        numeroResidencia:"",
 
         telefone: "",
         genero: "",
@@ -34,6 +39,55 @@ export default function InputCadastro() {
         senha: "",
         confirmarSenha: ""
     });
+
+    const validate = () => {
+        let newErrors = {};
+
+        if (!form.nome) newErrors.nome = "Nome é obrigatório";
+
+        if (!form.dataNascimento) {
+            newErrors.dataNascimento = "Data de nascimento é obrigatória";
+        }
+        if (!form.cpf) {
+            newErrors.cpf = "CPF é obrigatório";
+        }
+        if (!form.email) {
+            newErrors.email = "Email é obrigatório";
+        }
+
+        if (!form.cep) newErrors.cep = "CEP obrigatório";
+
+        if (!form.numeroResidencia) newErrors.numeroResidencia = "Número da residência é obrigatório";
+
+        if (!form.senha) {
+            newErrors.senha = "Senha obrigatória";
+        } else if (form.senha.length < 6) {
+            newErrors.senha = "Mínimo 6 caracteres";
+        }
+
+        if (form.senha !== form.confirmarSenha) {
+            newErrors.confirmarSenha = "Senhas não coincidem";
+        }
+
+        // Tipo usuário
+        if (tipoUsuario === "paciente") {
+            if (!form.telefone) newErrors.telefone = "Telefone obrigatório";
+            if (!form.genero) newErrors.genero = "Gênero obrigatório";
+        }
+
+        if (tipoUsuario === "psicologo") {
+            if (!form.crp) newErrors.crp = "CRP obrigatório";
+            if (!form.especialidade) newErrors.especialidade = "Especialidade obrigatória";
+        }
+
+        if (tipoUsuario === "voluntario") {
+            if (!form.ra) newErrors.ra = "RA obrigatório";
+            if (!form.token) newErrors.token = "Token obrigatório";
+        }
+
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
 
     useEffect(() => {
         const path = location.pathname;
@@ -48,26 +102,38 @@ export default function InputCadastro() {
     }, [location.pathname]);
 
     const handleChange = (e) => {
-        setForm({ ...form, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+
+        setForm({ ...form, [name]: value });
+
+        setErrors((prev) => ({
+            ...prev,
+            [name]: ""
+        }));
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         // Validação manual
-        if (!form.nome || !form.dataNascimento || !form.email || !form.localidade) {return; }
-        if (form.senha !== form.confirmarSenha) { return;}
-        if (tipoUsuario === "paciente" && (!form.telefone || !form.genero)) {return;}
-        if (tipoUsuario === "psicologo" && (!form.crp || !form.especialidade)) { return;}
-        if (tipoUsuario === "voluntario" && (!form.ra || !form.token)) { return; }
+        if (!validate()) return;
+        //if (tipoUsuario === "paciente" && (!form.telefone || !form.genero)) { return; }
+        //if (tipoUsuario === "psicologo" && (!form.crp || !form.especialidade)) { return; }
+        //if (tipoUsuario === "voluntario" && (!form.ra || !form.token)) { return; }
 
         const userData = {
             nome: form.nome,
+            sobrenome:form.sobrenome,
             email: form.email,
             senha: form.senha,
             dtNascimento: form.dataNascimento,
             genero: form.genero,
             telefone: form.telefone,
+            cep:form.cep,
+            uf:form.uf,
+            cidade:form.cidade,
+            bairro:form.bairro,
+            numeroResidencia:form.numeroResidencia,
             endereco: form.localidade,
             tipoUsuario: tipoUsuario,
         };
@@ -90,7 +156,7 @@ export default function InputCadastro() {
                 ariaLabel: "Logado"
             })
             navigate("/login=0");
-        } 
+        }
     };
 
     return (
@@ -117,7 +183,7 @@ export default function InputCadastro() {
                 {/* Desativa a validação automática do navegador */}
                 <form className="inputs" onSubmit={handleSubmit} noValidate>
                     <div className="cadastro-input">
-                        <div className="input full">
+                        <div className="input">
                             <label>Nome</label>
                             <input
                                 type="text"
@@ -126,6 +192,18 @@ export default function InputCadastro() {
                                 onChange={handleChange}
                                 placeholder="Seu nome completo"
                             />
+                            {errors.nome && <span className="error-text">{errors.nome}</span>}
+                        </div>
+                        <div className="input">
+                            <label>Sobrenome</label>
+                            <input
+                                type="text"
+                                name="sobrenome"
+                                value={form.sobrenome}
+                                onChange={handleChange}
+                                placeholder="Seu sobrenome"
+                            />
+                            {errors.sobrenome && <span className="error-text">{errors.sobrenome}</span>}
                         </div>
                         <div className="input">
                             <label>Data de Nascimento</label>
@@ -135,16 +213,18 @@ export default function InputCadastro() {
                                 value={form.dataNascimento}
                                 onChange={handleChange}
                             />
+                            {errors.dataNascimento && <span className="error-text">{errors.dataNascimento}</span>}
                         </div>
                         <div className="input">
                             <label>CPF</label>
                             <input
                                 name="cpf"
-                                type="cpf"
+                                type="text"
                                 value={form.cpf}
                                 onChange={handleChange}
                                 placeholder="000.000.000-00"
                             />
+                            {errors.cpf && <span className="error-text">{errors.cpf}</span>}
                         </div>
                         <div className="input">
                             <label>CEP</label>
@@ -155,6 +235,7 @@ export default function InputCadastro() {
                                 onChange={handleChange}
                                 placeholder="00000-000"
                             />
+                            {errors.cep && <span className="error-text">{errors.cep}</span>}
                         </div>
                         <div className="input">
                             <label>UF</label>
@@ -164,7 +245,7 @@ export default function InputCadastro() {
                                 value={form.uf}
                                 onChange={handleChange}
                                 placeholder="SP"
-                            />
+                            disabled/> {errors.uf && <span className="error-text">{errors.uf}</span>}
                         </div>
                         <div className="input">
                             <label>Cidade</label>
@@ -174,7 +255,7 @@ export default function InputCadastro() {
                                 value={form.cidade}
                                 onChange={handleChange}
                                 placeholder="Diadema"
-                            />
+                            disabled/> {errors.cidade && <span className="error-text">{errors.cidade}</span>}
                         </div>
                         <div className="input">
                             <label>Bairro</label>
@@ -184,7 +265,17 @@ export default function InputCadastro() {
                                 value={form.localidade}
                                 onChange={handleChange}
                                 placeholder="Centro"
-                            />
+                            disabled/> {errors.localidade && <span className="error-text">{errors.localidade}</span>}
+                        </div>
+                        <div className="input">
+                            <label>Número da residencia</label>
+                            <input
+                                name="numeroResidencia"
+                                type="text"
+                                value={form.numeroResidencia}
+                                onChange={handleChange}
+                                placeholder="Centro"
+                            disabled/> {errors.numeroResidencia && <span className="error-text">{errors.numeroResidencia}</span>}
                         </div>
 
                         {/* Campos específicos */}
@@ -194,11 +285,11 @@ export default function InputCadastro() {
                                     <label>Telefone</label>
                                     <input
                                         name="telefone"
-                                        type="text"
+                                        type="tel"
                                         value={form.telefone}
                                         onChange={handleChange}
                                         placeholder="11 94002-8922"
-                                    />
+                                    /> {errors.telefone && <span className="error-text">{errors.telefone}</span>}
                                 </div>
                                 <div className="input">
                                     <label>Gênero</label>
@@ -208,7 +299,17 @@ export default function InputCadastro() {
                                         value={form.genero}
                                         onChange={handleChange}
                                         placeholder="Masculino / Feminino"
-                                    />
+                                    /> {errors.genero && <span className="error-text">{errors.genero}</span>}
+                                </div>
+                                <div className="input">
+                                    <label>Email</label>
+                                    <input
+                                        name="email"
+                                        type="email"
+                                        value={form.email}
+                                        onChange={handleChange}
+                                        placeholder="Token de autorização"
+                                    /> {errors.email && <span className="error-text">{errors.email}</span>}
                                 </div>
                             </>
                         )}
@@ -223,7 +324,7 @@ export default function InputCadastro() {
                                         value={form.crp}
                                         onChange={handleChange}
                                         placeholder="06/12345"
-                                    />
+                                    /> {errors.crp && <span className="error-text">{errors.crp}</span>}
                                 </div>
                                 <div className="input">
                                     <label>Especialidade</label>
@@ -233,7 +334,7 @@ export default function InputCadastro() {
                                         value={form.especialidade}
                                         onChange={handleChange}
                                         placeholder="Terapia Cognitivo-Comportamental"
-                                    />
+                                    /> {errors.especialidade && <span className="error-text">{errors.especialidade}</span>}
                                 </div>
                             </>
                         )}
@@ -248,7 +349,7 @@ export default function InputCadastro() {
                                         value={form.ra}
                                         onChange={handleChange}
                                         placeholder="123456"
-                                    />
+                                    /> {errors.ra && <span className="error-text">{errors.ra}</span>}
                                 </div>
                                 <div className="input">
                                     <label>Token</label>
@@ -258,7 +359,7 @@ export default function InputCadastro() {
                                         value={form.token}
                                         onChange={handleChange}
                                         placeholder="Token de autorização"
-                                    />
+                                    /> {errors.token && <span className="error-text">{errors.token}</span>}
                                 </div>
                             </>
                         )}
@@ -278,7 +379,7 @@ export default function InputCadastro() {
                                 type="password"
                                 value={form.confirmarSenha}
                                 onChange={handleChange}
-                            />
+                            />{errors.confirmarSenha && <span className="error-text">{errors.confirmarSenha}</span>}
                         </div>
                     </div>
                     <div className="container-cadastrar-entrar">
@@ -292,7 +393,9 @@ export default function InputCadastro() {
                             </label>
                         </div>
 
-                        <button type="submit" className="button-confirm" disabled={loading}>
+                        <button type="submit" className="button-confirm" disabled={loading}
+                        >
+                            
                             {loading ? "Cadastrando..." : "Cadastrar"}
                         </button>
                     </div>

@@ -11,9 +11,9 @@
 
 /* Lado direito (form) */
 .container-input-login {
-  width: 45%;
+  width: 60%;
   background: #ffffff;
-  padding: 40px 50px;
+  padding: 40px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -93,6 +93,19 @@ form.inputs .cadastro-input {
   border-color: #2f6f5e;
   background: #fff;
   box-shadow: 0 0 0 3px rgba(47, 111, 94, 0.1);
+}
+
+/* ===== ERRO===== */
+.input input.error {
+    border: 2px solid #ff4d4f;
+    background-color: #fff5f5;
+}
+
+.error-text {
+    color: #ff4d4f;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
 }
 
 /* ===== Checkbox + botão ===== */

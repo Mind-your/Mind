@@ -10,14 +10,14 @@ export default function InputLogin() {
     const { login, error, loading, logout } = useAuth();
     const [form, setForm] = useState({ login: "", senha: "" });
     const [tipoUsuario, setTipoUsuario] = useState("paciente");
-    
+
     const navigate = useNavigate();
     const location = useLocation();
 
     // Detectar tipo de usuário pela URL
     useEffect(() => {
         const path = location.pathname;
-        
+
         if (path === "/login=0" || path === "/login") {
             setTipoUsuario("paciente");
         } else if (path === "/login=1") {
@@ -32,10 +32,10 @@ export default function InputLogin() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const result = await login(form.login, form.senha, tipoUsuario);
-        
+
         if (result.success) {
             const { user } = result;
-            
+
             // Verificar se o tipo corresponde (apenas se não for /login genérico)
             if (location.pathname !== "/login") {
                 if (tipoUsuario === "psicologo" && user.tipo !== "psicologo") {
@@ -50,7 +50,7 @@ export default function InputLogin() {
                     logout(); // DESLOGAR imediatamente
                     return;
                 }
-                
+
                 if (tipoUsuario === "paciente" && user.tipo !== "paciente") {
                     toast.error("Este usuário não é um paciente. Use o login de psicólogo.", {
                         position: "top-center",
@@ -64,7 +64,7 @@ export default function InputLogin() {
                     return;
                 }
             }
-            
+
             // Redirecionar para home SOMENTE se passou na validação
             toast.success("Logado", {
                 position: "top-center",
@@ -81,9 +81,9 @@ export default function InputLogin() {
         <>
             <section className="login-inputs">
                 <div className="background-img-login-cadastro">
-                    <img className="background" 
-                        src={background} 
-                        alt="Imagem de fundo - tela de cadastro" 
+                    <img className="background"
+                        src={background}
+                        alt="Imagem de fundo - tela de cadastro"
                     />
                 </div>
                 <div className="container-input-login">
@@ -101,7 +101,7 @@ export default function InputLogin() {
                             onChange={(e) => setForm({ ...form, login: e.target.value })}
                             required
                         />
-    
+
                         <span className="login-titulo">
                             <label htmlFor="password0">Senha</label>
                         </span>
@@ -113,19 +113,22 @@ export default function InputLogin() {
                             onChange={(e) => setForm({ ...form, senha: e.target.value })}
                             required
                         />
-    
+
                         {error && <p style={{ color: "red", marginTop: "10px" }}>{error}</p>}
-    
+
                         <div className="container-cadastrar-entrar">
-                            <Link to="/cadastro=0" className="link-cadastro">
-                                Não tenho cadastro
-                            </Link>
-                            <Link to="/recuperar-senha" className="link-cadastro">
-                            Esqueci a senha
-                            </Link>
-                            <button 
-                                type="submit" 
-                                className="button-confirm" 
+                            <div className="container-links">
+                                <Link to="/cadastro=0" className="link-cadastro">
+                                    Não tenho cadastro
+                                </Link>
+                                <Link to="/recuperar-senha" className="link-cadastro">
+                                    Esqueci a senha
+                                </Link>
+                            </div>
+
+                            <button
+                                type="submit"
+                                className="button-confirm login-button"
                                 disabled={loading}>
                                 {loading ? "Entrando..." : "Entrar"}
                             </button>
