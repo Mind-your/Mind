@@ -1,10 +1,4 @@
 /* Seções gerais (titulo) ------------ */
-.section{
-    margin: 7% var(--spacing-lg);
-    display: flex;
-    flex-direction: column;
-}
-
 .section > h1{
     text-align: center;
     font-size: 2rem;
@@ -16,6 +10,13 @@
 
 .section-caract{
     margin-bottom:10%;
+    padding-inline: 10%;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+.section-caract h1{
+    padding: 3rem;
 }
 
 .container-goals{
@@ -23,7 +24,7 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
-    gap: var(--spacing-xs)
+    gap: var(--spacing-md)
 }
 
 .goal{
@@ -77,8 +78,11 @@
 /* Responsividade ----------------- */
 
 @media(max-width:800px){
-    .section{
-        margin: var(--spacing-sm)
+    .section-caract{
+        padding-inline: 5%;
+    }
+    .goal{
+        padding: 10px 20px;
     }
     .container-goals{
         grid-template-columns: auto;

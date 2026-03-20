@@ -5,39 +5,47 @@ import logo from '../../assets/img/logo.svg'
 import bg from "../../assets/img/Wallpaper01.png"
 import bg2 from "../../assets/img/Wallpaper02.png"
 
-import {Link} from 'react-router'
+import { Link } from 'react-router'
 
 export default function Hero() {
   return (
     <>
-        <main className="main">
+      <main className="main">
 
-          <span>
-            <img className="bg2" src={bg2} alt="Imagem inicial do site" />
-            <div className="heading-hero">
-              <img src={logo} alt="logo do site" />
-              <div className="heading-1">
-                <img src={logomarca} alt="logomarca ou nome do sistema mind estilizado" />
-                <h1>... your mind</h1>
-              </div>
+        <span>
+          <img className="bg2" src={bg2} alt="Imagem inicial do site" />
+          <div className="heading-hero">
+            <img src={logo} alt="logo do site" />
+            <div className="heading-1">
+              <img src={logomarca} alt="logomarca ou nome do sistema mind estilizado" />
+              <h1>... your mind</h1>
             </div>
-            <p>A plataforma que tem cuidado com a sua saúde mental diária</p>
-          </span>
-
-          <Link 
+          </div>
+          <p>A plataforma que tem cuidado com a sua saúde mental diária</p>
+          <div className="buttons-hero">
+          <Link
             to="/"
             onClick={(e) => {
-                if (window.location.pathname === "/") {
-                    e.preventDefault();
-                    document.getElementById('planos')?.scrollIntoView({ 
-                        behavior: 'smooth' 
-                    });
-                }
+              if (window.location.pathname === "/") {
+                e.preventDefault();
+                document.getElementById('planos')?.scrollIntoView({
+                  behavior: 'smooth'
+                });
+              }
             }}>
-            <button className="btn-ver-planos button-confirm" >Ver planos</button>
+            <button className="button-confirm" >Ver planos</button>
+          </Link>
+          <Link
+            to="/login=0"
+          >
+            <button className="nav-btn-login btn-hero" >Começar</button>
           </Link>
 
-        </main>
+        </div>
+        </span>
+        
+
+      </main>
     </>
   )
 }

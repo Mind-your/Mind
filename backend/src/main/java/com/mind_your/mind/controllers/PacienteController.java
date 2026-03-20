@@ -54,7 +54,7 @@ public class PacienteController {
 
     // Buscar por email
     @GetMapping("/email/{email}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorEmail(@PathVariable String email) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorEmail(@PathVariable("email") String email) {
         return pacienteService.buscarPorEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -63,7 +63,7 @@ public class PacienteController {
 
     // Buscar por nome
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorNome(@PathVariable String nome) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorNome(@PathVariable("nome") String nome) {
         return pacienteService.buscarPorNome(nome)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -71,7 +71,7 @@ public class PacienteController {
 
     // Buscar por login (email ou username)
     @GetMapping("/login/{login}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorLogin(@PathVariable String login) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorLogin(@PathVariable("login") String login) {
         return pacienteService.buscarPorLogin(login)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -79,7 +79,7 @@ public class PacienteController {
 
     // Buscar por ID
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable("id") String id) {
         return pacienteService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -88,7 +88,7 @@ public class PacienteController {
     // Atualizar
     @PutMapping("/{id}")
     public ResponseEntity<PacienteResponseDTO> atualizar(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestBody PacienteUpdateRequestDTO dados) {
 
         return pacienteService.atualizar(id, dados)
@@ -99,7 +99,7 @@ public class PacienteController {
 
     // Deletar por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable String id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") String id) {
         return pacienteService.deletarPorId(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
@@ -114,7 +114,7 @@ public class PacienteController {
 
     @PostMapping("/{id}/imagem")
     public ResponseEntity<UploadImagemResponseDTO> uploadImagem(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestParam("imagem") MultipartFile file) {
 
         return pacienteService.uploadImagem(id, file)

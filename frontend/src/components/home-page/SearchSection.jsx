@@ -11,7 +11,7 @@ export default function SearchSection({
     visualizacao, setVisualizacao,                 // para visualizacao da posicao dos cards
     searchText, setSearchText                      // para busca por texto
 }) {
-    
+
     const specialities = [
         "Ansiedade",
         "Casais",
@@ -20,13 +20,7 @@ export default function SearchSection({
         "Dependência Química",
         "Burnout",
     ];
-    const ratings = [
-        "5.0 ★",
-        "4.9 – 4.0 ★",
-        "3.9 – 3.0 ★",
-        "2.9 – 2.0 ★",
-        "1.9 – 1.0 ★",
-    ];
+
     const diasSemana = [
         "Segunda-feira",
         "Terça-feira",
@@ -49,52 +43,51 @@ export default function SearchSection({
 
     return (
         <>
-            <section className="section-filters-searchbox">
-                <div className="search-boxes">
-                    <form onSubmit={handleSearchSubmit} style={{ display: 'flex', width: '100%' }}>
-                        <input 
-                            type="text" 
-                            id="search-input" 
-                            placeholder="Pesquisar por nome, especialidade, local..." 
-                            value={searchText}
-                            onChange={handleSearch}
+            <section>
+                <div className="section-filters-searchbox">
+                    <div className="search-boxes">
+                        <form onSubmit={handleSearchSubmit} style={{ display: 'flex', width: '100%' }}>
+                            <input
+                                type="text"
+                                id="search-input"
+                                placeholder="Pesquisar por nome, especialidade, local..."
+                                value={searchText}
+                                onChange={handleSearch}
+                            />
+                            <button type="submit" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                                <HiOutlineSearch className="icon-ui button-search" />
+                            </button>
+                        </form>
+                    </div>
+                    <div className="search-filters">
+                        <Filtro
+                            titulo="Especialidades"
+                            opcoes={specialities}
+                            selecionados={selectedSpecialities}
+                            setSelecionados={setSelectedSpecialities}
                         />
-                        <button type="submit" style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                            <HiOutlineSearch className="icon-ui button-search" />
-                        </button>
-                    </form>
-                </div>
-                <div className="search-filters">
-                    <Filtro
-                        titulo="Especialidades"
-                        opcoes={specialities}
-                        selecionados={selectedSpecialities}
-                        setSelecionados={setSelectedSpecialities}
-                    />
-                    <Filtro
-                        titulo="Locais"
-                        opcoes={locais}
-                        selecionados={selectedLocals}
-                        setSelecionados={setSelectedLocals}
-                    />
-                    <Filtro
-                        titulo="Avaliação"
-                        opcoes={ratings}
-                        selecionados={selectedRatings}
-                        setSelecionados={setSelectedRatings}
-                    />
-                    <Filtro
-                        titulo="Semana"
-                        opcoes={diasSemana}
-                        selecionados={selectedDays}
-                        setSelecionados={setSelectedDays}
-                    />
-                </div>
-                <div className="search-visualizacao">
-                     <Visualizacao
-                        visualizacao={visualizacao}
-                        setVisualizacao={setVisualizacao}
-                    />
+                        <Filtro
+                            titulo="Locais"
+                            opcoes={locais}
+                            selecionados={selectedLocals}
+                            setSelecionados={setSelectedLocals}
+                        />
+                        <Filtro
+                            titulo="Semana"
+                            opcoes={diasSemana}
+                            selecionados={selectedDays}
+                            setSelecionados={setSelectedDays}
+                        />
+                        <div className="search-visualizacao">
+                            <Visualizacao
+                                visualizacao={visualizacao}
+                                setVisualizacao={setVisualizacao}
+                            />
+                        </div>
+                    </div>
+
+
+
                 </div>
             </section>
         </>

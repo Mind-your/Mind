@@ -9,7 +9,6 @@
     font-weight: 600;
     font-size: 1.2rem;
     border: 3px solid var(--green-default-100);
-;
     border-radius: var(--spacing-xs);
     cursor: pointer;
 }
@@ -32,7 +31,8 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    gap: var(--spacing-sm)
+    gap: var(--spacing-sm);
+    text-wrap: nowrap;
 }
 
 .button-confirm:hover{

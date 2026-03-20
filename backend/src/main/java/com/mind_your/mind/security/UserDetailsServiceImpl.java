@@ -10,7 +10,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import java.util.Collections;
 import java.util.Optional;
 
 @Service
@@ -30,12 +31,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             pacienteOpt = pacienteRepository.findByEmail(username);
         }
 
+
         if (pacienteOpt.isPresent()) {
             Paciente paciente = pacienteOpt.get();
             return org.springframework.security.core.userdetails.User
                     .withUsername(paciente.getLogin())
                     .password(paciente.getSenha())
-                    .authorities(new ArrayList<>())
+                    .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_PACIENTE")))
                     .build();
         }
 
@@ -50,7 +52,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             return org.springframework.security.core.userdetails.User
                     .withUsername(psicologo.getLogin())
                     .password(psicologo.getSenha())
-                    .authorities(new ArrayList<>())
+                    .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_PSICOLOGO")))
                     .build();
         }
 

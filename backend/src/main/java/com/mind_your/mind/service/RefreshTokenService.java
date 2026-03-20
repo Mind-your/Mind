@@ -42,6 +42,13 @@ public class RefreshTokenService {
         return token.getExpiryDate().isBefore(Instant.now());
     }
 
+    // Rotacionar token: Gera um novo e deleta o antigo
+    public RefreshToken rotacionar(RefreshToken oldToken) {
+        String username = oldToken.getUsername();
+        refreshTokenRepository.delete(oldToken);
+        return criar(username);
+    }
+
     // Deletar por username (logout)
     public void deletarPorUsername(String username) {
         refreshTokenRepository.deleteByUsername(username);
