@@ -1,4 +1,4 @@
-export default function InfosGerais({ user }) {
+export default function InfosGerais({ formData, handleChange }) {
 
     const formatarData = (dtNascimento) => {
         if (!dtNascimento) return "";
@@ -18,91 +18,156 @@ export default function InfosGerais({ user }) {
             <div className="container-input-1">
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label htmlFor="nomeEdit">Nome</label>
+                        <label htmlFor="nomeConfig">Nome</label>
                     </span>
                     <input
-                        id="nomeEdit"
+                        id="nomeConfig"
                         type="text"
                         className="form-control"
                         placeholder="Nome"
-                        defaultValue={user?.nome || ""}
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label>Sobrenome</label>
+                        <label htmlFor="sobrenomeEdit">Sobrenome</label>
                     </span>
                     <input
                         id="sobrenomeEdit"
                         type="text"
+                        name="sobrenome"
                         className="form-control"
                         placeholder="Sobrenome"
-                        defaultValue={user?.sobrenome || ""}
+                        value={formData.sobrenome}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label>Data de nascimento</label>
+                        <label htmlFor="nascimentoEdit">Data de nascimento</label>
                     </span>
                     <input
                         id="nascimentoEdit"
                         type="date"
+                        name="dtNascimento"
                         className="form-control"
                         placeholder="Data de nascimento"
-                        defaultValue={formatarData(user?.dtNascimento)}
+                        value={formatarData(formData.dtNascimento)}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label>Telefone</label>
+                        <label htmlFor="telefoneEdit">Telefone</label>
                     </span>
                     <input
                         id="telefoneEdit"
                         type="text"
+                        name="telefone"
                         className="form-control"
                         placeholder="Telefone"
-                        defaultValue={user?.telefone || ""}
+                        value={formData.telefone}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label>Local</label>
+                        <label htmlFor="cpfEdit">CPF</label>
+                    </span>
+                    <input
+                        id="cpfEdit"
+                        type="text"
+                        name="CPF"
+                        className="form-control"
+                        placeholder="CPF"
+                        value={formData.CPF}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <span className="login-titulo">
+                        <label htmlFor="sexoEdit">Sexo</label>
+
                     </span>
                     <select
-                        id="localEdit"
+                        id="sexoEdit"
                         className="form-control"
-                        defaultValue={user?.endereco || ""}
+                        name="sexo"
+                        value={formData.sexo}
+                        onChange={handleChange}
                     >
-                        <option value="" disabled hidden>Escolha a Cidade</option>
-                        <option value="São Paulo">São Paulo</option>
-                        <option value="Diadema">Diadema</option>
-                        <option value="São Bernardo">São Bernardo</option>
-                        <option value="Santo André">Santo André</option>
-                        <option value="Santo Amaro">Santo Amaro</option>
-                        <option value="Jabaquara">Jabaquara</option>
-                        <option value="Osasco">Osasco</option>
-                        <option value="Guarulhos">Guarulhos</option>
+                        <option value="" disabled hidden>Escolher opções</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Outro">Outro</option>
                     </select>
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label>Sexo</label>
+                        <label htmlFor="cepEdit">CEP</label>
                     </span>
-                    <select
-                        id="generoEdit"
+                    <input
+                        id="cepEdit"
+                        type="text"
+                        name="cep"
                         className="form-control"
-                        defaultValue={user?.genero || ""}
-                    >
-                        <option value="" disabled hidden>Escolha o gênero</option>
-                        <option value="Feminino">Feminino</option>
-                        <option value="Masculino">Masculino</option>
-                        <option value="Outro">Outro</option>
-                    </select>
+                        placeholder="00000-000"
+                        value={formData.cep}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <span className="login-titulo">
+                        <label htmlFor="bairroEdit">Bairro</label>
+                    </span>
+                    <input
+                        id="bairroEdit"
+                        type="text"
+                        name="bairro"
+                        className="form-control"
+                        placeholder="Bairro"
+                        value={formData.bairro}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <span className="login-titulo">
+                        <label htmlFor="cidadeEdit">Cidade</label>
+                    </span>
+                    <input
+                        id="cidadeEdit"
+                        type="text"
+                        name="cidade"
+                        className="form-control"
+                        placeholder="Cidade"
+                        value={formData.cidade}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <span className="login-titulo">
+                        <label htmlFor="ufEdit">UF</label>
+                    </span>
+                    <input
+                        id="ufEdit"
+                        type="text"
+                        name="uf"
+                        className="form-control"
+                        placeholder="UF"
+                        value={formData.uf}
+                        onChange={handleChange}
+                    />
                 </div>
             </div>
         </>

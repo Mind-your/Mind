@@ -31,7 +31,7 @@ export default function Perguntas() {
 
   return (
     <>
-      <section class="container-questions">
+      <section className="container-questions">
         <h1>Perguntas frequentes</h1>
 
         {listQuestions.map((item, index) => (

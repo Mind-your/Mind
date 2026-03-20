@@ -31,7 +31,8 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    gap: var(--spacing-sm)
+    gap: var(--spacing-sm);
+    text-wrap: nowrap;
 }
 
 .button-confirm:hover{
