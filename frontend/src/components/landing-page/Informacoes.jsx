@@ -35,7 +35,7 @@ export default function Informacoes() {
         <div className="info-grid">
 
           {listInfo.map((item) => (
-            <div className={`info info-${item.id}`}>
+            <div key={item.id} className={`info info-${item.id}`}>
               <h2>{item.title}</h2>
               <p>{item.text}</p>
             </div>

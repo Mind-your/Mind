@@ -1,12 +1,12 @@
 @import url("../pop-ups/deletar.css");
 
 section.config{
-    margin:3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     position: relative;
+    padding-inline: 10%;
 }
 section.config h1{
     font-size: clamp(1.5rem, 5vw, 2rem);

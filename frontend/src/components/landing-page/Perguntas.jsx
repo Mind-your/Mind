@@ -13,7 +13,7 @@ export default function Perguntas() {
   const listQuestions = [
     {
       "question": "Como funciona a terapia online?",
-      "answer" : <p>A terapia online funciona como uma sessão tradicional, mas ocorre através de <span style={{textDecoration: +"underline;"}}> videoconferência</span>. Você marca seu horário de acordo com a disponibilidade da agenda do psicologo escolhido, e se confirmado a sessão, o usuário receberá uma notificação em seu perfil da data e horário de registro, <span  style={{ backgroundColor: "#f8d982", padding: "2px 4px", borderRadius: "3px" }}>tendo início a consulta no tempo previsto de forma automatica, juntamente a entrada do profissional no ambiente de streaming </span>, sendo este privado e confidencial. Sendo tão eficaz quanto a terapia presencial para a maioria dos casos.</p>,
+      "answer" : <p>A terapia online funciona como uma sessão tradicional, mas ocorre através de <span style={{ textDecoration: "underline" }}> videoconferência</span>. Você marca seu horário de acordo com a disponibilidade da agenda do psicologo escolhido, e se confirmado a sessão, o usuário receberá uma notificação em seu perfil da data e horário de registro, <span  style={{ backgroundColor: "#f8d982", padding: "2px 4px", borderRadius: "3px" }}>tendo início a consulta no tempo previsto de forma automatica, juntamente a entrada do profissional no ambiente de streaming </span>, sendo este privado e confidencial. Sendo tão eficaz quanto a terapia presencial para a maioria dos casos.</p>,
     },
     {
       "question": "Quanto tempo dura cada sessão?",
@@ -21,7 +21,7 @@ export default function Perguntas() {
     },
     {
       "question": "É realmente confidencial?",
-      "answer" :  <p>Sim, utilizamos uma plataformas segura de apoio para videos chamadas e seguimos rigorosamente o <a href="https://www.crpsp.org/pagina/view/49" target="_blank" style={{textDecoration: "underline", color : "#16120D;"}}>Código de Ética Profissional</a>. Suas sessões são protegidas por sigilo profissional, com exceção apenas dos casos previstos em lei (como risco de vida).</p>,
+      "answer" :  <p>Sim, utilizamos uma plataformas segura de apoio para videos chamadas e seguimos rigorosamente o <a href="https://www.crpsp.org/pagina/view/49" target="_blank" style={{textDecoration: "underline", color : "#16120D"}}>Código de Ética Profissional</a>. Suas sessões são protegidas por sigilo profissional, com exceção apenas dos casos previstos em lei (como risco de vida).</p>,
     },
     {
       "question": "Como saber se preciso de terapia?",
@@ -35,7 +35,7 @@ export default function Perguntas() {
         <h1>Perguntas frequentes</h1>
 
         {listQuestions.map((item, index) => (
-          <div>
+  <div key={item.question}>
             <button 
               className={`accordion ${toggleQuestion === index ? 'active' : ''}`}
               onClick={() => openQuestionBox(index)}>
