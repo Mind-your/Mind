@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import background from "../../assets/img/background_input.png";
-import "../../assets/styles/input_recuperar_senha.css";
+import "../../assets/styles/login-cadastro/input_recuperar_senha.css";
 import { HiChevronLeft } from "react-icons/hi";
 import { toast } from "react-toastify";
+
 
 export default function SectionRecuperarSenha() {
 
@@ -26,17 +27,20 @@ export default function SectionRecuperarSenha() {
     };
 
     const enviarEmail = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        if (!form.email) return;
+    if (!form.email) {
+        toast.error("Digite um email válido");
+        return;
+    }
 
-        // chamada API
-        console.log("Enviar código para:", form.email);
+    // chamada API
+    console.log("Enviar código para:", form.email);
 
-        toast.success("Código enviado para seu email");
+    toast.success("Código enviado para seu email");
 
-        setStep(2);
-    };
+    setStep(2);
+};
 
     const confirmarCodigo = async (e) => {
         e.preventDefault();
@@ -78,9 +82,16 @@ export default function SectionRecuperarSenha() {
         }
     };
 
+
+    const [animar, setAnimar] = useState(false);
+    useEffect(() => {
+    setAnimar(false);
+    const timeout = setTimeout(() => setAnimar(true), 50);
+    return () => clearTimeout(timeout);
+}, [step]);
+
     return (
         <section className="login-inputs">
-
             <div className="background-img-login-cadastro">
                 <img
                     className="background"
@@ -92,93 +103,86 @@ export default function SectionRecuperarSenha() {
             <div className="container-input-login">
 
                 <div className="container-icon-return-login">
-                    <Link to="/login=0">
-                        <button className="icon-btn icon-return-login">
-                            <HiChevronLeft />
-                        </button>
+                    <Link to="/login=0" className="icon-btn icon-return-login">
+                        <HiChevronLeft />
                     </Link>
                 </div>
 
                 <h1>Recuperação de Senha</h1>
 
-                {/* STEP 1 EMAIL */}
+                {/* STEP 1 - EMAIL */}
                 {step === 1 && (
-                    <form className="inputs-recuperarsenha" onSubmit={enviarEmail}>
+                    <form className="inputs" onSubmit={enviarEmail} noValidate>
+                        <div className={`login-input ${animar ? "animar" : ""}`}>
 
-                        <div className="input">
-                            <span className="login-titulo">
+                            <div className={`input input-obrigatorio ${form.email ? "preenchido" : ""}`}>
                                 <label>Email</label>
-                            </span>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={form.email}
+                                    onChange={handleChange}
+                                    placeholder="Digite seu email"
+                                />
+                            </div>
 
-                            <input
-                                type="email"
-                                name="email"
-                                value={form.email}
-                                onChange={handleChange}
-                                placeholder="Digite seu email"
-                            />
                         </div>
 
-                        <button className="button-confirm">
+                        <button className="button-confirm" type="submit">
                             Enviar Código
                         </button>
-
                     </form>
                 )}
 
-                {/* STEP 2 CODIGO */}
+                {/* STEP 2 - CÓDIGO */}
                 {step === 2 && (
-                    <form className="inputs-recuperarsenha" onSubmit={confirmarCodigo}>
+                    <form className="inputs" onSubmit={confirmarCodigo} noValidate>
+                        <div className={`login-input ${animar ? "animar" : ""}`}>
 
-                        <div className="input">
-                            <span className="login-titulo">
+                            <div className={`input input-obrigatorio ${form.codigo ? "preenchido" : ""}`}>
                                 <label>Código de verificação</label>
-                            </span>
+                                <input
+                                    type="text"
+                                    name="codigo"
+                                    value={form.codigo}
+                                    onChange={handleChange}
+                                    placeholder="Digite o código recebido"
+                                />
+                            </div>
 
-                            <input
-                                type="text"
-                                name="codigo"
-                                value={form.codigo}
-                                onChange={handleChange}
-                                placeholder="Digite o código recebido"
-                            />
                         </div>
 
-                        <button className="button-confirm">
+                        <button className="button-confirm" type="submit">
                             Confirmar Código
                         </button>
-
                     </form>
                 )}
 
-                {/* STEP 3 NOVA SENHA */}
+                {/* STEP 3 - NOVA SENHA */}
                 {step === 3 && (
-                    <form className="inputs-recuperarsenha" onSubmit={redefinirSenha}>
+                    <form className="inputs" onSubmit={redefinirSenha} noValidate>
+                        <div className={`login-input ${animar ? "animar" : ""}`}>
 
-                        <div className="input">
-                            <span className="login-titulo">
+                            <div className={`input input-obrigatorio ${form.senha ? "preenchido" : ""}`}>
                                 <label>Nova Senha</label>
-                            </span>
+                                <input
+                                    type="new-password"
+                                    name="senha"
+                                    value={form.senha}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                            <input
-                                type="password"
-                                name="senha"
-                                value={form.senha}
-                                onChange={handleChange}
-                            />
-                        </div>
-
-                        <div className="input">
-                            <span className="login-titulo">
+                            <div className={`input input-obrigatorio ${form.confirmarSenha ? "preenchido" : ""}`}>
                                 <label>Confirmar Senha</label>
-                            </span>
+                                <input
+                                    type="new-password"
+                                    name="confirmarSenha"
+                                    value={form.confirmarSenha}
+                                    onChange={handleChange}
+                                />
+                            </div>
 
-                            <input
-                                type="password"
-                                name="confirmarSenha"
-                                value={form.confirmarSenha}
-                                onChange={handleChange}
-                            />
                         </div>
 
                         <button
@@ -188,12 +192,10 @@ export default function SectionRecuperarSenha() {
                         >
                             {loadingReset ? "Redefinindo..." : "Redefinir Senha"}
                         </button>
-
                     </form>
                 )}
 
             </div>
-
         </section>
     );
 }
