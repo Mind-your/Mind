@@ -43,7 +43,7 @@ export default function InputLogin() {
 
     const handleSubmit = async (e) => {
     e.preventDefault();
-    // ✅ VALIDAÇÃO
+
     if (!form.login || !form.senha) {
         setErrors({
             login: !form.login ? "Digite o login" : "",
@@ -56,7 +56,6 @@ export default function InputLogin() {
 
     const result = await login(form.login, form.senha, tipoUsuario);
 
-    // ❌ ERRO DE LOGIN
     if (!result.success) {
         setErrors({
             login: "Login ou senha inválidos",
@@ -65,10 +64,8 @@ export default function InputLogin() {
         return;
     }
 
-    // ✅ SUCESSO
     const { user } = result;
 
-    // 🔥 MAPA DOS TIPOS
     const mapaTipos = {
         "0": "paciente",
         "1": "psicologo",
@@ -79,7 +76,6 @@ export default function InputLogin() {
     const tipoRota = mapaTipos[tipoRotaNumero];
     const tipoUser = user.tipo.toLowerCase().trim();
 
-    // 🚨 VALIDAÇÃO DE TIPO
     if (tipoRota && tipoRota !== tipoUser) {
         toast.error(`Você está tentando acessar como ${tipoRota}, mas sua conta é ${tipoUser}.`, {
             position: "top-center",
@@ -90,12 +86,9 @@ export default function InputLogin() {
         return;
     }
 
-    // ✅ SUCESSO FINAL
     toast.success("Logado");
     navigate("/home");
 };
-
-
 
     return (
         <>

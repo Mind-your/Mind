@@ -6,18 +6,18 @@ import Notificacoes from './Notificacoes.jsx';
 import Logout from './Logout.jsx';
 import ArtigosPerfil from './ArtigosPerfil.jsx';
 
-export default function SectionPsicologo({ id }) {
+export default function SectionPsicologo({ profileData }) {
     return (
         <div className="container-section-perfil">
             <div className="sobre-notif-container">
-                <InfoPsicologo id={id} />
-                <SobrePsicologo id={id} />
-                <ArtigosPerfil id={id} />
+                <InfoPsicologo profileData={profileData} />
+                <SobrePsicologo profileData={profileData} />
+                <ArtigosPerfil id={profileData?.id} />
             </div>
             <div className="perfil-container">
                 <Logout />
-                <Calendario id={id} />
-                <Notificacoes id={id} />
+                <Calendario id={profileData?.id} />
+                <Notificacoes id={profileData?.id} />
             </div>
             
         </div>

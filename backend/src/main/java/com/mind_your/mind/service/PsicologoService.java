@@ -11,6 +11,10 @@ import com.mind_your.mind.models.Psicologo;
 import com.mind_your.mind.models.RefreshToken;
 import com.mind_your.mind.repository.PsicologoRepository;
 import com.mind_your.mind.security.JwtUtil;
+import com.mind_your.mind.dto.response.PsicologoConfiguracoesResponseDTO;
+import com.mind_your.mind.security.UserDetailsImpl;
+import org.springframework.security.core.Authentication;
+import com.mind_your.mind.dto.response.PsicologoSessionResponseDTO;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -47,6 +51,9 @@ public class PsicologoService {
     @Autowired
     private RefreshTokenService refreshTokenService;
 
+    @Autowired
+    private EnderecoService enderecoService;
+
     // Cadastrar
     public PsicologoCadastroResponseDTO cadastrar(PsicologoCadastroRequestDTO dados) {
         Psicologo psicologo = new Psicologo();
@@ -61,6 +68,16 @@ public class PsicologoService {
         psicologo.setSenha(passwordEncoder.encode(dados.getSenha()));
         psicologo.setCrp(dados.getCrp());
         psicologo.setEspecialidades(dados.getEspecialidades());
+        psicologo.setNumeroResidencia(dados.getNumeroResidencia());
+
+        if (dados.getCep() != null){
+            enderecoService.obtemEnderecoPorCep(dados.getCep()).ifPresent(dadosEndereco -> {
+                psicologo.setCep(dados.getCep());
+                psicologo.setCidade(dadosEndereco.getCidade());
+                psicologo.setEndereco(dadosEndereco.getLogradouro());
+                psicologo.setUf(dadosEndereco.getUf());
+            });
+        }
 
         Psicologo salvo = psicologoRepository.save(psicologo);
         return PsicologoMapper.toCadastroResponseDTO(salvo);
@@ -78,6 +95,13 @@ public class PsicologoService {
     public Optional<PsicologoResponseDTO> buscarPorId(String id) {
         return psicologoRepository.findById(id)
                 .map(PsicologoMapper::toResponseDTO);
+    }
+
+    // Buscar configurações por ID
+    public Optional<PsicologoConfiguracoesResponseDTO> buscarConfiguracoesPorId(String id) {
+        checarPropriedade(id);
+        return psicologoRepository.findById(id)
+                .map(PsicologoMapper::toConfiguracoesResponseDTO);
     }
 
     // Buscar por email
@@ -100,6 +124,7 @@ public class PsicologoService {
 
     // Atualizar
     public Optional<PsicologoResponseDTO> atualizar(String id, PsicologoUpdateRequestDTO dados) {
+        checarPropriedade(id);
         return psicologoRepository.findById(id).map(psicologo -> {
             PsicologoMapper.updatePsicologoFromDTO(dados, psicologo, passwordEncoder);
             Psicologo atualizado = psicologoRepository.save(psicologo);
@@ -109,6 +134,7 @@ public class PsicologoService {
 
     // Deletar por ID
     public boolean deletarPorId(String id) {
+        checarPropriedade(id);
         if (psicologoRepository.existsById(id)) {
             psicologoRepository.deleteById(id);
             return true;
@@ -132,6 +158,7 @@ public class PsicologoService {
 
     // Upload de imagem de perfil
     public Optional<UploadImagemResponseDTO> uploadImagem(String id, MultipartFile file) {
+        checarPropriedade(id);
         try {
             String contentType = file.getContentType();
             if (contentType == null || !contentType.startsWith("image/")) {
@@ -180,11 +207,26 @@ public class PsicologoService {
         }
     }
 
+    // Buscar Sessao por login
+    public Optional<PsicologoSessionResponseDTO> buscarSessaoPorLogin(String login) {
+        return buscarPorLoginAuth(login).map(PsicologoMapper::toSessionDTO);
+    }
+
     // Método interno de busca por login ou email
     private Optional<Psicologo> buscarPorLoginAuth(String login) {
         if (login.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
             return psicologoRepository.findByEmail(login);
         }
         return psicologoRepository.findByLogin(login);
+    }
+
+    private void checarPropriedade(String id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof UserDetailsImpl) {
+            UserDetailsImpl user = (UserDetailsImpl) auth.getPrincipal();
+            if (!user.getId().equals(id)) {
+                throw new RuntimeException("Acesso negado: Você não tem permissão para acessar ou modificar dados de outro usuário.");
+            }
+        }
     }
 }

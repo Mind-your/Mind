@@ -6,6 +6,8 @@ import com.mind_your.mind.dto.request.PsicologoUpdateRequestDTO;
 import com.mind_your.mind.dto.response.JwtResponseDTO;
 import com.mind_your.mind.dto.response.PsicologoCadastroResponseDTO;
 import com.mind_your.mind.dto.response.PsicologoResponseDTO;
+import com.mind_your.mind.dto.response.PsicologoConfiguracoesResponseDTO;
+import com.mind_your.mind.dto.response.PsicologoSessionResponseDTO;
 import com.mind_your.mind.dto.response.UploadImagemResponseDTO;
 import com.mind_your.mind.service.PsicologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +44,14 @@ public class PsicologoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Buscar configurações completas por ID
+    @GetMapping("/{id}/configuracoes")
+    public ResponseEntity<PsicologoConfiguracoesResponseDTO> buscarConfiguracoesPorId(@PathVariable("id") String id) {
+        return psicologoService.buscarConfiguracoesPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
     // Buscar por email
     @GetMapping("/email/{email}")
     public ResponseEntity<PsicologoResponseDTO> buscarPorEmail(@PathVariable("email") String email) {
@@ -58,10 +68,10 @@ public class PsicologoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Buscar por login
+    // Buscar SESSÃO por login
     @GetMapping("/login/{login}")
-    public ResponseEntity<PsicologoResponseDTO> buscarPorLogin(@PathVariable("login") String login) {
-        return psicologoService.buscarPorLogin(login)
+    public ResponseEntity<PsicologoSessionResponseDTO> buscarSessaoPorLogin(@PathVariable("login") String login) {
+        return psicologoService.buscarSessaoPorLogin(login)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }

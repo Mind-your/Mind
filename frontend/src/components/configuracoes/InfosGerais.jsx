@@ -1,4 +1,4 @@
-export default function InfosGerais({ formData, handleChange }) {
+export default function InfosGerais({ formData, handleChange, handleCepBlur, handleEnderecoBlur }) {
 
     const formatarData = (dtNascimento) => {
         if (!dtNascimento) return "";
@@ -12,6 +12,8 @@ export default function InfosGerais({ formData, handleChange }) {
         // Se já vier como string "2000-09-13"
         return dtNascimento;
     };
+
+    const isCepValid = (formData.cep || "").replace(/\D/g, "").length === 8;
 
     return (
         <>
@@ -122,20 +124,38 @@ export default function InfosGerais({ formData, handleChange }) {
                         placeholder="00000-000"
                         value={formData.cep}
                         onChange={handleChange}
+                        onBlur={handleCepBlur}
                     />
                 </div>
 
                 <div className="input-e-span">
                     <span className="login-titulo">
-                        <label htmlFor="bairroEdit">Bairro</label>
+                        <label htmlFor="ruaEdit">Rua / Logradouro</label>
                     </span>
                     <input
-                        id="bairroEdit"
+                        id="ruaEdit"
                         type="text"
-                        name="bairro"
+                        name="rua"
                         className="form-control"
-                        placeholder="Bairro"
-                        value={formData.bairro}
+                        placeholder="Rua"
+                        value={formData.rua}
+                        onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <span className="login-titulo">
+                        <label htmlFor="numeroEdit">Número</label>
+                    </span>
+                    <input
+                        id="numeroEdit"
+                        type="text"
+                        name="numeroResidencia"
+                        className="form-control"
+                        placeholder="Número da Residência"
+                        value={formData.numeroResidencia}
                         onChange={handleChange}
                     />
                 </div>
@@ -152,6 +172,8 @@ export default function InfosGerais({ formData, handleChange }) {
                         placeholder="Cidade"
                         value={formData.cidade}
                         onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
                     />
                 </div>
 
@@ -167,6 +189,8 @@ export default function InfosGerais({ formData, handleChange }) {
                         placeholder="UF"
                         value={formData.uf}
                         onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
                     />
                 </div>
             </div>

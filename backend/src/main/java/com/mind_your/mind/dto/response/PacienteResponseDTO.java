@@ -6,46 +6,37 @@ public class PacienteResponseDTO {
     private String id;
     private String nome;
     private String sobrenome;
-    private String email;
-    private String login;
     private String imgPerfil;
-    private LocalDate dtNascimento;
-    private String genero;
     private String telefone;
-    private String endereco;
     private String sobreMim;
     private String medicamentos;
     private String preferencias;
+    private Integer idade;
+    private String local;
 
-    public PacienteResponseDTO(String id, String nome, String sobrenome, String email, String login,
-                                String imgPerfil, LocalDate dtNascimento, String genero, String telefone,
-                                String endereco, String sobreMim, String medicamentos, String preferencias) {
+    public PacienteResponseDTO(String id, String nome, String sobrenome, String imgPerfil, 
+                               String telefone, String sobreMim, String medicamentos, 
+                               String preferencias, Integer idade, String local) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
-        this.email = email;
-        this.login = login;
         this.imgPerfil = imgPerfil;
-        this.dtNascimento = dtNascimento;
-        this.genero = genero;
         this.telefone = telefone;
-        this.endereco = endereco;
         this.sobreMim = sobreMim;
         this.medicamentos = medicamentos;
         this.preferencias = preferencias;
+        this.idade = idade;
+        this.local = local;
     }
 
     public String getId() { return id; }
     public String getNome() { return nome; }
     public String getSobrenome() { return sobrenome; }
-    public String getEmail() { return email; }
-    public String getLogin() { return login; }
     public String getImgPerfil() { return imgPerfil; }
-    public LocalDate getDtNascimento() { return dtNascimento; }
-    public String getGenero() { return genero; }
     public String getTelefone() { return telefone; }
-    public String getEndereco() { return endereco; }
     public String getSobreMim() { return sobreMim; }
     public String getMedicamentos() { return medicamentos; }
     public String getPreferencias() { return preferencias; }
+    public Integer getIdade() { return idade; }
+    public String getLocal() { return local; }
 }

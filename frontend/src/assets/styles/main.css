@@ -163,3 +163,8 @@
 a{
     text-decoration: none;
 }
+
+input[readonly] {
+    cursor: text !important;
+    background-color: rgba(0, 0, 0, 0.02); /* Slight dim to show it's auto-filled */
+}

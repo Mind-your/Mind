@@ -5,10 +5,19 @@ import com.mind_your.mind.dto.request.PacienteUpdateRequestDTO;
 import com.mind_your.mind.dto.response.JwtResponseDTO;
 import com.mind_your.mind.dto.response.PacienteCadastroResponseDTO;
 import com.mind_your.mind.dto.response.PacienteResponseDTO;
+import com.mind_your.mind.dto.response.PacienteConfiguracoesResponseDTO;
+import com.mind_your.mind.dto.request.PacienteUpdateRequestDTO;
+import com.mind_your.mind.dto.response.JwtResponseDTO;
+import com.mind_your.mind.dto.response.PacienteCadastroResponseDTO;
+import com.mind_your.mind.dto.response.PacienteResponseDTO;
+import com.mind_your.mind.dto.response.PacienteSessionResponseDTO;
+import com.mind_your.mind.dto.response.PacienteConfiguracoesResponseDTO;
 import com.mind_your.mind.dto.response.UploadImagemResponseDTO;
 import com.mind_your.mind.models.Paciente;
 import com.mind_your.mind.repository.PacienteRepository;
 import com.mind_your.mind.mapper.PacienteMapper;
+import com.mind_your.mind.security.UserDetailsImpl;
+import org.springframework.security.core.Authentication;
 
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -21,7 +30,7 @@ import java.nio.file.Paths;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import com.mind_your.mind.models.RefreshToken;
-import com.mind_your.mind.service.RefreshTokenService;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -48,12 +57,33 @@ public class PacienteService {
     @Autowired
     private RefreshTokenService refreshTokenService;
 
+    @Autowired
+    private EnderecoService enderecoService;
+
     public PacienteCadastroResponseDTO cadastrar(PacienteCadastroRequestDTO dados) {
         Paciente paciente = new Paciente();
 
         paciente.setNome(dados.getNome());
         paciente.setSobrenome(dados.getSobrenome());
         paciente.setEmail(dados.getEmail());
+
+        paciente.setGenero(dados.getGenero());
+        paciente.setTelefone(dados.getTelefone());
+
+        if(dados.getDtNascimento() != null) {
+            paciente.setDtNascimento(dados.getDtNascimento());
+        }
+
+        paciente.setNumeroResidencia(dados.getNumeroResidencia());
+
+        if (dados.getCep() != null){
+            enderecoService.obtemEnderecoPorCep(dados.getCep()).ifPresent(dadosEndereco -> {
+                paciente.setCep(dados.getCep());
+                paciente.setCidade(dadosEndereco.getCidade());
+                paciente.setEndereco(dadosEndereco.getLogradouro());
+                paciente.setUf(dadosEndereco.getUf());
+            });
+        }
 
         if (dados.getLogin() == null || dados.getLogin().isEmpty()) {
             paciente.setLogin(dados.getEmail());
@@ -88,23 +118,29 @@ public class PacienteService {
                 .map(PacienteMapper::toResponseDTO);
     }
 
+    // buscar configuracoes por Id
+    public Optional<PacienteConfiguracoesResponseDTO> buscarConfiguracoesPorId(String id) {
+        checarPropriedade(id);
+        return pacienteRepository.findById(id)
+                .map(PacienteMapper::toConfiguracoesResponseDTO);
+    }
+
     // buscar por nome
     public Optional<PacienteResponseDTO> buscarPorNome(String nome) {
         return pacienteRepository.findByNome(nome)
                 .map(PacienteMapper::toResponseDTO);
     }
 
-    // buscar por login (email ou login)
+    // buscar por login (email ou login) - Perfil Completo
     public Optional<PacienteResponseDTO> buscarPorLogin(String login) {
-        Optional<Paciente> paciente;
-
-        if (login.matches("^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$")) {
-            paciente = pacienteRepository.findByEmail(login);
-        } else {
-            paciente = pacienteRepository.findByLogin(login);
-        }
-
+        Optional<Paciente> paciente = buscarPorLoginAuth(login);
         return paciente.map(PacienteMapper::toResponseDTO);
+    }
+
+    // buscar por login (email ou login) - Sessao
+    public Optional<PacienteSessionResponseDTO> buscarSessaoPorLogin(String login) {
+        Optional<Paciente> paciente = buscarPorLoginAuth(login);
+        return paciente.map(PacienteMapper::toSessionDTO);
     }
 
     private Optional<Paciente> buscarPorLoginAuth(String login) {
@@ -116,6 +152,7 @@ public class PacienteService {
 
     // atualizar
     public Optional<PacienteResponseDTO> atualizar(String id, PacienteUpdateRequestDTO dados) {
+        checarPropriedade(id);
         return pacienteRepository.findById(id).map(paciente -> {
             PacienteMapper.updatePacienteFromDTO(dados, paciente, passwordEncoder);
             Paciente atualizado = pacienteRepository.save(paciente);
@@ -125,6 +162,7 @@ public class PacienteService {
 
     // deletar por ID
     public boolean deletarPorId(String id) {
+        checarPropriedade(id);
         if (pacienteRepository.existsById(id)) {
             pacienteRepository.deleteById(id);
             return true;
@@ -149,6 +187,7 @@ public class PacienteService {
 
     // upload imagem de perfil
     public Optional<UploadImagemResponseDTO> uploadImagem(String id, MultipartFile file) {
+        checarPropriedade(id);
         try {
             String contentType = file.getContentType();
             if (contentType == null || !contentType.startsWith("image/")) {
@@ -195,6 +234,16 @@ public class PacienteService {
 
         } catch (Exception e) {
             throw new RuntimeException("Erro ao fazer upload da imagem", e);
+        }
+    }
+
+    private void checarPropriedade(String id) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getPrincipal() instanceof UserDetailsImpl) {
+            UserDetailsImpl user = (UserDetailsImpl) auth.getPrincipal();
+            if (!user.getId().equals(id)) {
+                throw new RuntimeException("Acesso negado: Você não tem permissão para acessar ou modificar dados de outro usuário.");
+            }
         }
     }
 }

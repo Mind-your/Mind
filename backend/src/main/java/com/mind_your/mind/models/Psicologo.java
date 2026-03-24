@@ -24,6 +24,10 @@ public class Psicologo {
     private Integer idade;
     private String genero = "";
     private String telefone = "";
+    private String cep = "";
+    private String numeroResidencia = "";
+    private String cidade = "";
+    private String uf = "";
     private String endereco = "";
     private String imgPerfil = "";
     private String sobreMim;
@@ -111,6 +115,38 @@ public class Psicologo {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getNumeroResidencia() {
+        return numeroResidencia;
+    }
+
+    public void setNumeroResidencia(String numeroResidencia) {
+        this.numeroResidencia = numeroResidencia;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     public String getEndereco() {

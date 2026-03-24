@@ -34,11 +34,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (pacienteOpt.isPresent()) {
             Paciente paciente = pacienteOpt.get();
-            return org.springframework.security.core.userdetails.User
-                    .withUsername(paciente.getLogin())
-                    .password(paciente.getSenha())
-                    .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_PACIENTE")))
-                    .build();
+            return new UserDetailsImpl(
+                    paciente.getId(),
+                    paciente.getLogin(),
+                    paciente.getEmail(),
+                    paciente.getSenha(),
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_PACIENTE"))
+            );
         }
 
         // Tenta buscar como email ou login nos psicólogos
@@ -49,11 +51,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         if (psicologoOpt.isPresent()) {
             Psicologo psicologo = psicologoOpt.get();
-            return org.springframework.security.core.userdetails.User
-                    .withUsername(psicologo.getLogin())
-                    .password(psicologo.getSenha())
-                    .authorities(Collections.singletonList(new SimpleGrantedAuthority("ROLE_PSICOLOGO")))
-                    .build();
+            return new UserDetailsImpl(
+                    psicologo.getId(),
+                    psicologo.getLogin(),
+                    psicologo.getEmail(),
+                    psicologo.getSenha(),
+                    Collections.singletonList(new SimpleGrantedAuthority("ROLE_PSICOLOGO"))
+            );
         }
 
         throw new UsernameNotFoundException("Usuário não encontrado: " + username);

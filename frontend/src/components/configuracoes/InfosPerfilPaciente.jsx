@@ -54,6 +54,7 @@ export default function InfosPerfilPaciente({
                 <textarea 
                     id="medicamentosEdit"
                     type="text"
+                    name="medicamentos"
                     value={formData.medicamentos}
                     onChange={handleChange}
                 ></textarea>
@@ -65,6 +66,7 @@ export default function InfosPerfilPaciente({
                 <textarea 
                     id="preferenciasEdit" 
                     type="text"
+                    name="preferencias"
                     value={formData.preferencias}
                     onChange={handleChange}
                 ></textarea>

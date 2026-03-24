@@ -4,32 +4,32 @@ import fotoPsi from '../../assets/img/perfil-default.png';
 import "../../assets/styles/perfil/info.css";
 import { Link } from "react-router-dom";
 
-export default function InfoPsicologo() {
+export default function InfoPsicologo({ profileData }) {
   const { user } = useAuth();
 
-  if (!user) return <p>Carregando...</p>;
+  if (!profileData) return <p>Carregando...</p>;
 
   return (
     <div className="card-perfil-content">
       <div className="foto-perfil">
         <div className="banner-perfil"></div>
-        <img id="perfilFoto" src={user.foto || fotoPsi} alt="Foto do Psicólogo" />
+        <img id="perfilFoto" src={profileData.foto || fotoPsi} alt="Foto do Psicólogo" />
         <div className="info-perfil">
-          <h3 id="perfilNome">{user.nome}</h3>
+          <h3 id="perfilNome">{profileData.nome}</h3>
 
           <div className="container-info">
             <p id="perfilIdade">Idade:</p>
-            <label>{user.idade || "idade teste"}</label>
+            <label>{profileData.idade || "idade teste"}</label>
           </div>
 
           <div className="container-info">
             <p id="perfilLocal">Local:</p>
-            <label>{user.local || "local teste"}</label>
+            <label>{profileData.local || "local teste"}</label>
           </div>
 
           <div className="container-info">
             <p id="perfilLocal">CRP:</p>
-            <label>{user.crp || ""}</label>
+            <label>{profileData.crp || ""}</label>
           </div>
         </div>
       </div>
@@ -40,22 +40,22 @@ export default function InfoPsicologo() {
             <button 
               type="button" 
               className="icon-btn icon-ui" 
-              onClick={() => navigator.clipboard.writeText(user.telefone || "")}
+              onClick={() => navigator.clipboard.writeText(profileData.telefone || "")}
             >
               <HiOutlinePhone />
             </button>
-            <span>{user.telefone || "+55 11 9000-0000"}</span>
+            <span>{profileData.telefone || "+55 11 9000-0000"}</span>
           </div>
 
           <div className="contato">
             <button 
               type="button" 
               className="icon-btn icon-ui" 
-              onClick={() => navigator.clipboard.writeText(user.email || "")}
+              onClick={() => navigator.clipboard.writeText(profileData.email || "")}
             >
               <HiOutlineMail />
             </button>
-            <span>{user.email || "email@exemplo.com"}</span>
+            <span>{profileData.local || "Cidade - UF"}</span>
           </div>
         </div>
 

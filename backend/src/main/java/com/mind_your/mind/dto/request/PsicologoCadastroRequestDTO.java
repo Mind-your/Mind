@@ -9,6 +9,8 @@ public class PsicologoCadastroRequestDTO {
     private String email;
     private String login;
     private String senha;
+    private String cep;
+    private String numeroResidencia;
     private String crp;
     private List<String> especialidades;
 
@@ -26,6 +28,12 @@ public class PsicologoCadastroRequestDTO {
 
     public String getSenha() { return senha; }
     public void setSenha(String senha) { this.senha = senha; }
+
+    public String getCep() { return cep; }
+    public void setCep(String cep) { this.cep = cep; }
+
+    public String getNumeroResidencia() { return numeroResidencia; }
+    public void setNumeroResidencia(String numeroResidencia) { this.numeroResidencia = numeroResidencia; }
 
     public String getCrp() { return crp; }
     public void setCrp(String crp) { this.crp = crp; }

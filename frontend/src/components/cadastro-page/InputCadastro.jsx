@@ -164,15 +164,42 @@ export default function InputCadastro() {
         return () => clearTimeout(timeout);
     }, [location.pathname]);
 
-    useEffect(() => {
-        const cepLimpo = form.cep.replace(/\D/g, "");
+    // ================= HANDLERS =================
+    const handleCepBlur = (e) => {
+        const relatedName = e.relatedTarget?.name;
+        if (["rua", "cidade", "uf", "numeroResidencia"].includes(relatedName)) return;
 
+        const cepLimpo = form.cep.replace(/\D/g, "");
         if (cepLimpo.length === 8) {
             handleBuscarCep(cepLimpo);
         }
-    }, [form.cep]);
+    };
 
-    // ================= HANDLERS =================
+    const handleEnderecoBlur = async (e) => {
+        const relatedName = e.relatedTarget?.name;
+        if (["cep", "rua", "cidade", "uf", "numeroResidencia"].includes(relatedName)) return;
+
+        const cepLimpo = form.cep?.replace(/\D/g, "");
+        if (!cepLimpo && form.uf?.length === 2 && form.cidade?.length >= 3 && form.rua?.length >= 3) {
+            try {
+                setLoadingCep(true);
+                const response = await fetch(`https://viacep.com.br/ws/${form.uf}/${form.cidade}/${form.rua}/json/`);
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    setForm((prev) => ({
+                        ...prev,
+                        cep: data[0].cep
+                    }));
+                    toast.success("CEP encontrado e preenchido automaticamente!");
+                }
+            } catch (error) {
+                console.error("Erro ao consultar CEP pelo endereço:", error);
+            } finally {
+                setLoadingCep(false);
+            }
+        }
+    };
+
     function handleChange(e) {
         const { name, value } = e.target;
 
@@ -203,11 +230,10 @@ export default function InputCadastro() {
             dtNascimento: form.dataNascimento,
             genero: form.genero,
             telefone: form.telefone,
+
             cep: form.cep,
-            uf: form.uf,
-            cidade: form.cidade,
             numeroResidencia: form.numeroResidencia,
-            endereco: form.rua,
+
             cpf: form.cpf,
             tipoUsuario: tipoUsuario,
         };
@@ -236,6 +262,7 @@ export default function InputCadastro() {
 
     // ================= DATAS =================
     const hoje = new Date();
+    const isCepValid = (form.cep || "").replace(/\D/g, "").length === 8;
 
     const maxDate = new Date(
         hoje.getFullYear() - 18,
@@ -348,6 +375,7 @@ export default function InputCadastro() {
                                     placeholder="00000-000"
                                     autoComplete="postal-code"
                                     className={errors.cep ? "error" : ""}
+                                    onBlur={handleCepBlur}
                                 />
 
                                 {loadingCep && (
@@ -365,7 +393,8 @@ export default function InputCadastro() {
                                 onChange={handleChange}
                                 placeholder="SP"
                                 className={errors.uf ? "error" : ""}
-                                readOnly
+                                onBlur={handleEnderecoBlur}
+                                readOnly={isCepValid}
                             /> {errors.uf && <span className="error-text">{errors.uf}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.cidade ? "preenchido" : ""}`}>
@@ -377,7 +406,8 @@ export default function InputCadastro() {
                                 onChange={handleChange}
                                 placeholder="Diadema"
                                 className={errors.cep ? "error" : ""}
-                                readOnly
+                                onBlur={handleEnderecoBlur}
+                                readOnly={isCepValid}
                             /> {errors.cidade && <span className="error-text">{errors.cidade}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.rua ? "preenchido" : ""}`}>
@@ -389,7 +419,8 @@ export default function InputCadastro() {
                                 onChange={handleChange}
                                 placeholder="Centro"
                                 className={errors.rua ? "error" : ""}
-                                readOnly
+                                onBlur={handleEnderecoBlur}
+                                readOnly={isCepValid}
                             /> {errors.rua && <span className="error-text">{errors.rua}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.numeroResidencia ? "preenchido" : ""}`}>

@@ -1,17 +1,20 @@
 import '../../assets/styles/perfil/sobre.css';
 
-
-export default function SobrePsicologo() {
+export default function SobrePsicologo({ profileData }) {
     return (
         <>
             <div className="infos">
             <div className="card-info-container">
                 <h4>Sobre mim:</h4>
-                <div className="card-sobre-container"></div>
+                <div className="card-sobre-container">
+                    <p>{profileData?.sobreMim || "Nenhuma informação adicionada."}</p>
+                </div>
             </div>
             <div className="card-info-container">
                 <h4>Especializações</h4>
-                <div className="card-ficha-container-psi"></div>
+                <div className="card-ficha-container-psi">
+                    <p>{profileData?.especialidades?.join(", ") || "Nenhuma especialidade."}</p>
+                </div>
             </div>
             <div className="container-horarios-psi">
                 <h4>Horários de Atendimento</h4>

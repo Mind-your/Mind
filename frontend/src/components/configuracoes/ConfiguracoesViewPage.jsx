@@ -25,6 +25,8 @@ export default function ConfiguracoesViewPage({
     setIsOpen,
     formData,
     handleChange,
+    handleCepBlur,
+    handleEnderecoBlur,
 
     especializacoes,
     novaEspecializacao,
@@ -81,7 +83,9 @@ export default function ConfiguracoesViewPage({
                     <div>
                         <InfosGerais 
                             formData={formData}
-                            handleChange={handleChange} />
+                            handleChange={handleChange}
+                            handleCepBlur={handleCepBlur}
+                            handleEnderecoBlur={handleEnderecoBlur} />
                         <AtualizacaoCredenciais 
                             formData={formData}
                             handleChange={handleChange} />

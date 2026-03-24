@@ -7,7 +7,7 @@ import * as pacienteService from '../../services/pacienteService';
 import * as psicologoService from '../../services/psicologoService';
 import "../../assets/styles/perfil/info.css";
 
-export default function Info({ id }) {
+export default function Info({ profileData }) {
     const { user, updateUser } = useAuth();
     const [uploading, setUploading] = useState(false);
     const [uploadError, setUploadError] = useState(null);
@@ -102,14 +102,14 @@ export default function Info({ id }) {
                     </div>
                 )}
                 <div className="info-perfil">
-                    <h3>{user?.nome} {user?.sobrenome}</h3>
+                    <h3>{profileData?.nome} {profileData?.sobrenome}</h3>
                     <div className="container-info">
                         <p id="perfilIdade">Idade:</p>
-                        <label>{user.idade || "idade teste"}</label>
+                        <label>{profileData?.idade || "idade teste"}</label>
                     </div>
                     <div className="container-info">
                         <p id="perfilIdade">Local:</p>
-                        <label>{user.local || "local teste"}</label>
+                        <label>{profileData?.local || "local teste"}</label>
                     </div>
                 </div>
             </div>
@@ -119,11 +119,11 @@ export default function Info({ id }) {
                         <button
                             type="button"
                             className="icon-btn icon-ui"
-                            onClick={() => navigator.clipboard.writeText(user.telefone || "")}
+                            onClick={() => navigator.clipboard.writeText(profileData?.telefone || "")}
                         >
                             <HiOutlinePhone />
                         </button>
-                        <span>{user.telefone || "+55 11 9000-0000"}</span>
+                        <span>{profileData?.telefone || "+55 11 9000-0000"}</span>
                     </div>
                 </div>
 

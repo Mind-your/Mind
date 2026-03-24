@@ -8,8 +8,8 @@ import { getDefaultWallpaper } from "../utils/imageHelper";
 import { useState, useEffect } from "react";
 import { useParams, Navigate, useNavigate } from "react-router-dom"
 import { useAuth } from "../context/AuthContext";
-import { atualizar, deletar, uploadImagem } from "../services/pacienteService";
-import { atualizar as atualizarPsicologo, deletar as deletarPsicologo, uploadImagem as uploadImagemPsicologo } from "../services/psicologoService";
+import { atualizar, deletar, uploadImagem, buscarConfiguracoes } from "../services/pacienteService";
+import { atualizar as atualizarPsicologo, deletar as deletarPsicologo, uploadImagem as uploadImagemPsicologo, buscarConfiguracoes as buscarConfiguracoesPsicologo } from "../services/psicologoService";
 import { usePsicologos } from "../context/Psicologos"; // Novo import
 
 export default function Configuracoes() {
@@ -45,31 +45,101 @@ export default function Configuracoes() {
         medicamentos: '',
         preferencias: '',
         especializacoes: []
-        
+
     });
 
     useEffect(() => {
-        if (user) {
-            setFormData({
-                // Informações Gerais
-                nome: user.nome || '',
-                sobrenome: user.sobrenome || '',
-                dtNascimento: user.dtNascimento || '',
-                telefone: user.telefone || '',
-                endereco: user.endereco || '',
-                genero: user.genero || '',
-                // Informações Gerais
-                login: user.login || '',
-                email: user.email || '',
-                senha: '',
-                // Perfil
-                sobreMim: user.sobreMim || '',
-                medicamentos: user.medicamentos || '',
-                preferencias: user.preferencias || '',
-                especializacoes: user.especializacoes || []
-            });
-        }
+        const carregaConfiguracoes = async () => {
+            if (user) {
+                try {
+                    let data = user;
+                    // Busca as configs especificas que trazem endereco completo
+                    if (user.tipo === 'paciente') {
+                        data = await buscarConfiguracoes(user.id);
+                    } else if (user.tipo === 'psicologo') {
+                        data = await buscarConfiguracoesPsicologo(user.id);
+                    }
+                    
+                    setFormData(prev => ({
+                        ...prev,
+                        // Informações Gerais
+                        nome: data.nome || '',
+                        sobrenome: data.sobrenome || '',
+                        dtNascimento: data.dtNascimento || '',
+                        telefone: data.telefone || '',
+                        genero: data.genero || '',
+                        // Credenciais
+                        login: data.login || '',
+                        email: data.email || '',
+                        senha: '',
+                        // Perfil
+                        sobreMim: data.sobreMim || '',
+                        medicamentos: data.medicamentos || '',
+                        preferencias: data.preferencias || '',
+                        especializacoes: data.especializacoes || [],
+                        // Endereço (somente paciente costuma preencher completo aqui, mas deixamos dinamico)
+                        cep: data.cep || '',
+                        numeroResidencia: data.numeroResidencia || '',
+                        cidade: data.cidade || '',
+                        uf: data.uf || '',
+                        rua: data.endereco || data.rua || ''
+                    }));
+                } catch (error) {
+                    toast.error("Erro ao carregar configurações completas.");
+                }
+            }
+        };
+
+        carregaConfiguracoes();
     }, [user]);
+
+    // Lógica ViaCEP automático via onBlur
+    const handleCepBlur = async (e) => {
+        const relatedName = e.relatedTarget?.name;
+        // Se o próximo foco for um campo do grupo de endereço, não busca ainda
+        if (["rua", "cidade", "uf", "numeroResidencia"].includes(relatedName)) return;
+
+        const cepLimpo = formData.cep?.replace(/\D/g, "");
+        if (cepLimpo?.length === 8) {
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${cepLimpo}/json/`);
+                const data = await response.json();
+                if (!data.erro) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        cidade: data.localidade || prev.cidade,
+                        uf: data.uf || prev.uf,
+                        rua: data.logradouro || prev.rua,
+                    }));
+                }
+            } catch (error) {
+                console.error("Erro ao consultar ViaCEP:", error);
+            }
+        }
+    };
+
+    const handleEnderecoBlur = async (e) => {
+        const relatedName = e.relatedTarget?.name;
+        // Se o próximo foco ainda for um campo do grupo de endereço, não busca ainda
+        if (["cep", "rua", "cidade", "uf", "numeroResidencia"].includes(relatedName)) return;
+
+        const cepLimpo = formData.cep?.replace(/\D/g, "");
+        if (!cepLimpo && formData.uf?.length === 2 && formData.cidade?.length >= 3 && formData.rua?.length >= 3) {
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${formData.uf}/${formData.cidade}/${formData.rua}/json/`);
+                const data = await response.json();
+                if (data && data.length > 0) {
+                    setFormData((prev) => ({
+                        ...prev,
+                        cep: data[0].cep
+                    }));
+                    toast.success("CEP encontrado e preenchido automaticamente!");
+                }
+            } catch (error) {
+                console.error("Erro ao consultar CEP pelo endereço:", error);
+            }
+        }
+    };
 
     useEffect(() => {
         if (user?.imgPerfil) {
@@ -258,31 +328,33 @@ export default function Configuracoes() {
     }
 
     return (
-    <>
-        <ConfiguracoesViewPage 
-            user={user}
+        <>
+            <ConfiguracoesViewPage
+                user={user}
 
-            imgPerfil={imgPerfil}
-            novaImagem={novaImagem}
-            chooseImgPerfil={chooseImgPerfil}
+                imgPerfil={imgPerfil}
+                novaImagem={novaImagem}
+                chooseImgPerfil={chooseImgPerfil}
 
-            imgWallpaper={imgWallpaper}         
-            novaWallpaper={novaWallpaper}        
-            chooseWallpaper={chooseWallpaper} 
+                imgWallpaper={imgWallpaper}
+                novaWallpaper={novaWallpaper}
+                chooseWallpaper={chooseWallpaper}
 
-            handleAtualizarPerfil={handleAtualizarPerfil}
-            handleDeletarConta={handleDeletarConta}
-            salvando={salvando}
-            deletando={deletando}
-            isOpen={isOpen}
-            setIsOpen={setIsOpen}
-            formData={formData}
-            handleChange={handleChange} 
+                handleAtualizarPerfil={handleAtualizarPerfil}
+                handleDeletarConta={handleDeletarConta}
+                salvando={salvando}
+                deletando={deletando}
+                isOpen={isOpen}
+                setIsOpen={setIsOpen}
+                formData={formData}
+                handleChange={handleChange}
+                handleCepBlur={handleCepBlur}
+                handleEnderecoBlur={handleEnderecoBlur}
 
-            especializacoes={formData.especializacoes}
-            adicionarEspecializacao={adicionarEspecializacao}
-            removerEspecializacao={removerEspecializacao}/>
-            
-    </>
-  )
+                especializacoes={formData.especializacoes}
+                adicionarEspecializacao={adicionarEspecializacao}
+                removerEspecializacao={removerEspecializacao} />
+
+        </>
+    )
 }

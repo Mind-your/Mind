@@ -100,6 +100,9 @@ public class SecurityConfig {
                 .requestMatchers("/horarios/**").authenticated()
                 .requestMatchers("/agendas/**").authenticated()
                 
+                // Endereços (ViaCEP)
+                .requestMatchers(HttpMethod.GET, "/enderecos/**").permitAll()
+                
                 .anyRequest().authenticated()
             );
 
