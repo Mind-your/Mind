@@ -134,13 +134,13 @@ a {
 /* ===== MODAL NOTIF===== */
 
 .notif-modal-overlay {
-  position: absolute;
-  top: 120%;
+ position: fixed; /* melhor que absolute */
+  top: 4rem; /* ajuste conforme seu header */
+  right: 0; /* cola na direita */
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   z-index: 1000;
-  animation: fadeIn .2s ease;
+  
 }
 
 /* ===== MODAL ===== */
