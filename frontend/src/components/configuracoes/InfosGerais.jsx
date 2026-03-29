@@ -19,9 +19,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
         <>
             <div className="container-input-1">
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="nomeConfig">Nome</label>
-                    </span>
+                    <label htmlFor="nomeConfig" className="login-titulo">Nome</label>
                     <input
                         id="nomeConfig"
                         type="text"
@@ -34,9 +32,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="sobrenomeEdit">Sobrenome</label>
-                    </span>
+                    <label htmlFor="sobrenomeEdit" className="login-titulo">Sobrenome</label>
                     <input
                         id="sobrenomeEdit"
                         type="text"
@@ -49,9 +45,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="nascimentoEdit">Data de nascimento</label>
-                    </span>
+                    <label htmlFor="nascimentoEdit" className="login-titulo">Data de nascimento</label>
                     <input
                         id="nascimentoEdit"
                         type="date"
@@ -64,9 +58,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="telefoneEdit">Telefone</label>
-                    </span>
+                    <label htmlFor="telefoneEdit" className="login-titulo">Telefone</label>
                     <input
                         id="telefoneEdit"
                         type="text"
@@ -79,9 +71,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="cpfEdit">CPF</label>
-                    </span>
+                    <label htmlFor="cpfEdit" className="login-titulo">CPF</label>
                     <input
                         id="cpfEdit"
                         type="text"
@@ -94,10 +84,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="sexoEdit">Sexo</label>
-
-                    </span>
+                    <label htmlFor="sexoEdit" className="login-titulo">Sexo</label>
                     <select
                         id="sexoEdit"
                         className="form-control"
@@ -113,9 +100,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="cepEdit">CEP</label>
-                    </span>
+                    <label htmlFor="cepEdit" className="login-titulo">CEP</label>
                     <input
                         id="cepEdit"
                         type="text"
@@ -129,9 +114,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="ruaEdit">Rua / Logradouro</label>
-                    </span>
+                    <label htmlFor="ruaEdit" className="login-titulo">Rua / Logradouro</label>
                     <input
                         id="ruaEdit"
                         type="text"
@@ -146,9 +129,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="numeroEdit">Número</label>
-                    </span>
+                    <label htmlFor="numeroEdit" className="login-titulo">Número</label>
                     <input
                         id="numeroEdit"
                         type="text"
@@ -161,9 +142,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="cidadeEdit">Cidade</label>
-                    </span>
+                    <label htmlFor="cidadeEdit" className="login-titulo">Cidade</label>
                     <input
                         id="cidadeEdit"
                         type="text"
@@ -178,9 +157,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="ufEdit">UF</label>
-                    </span>
+                    <label htmlFor="ufEdit" className="login-titulo">UF</label>
                     <input
                         id="ufEdit"
                         type="text"

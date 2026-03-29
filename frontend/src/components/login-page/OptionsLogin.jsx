@@ -27,22 +27,32 @@ export default function OptionsLogin() {
     }, [location.pathname]);
 
     return (
-        <div className="container-options">
-            <Link to="/login=0">
-                <button className={tipoUsuario === "paciente" ? "active" : ""}>
-                    Paciente
-                </button>
-            </Link>
-            <Link to="/login=1">
-                <button className={tipoUsuario === "psicologo" ? "active" : ""}>
-                    Psicologo
-                </button>
-            </Link>
-            <Link to="/login=2">
-                <button className={tipoUsuario === "voluntario" ? "active" : ""}>
-                    Voluntario
-                </button>
-            </Link>
+        <>
+        <div role="region" className="container-options" aria-label="Tipo de usuário">
+            <ul>
+                <li>
+                    <Link to="/login=0" 
+                          className={tipoUsuario === "paciente" ? "active" : ""}
+                          aria-current={tipoUsuario === "paciente" ? "true" : "false"}>
+                        Paciente
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/login=1" 
+                          className={tipoUsuario === "psicologo" ? "active" : ""}
+                          aria-current={tipoUsuario === "psicologo" ? "active" : ""}>
+                        Psicologo
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/login=2" 
+                          className={tipoUsuario === "voluntario" ? "active" : ""}
+                          aria-current={tipoUsuario === "voluntario" ? "active" : ""}>
+                        Voluntario
+                    </Link>
+                </li>
+            </ul>
         </div>
+        </>
     )
 }

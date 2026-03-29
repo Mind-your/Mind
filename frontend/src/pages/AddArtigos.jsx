@@ -31,12 +31,12 @@ export default function AddArtigos() {
                     <img id="imagePreview" src={imgArticle} alt="" className="imgEdit"/>
                     <div>
                         <input 
-                            id="file-image" 
+                            id="foto-preview" 
                             type="file" 
                             accept="image/*" 
                             onChange={(e) => chooseImgArticle(e)}
                             required/>
-                        <label className="btns button-confirm" htmlFor="file-image">Mudar Foto</label>
+                        <label className="btns button-confirm" htmlFor="foto-preview">Mudar Foto</label>
                     </div>
                     
                 </div>

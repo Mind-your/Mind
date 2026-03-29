@@ -3,7 +3,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
     <>
         <div className="container-input-2">
             <div className="input-e-span">
-                <span className="login-titulo"><label>Nome do login</label></span>
+                <label htmlFor="loginEdit" className="login-titulo">Nome do login</label>
                 <input 
                     id="loginEdit" 
                     type="text"
@@ -15,7 +15,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
                 />
             </div>
             <div className="input-e-span">
-                <span className="login-titulo"><label>E-mail</label></span>
+                <label htmlFor="emailEdit" className="login-titulo">E-mail</label>
                 <input 
                     id="emailEdit" 
                     type="email"
@@ -27,7 +27,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
                 />
             </div>
             <div className="input-e-span">
-                <span className="login-titulo"><label>Nova Senha (deixe em branco para manter)</label></span>
+                <label htmlFor="senhaEdit" className="login-titulo">Nova Senha (deixe em branco para manter)</label>
                 <input 
                     id="senhaEdit" 
                     type="password"

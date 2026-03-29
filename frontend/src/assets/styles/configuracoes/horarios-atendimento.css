@@ -1,3 +1,14 @@
+ul.cards-horarios{
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    margin-top: 15px;
+}
+
+ul.cards-horarios li{
+    list-style:none;
+}
+
 .container-agendamento {
     background-color: var(--silver-chalice-100);
     padding: var(--spacing-xs);
