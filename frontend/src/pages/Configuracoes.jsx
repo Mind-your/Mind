@@ -1,6 +1,7 @@
 import "../assets/styles/configuracoes/configuracoes.css"
 
 import ConfiguracoesViewPage from "../components/configuracoes/ConfiguracoesViewPage";
+import SkipNavigation from "../components/SkipNavigation";
 import { toast } from 'react-toastify';
 import { getImageUrl, getDefaultAvatar } from "../utils/imageHelper";
 import { getDefaultWallpaper } from "../utils/imageHelper";
@@ -329,7 +330,8 @@ export default function Configuracoes() {
 
     return (
         <>
-            <ConfiguracoesViewPage
+            < SkipNavigation mainContent="configPageForm" />
+            < ConfiguracoesViewPage
                 user={user}
 
                 imgPerfil={imgPerfil}

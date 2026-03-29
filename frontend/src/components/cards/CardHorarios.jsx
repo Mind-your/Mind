@@ -75,9 +75,12 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
     return (
     <>
         <div className="container-agendamento">
-            {error && <div style={{color: "red", fontSize: "14px", marginBottom: "5px"}}>{error}</div>}
+            {error && <div role="alert" style={{color: "red", fontSize: "14px", marginBottom: "5px"}}>{error}</div>}
             <div className="container-horario">
                 <div className="inputs-horarios">
+                    <label className="sr-only" htmlFor={`dia-${horario.id || horario.tempId}`}>
+                        Dia da semana
+                    </label>
                     <select 
                         value={diaDaSemana} 
                         onChange={e => setDiaDaSemana(e.target.value)}
@@ -91,11 +94,18 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
                         <option value="Sexta">Sexta</option>
                         <option value="Sabado">Sábado</option>
                     </select>
+
+                    <label className="sr-only" htmlFor={`inicio-${horario.id || horario.tempId}`}>
+                        Hora de início
+                    </label>
                     <input 
                         type="time" 
                         value={horaInicio}
                         disabled={isExisting}
                         onChange={(e) => calculateHour(e.target.value)}/>
+                    <label className="sr-only" htmlFor={`inicio-${horario.id || horario.tempId}`}>
+                        Hora de início
+                    </label>
                     <input 
                         type="time" 
                         disabled={true}
@@ -107,8 +117,11 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
                         type="button" 
                         id="abrir-options-agendamento"
                         onClick={() => setDropdownOpen(!isDropdownOpen)}
-                        className={isDropdownOpen ? "" : "active" }>
+                        className={isDropdownOpen ? "" : "active" }
+                        aria-expanded={!isDropdownOpen}>
+
                         <HiChevronDown />
+                        <span className="sr-only">Abrir opções do horário</span>
                     </button>
 
                 </div>
@@ -117,7 +130,8 @@ export default function CardHorarios({ horario, onSaved, onDeleted, onRemoveTemp
             <div 
                 className="container-confirmar" 
                 id="options-agendamento" 
-                style={{ display: isDropdownOpen ? 'none' : 'flex' }}>
+                style={{ display: isDropdownOpen ? 'none' : 'flex' }}
+                aria-hidden={isDropdownOpen}>
 
                 <button 
                   className="cancelar-agendamento button-cancelar" 
