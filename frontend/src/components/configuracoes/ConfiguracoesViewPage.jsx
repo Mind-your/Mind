@@ -4,6 +4,7 @@ import InfosPerfilPsicologo from "./InfosPerfilPsicologo"
 import InfosPerfilPaciente from "./InfosPerfilPaciente"
 import Deletar from "../pop-ups/Deletar"
 import Horarios from "./Horarios";
+import { useRef } from "react";
 import { getImageUrl, getDefaultAvatar } from "../../utils/imageHelper";
 
 export default function ConfiguracoesViewPage({
@@ -34,50 +35,53 @@ export default function ConfiguracoesViewPage({
     adicionarEspecializacao,
     removerEspecializacao
 }) {
+    const inputRef = useRef(null);
   return (
     <>
         <section className="config">
             <div className="container-section">
                 <div className="container-img">
-                    <div className="img-options">
+                    <div className="img-options" id="configPageForm">
                         <img 
                             id="imagePreview" 
                             src={imgPerfil || getDefaultAvatar()}
-                            alt="Foto de perfil" 
+                            alt={novaImagem ? "Pré-visualização da foto de perfil" : "Foto de perfil atual"}
                             className="imgEdit"
                             onError={(e) => {
                                 e.currentTarget.onerror = null;
                                 e.currentTarget.src = getDefaultAvatar();
                             }}
                         />
-                        <div>
-                            <input 
-                                id="file-image" 
-                                type="file" 
-                                accept="image/*" 
-                                onChange={chooseImgPerfil}
-                            />
-                            <label className="btns button-confirm" htmlFor="file-image">
-                                {novaImagem ? 'Foto Selecionada' : 'Mudar Foto'}
-                            </label>
-                        </div>
-                        {novaImagem && (
-                            <small style={{ display: 'block', marginTop: '5px', color: '#666' }}>
-                                Clique em "Atualizar perfil" para salvar
-                            </small>
-                        )}
+                        
+                        <label className="sr-only" htmlFor="file-image" aria-hidden="true">Escolha uma imagem</label>
+                        <input 
+                            ref={inputRef}
+                            id="file-image" 
+                            type="file" 
+                            accept="image/*" 
+                            aria-hidden="true"
+                            onChange={chooseImgPerfil}
+                        />
+                        <button
+                            type="button"
+                            className="btns button-confirm btns-image"
+                            onClick={() => inputRef.current.click()}>
+                            {novaImagem ? 'Foto Selecionada' : 'Mudar Foto'}
+                        </button>
                     </div>
-                    <div className="atalhos">
-                        <a href="#formAtualizar" id="Geral">Geral</a>
-                        <a href="#container-perfil" id="Perfil">Perfil</a>
-                        {user?.tipo === "psicologo" && (
-                            <a href="#container-horario-atendimento" id="Horarios">Horarios de atendimentos</a>
-                        )}
-                        <a href="#deletar-conta" id="Deletar">Deletar conta</a>
-                    </div>
+                    <nav aria-label="Seções das configurações">
+                        <ul className="atalhos">
+                            <li><a href="#formAtualizar" id="Geral">Geral</a></li>
+                            <li><a href="#container-perfil" id="Perfil">Perfil</a></li>
+                            {user?.tipo === "psicologo" && (
+                                <li><a href="#container-horario-atendimento" id="Horarios">Horarios de atendimentos</a></li>
+                            )}
+                            <li><a href="#deletar-conta" id="Deletar">Deletar conta</a></li>
+                        </ul>
+                    </nav>
                 </div>
 
-                <div className="container-inputs container-perfil" id="formAtualizar">
+                <form onSubmit={handleAtualizarPerfil} aria-labelledby="configPageForm" className="container-inputs container-perfil" id="formAtualizar">
                     <h1>Geral</h1>
 
                     <div>
@@ -119,7 +123,7 @@ export default function ConfiguracoesViewPage({
                             <button 
                                 id="btnAtualizarPerfil" 
                                 className="button-confirm"
-                                onClick={handleAtualizarPerfil}
+                                type="submit"
                                 disabled={salvando}
                                 style={{ 
                                     opacity: salvando ? 0.6 : 1,
@@ -131,7 +135,7 @@ export default function ConfiguracoesViewPage({
                         </div> 
                     </div>
 
-                </div>
+                </form>
             </div>
 
             <div className="container-deletar" id="deletar-conta">

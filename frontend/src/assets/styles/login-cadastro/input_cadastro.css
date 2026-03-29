@@ -42,7 +42,7 @@
 }
 
 
-.container-termos {
+/* .container-termos {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -100,4 +100,44 @@
     opacity: 1;
     transform: translateY(-60%) scale(1) rotate(45deg);
   }
+} */
+
+.label-text {
+  position: relative;
+  padding-left: 28px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: none;
+}
+
+/* caixa */
+.label-text::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0px;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #2f6f5e;
+  border-radius: 6px;
+}
+
+/* checked */
+.checkbox:checked + .label-text::before {
+  background: #2f6f5e;
+}
+
+/* check */
+.checkbox:checked + .label-text::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 4px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
 }

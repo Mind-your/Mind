@@ -6,36 +6,44 @@ export default function Footer() {
   return (
     <>
         <footer>
-            <div className="grid-footer">
+            <nav className="grid-footer" aria-label="Navegação geral do site">
+                <ul>
+                    <li><Link to="/sobre-nos">Sobre nós</Link></li>
+                    <li><Link to="/artigos">Artigos</Link></li>
+                    <li><Link to="/termos-e-condicoes">Termos e Acordos</Link></li>
+                    <li><Link to="">Entre para nosso time</Link></li>
+                </ul>
                 <div>
-                    <Link to="/sobre-nos"><p>Sobre nós</p></Link>
-                    <Link to="/artigos"><p>Artigos</p></Link>
-                    <Link to="/termos-e-condicoes"><p>Termos e Acordos</p></Link>
-                    <Link to=""><p>Entre para nosso time</p></Link>
-                </div>
-                <div>
-                    <Link 
-                        to="/"
-                        onClick={(e) => {
-                            if (window.location.pathname === "/") {
-                                e.preventDefault();
-                                document.getElementById('planos')?.scrollIntoView({ 
-                                    behavior: 'smooth' 
-                                });
-                            }
-                        }}><p>Planos</p></Link>
-                    <Link to="/:tipo(paciente|psicologo)/perfil/:id/configuracoes"><p>Atribuições</p></Link>
-                    <Link to="/adicionar-artigos">Canal de denúncia</Link>
+                    <ul>
+                        <li>
+                            <Link
+                                to="/"
+                                onClick={(e) => {
+                                    if (window.location.pathname === "/") {
+                                        e.preventDefault();
+                                        document.getElementById('planos')?.scrollIntoView({
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }}>Planos</Link>
+                        </li>
+                        <li>
+                            <Link to="/:tipo(paciente|psicologo)/perfil/:id/configuracoes">Atribuições</Link>
+                        </li>
+                        <li>
+                            <Link to="/adicionar-artigos">Canal de denúncia</Link>
+                        </li>
+                    </ul>
                     <p>Contatos:</p>
                     <div className="icon-btns">
-                        <button className="icon-btn icon-ui">
+                        <button className="icon-btn icon-ui" aria-label="Copiar email">
                             <HiOutlineMail
                                 value="mind@falsoemail.com"
                                 type="button"
                                 title="copiar email"
                             />
                         </button>
-                        <button className="icon-btn icon-ui">
+                        <button className="icon-btn icon-ui" aria-label="Copiar telefone">
                             <HiOutlinePhone
                                 value="(11) 1111-1111"
                                 type="button"
@@ -44,7 +52,7 @@ export default function Footer() {
                         </button>
                     </div>
                 </div>
-            </div>
+            </nav>
             <hr/>
             <p className="footer-copyright">&copy; 2025 All rights reserved - Mind</p>
         </footer>

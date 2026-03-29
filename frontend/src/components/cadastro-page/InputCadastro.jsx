@@ -288,20 +288,21 @@ export default function InputCadastro() {
             </div>
             <div className="container-input-login">
                 <div className="container-icon-return-login">
-                    <Link to="/login=0" className="icon-btn icon-return-login">
-                        <HiChevronLeft/>
+                    <Link to="/login=0" className="icon-btn icon-return-login" aria-label="Voltar para login">
+                        <HiChevronLeft aria-hidden="true"/>
                     </Link>
                 </div>
 
-                <h1>Cadastro</h1>
+                <h1 id="signinPageForm">Cadastro</h1>
                 <OptionsCadastro />
 
                 {/* Desativa a validação automática do navegador */}
                 <form className="inputs" onSubmit={handleSubmit} noValidate>
                     <div className={`cadastro-input ${animar ? "animar" : ""}`}>
                         <div className={`input input-obrigatorio ${form.nome ? "preenchido" : ""}`}>
-                            <label>Nome</label>
+                            <label htmlFor="nameInputSignIn" >Nome</label>
                             <input
+                                id="nameInputSignIn"
                                 type="text"
                                 name="nome"
                                 value={form.nome}
@@ -309,12 +310,14 @@ export default function InputCadastro() {
                                 placeholder="Seu nome"
                                 autoComplete="given-name"
                                 className={errors.nome ? "error" : ""}
+                                required
                             />
-                            {errors.nome && <span className="error-text">{errors.nome}</span>}
+                            {errors.nome && <span className="error-text" role="alert">{errors.nome}</span>}
                         </div>
                         <div className="input">
-                            <label>Sobrenome</label>
+                            <label htmlFor="sobrenomeInputSignIn">Sobrenome</label>
                             <input
+                                id="sobrenomeInputSignIn"
                                 type="text"
                                 name="sobrenome"
                                 value={form.sobrenome}
@@ -323,11 +326,12 @@ export default function InputCadastro() {
                                 autoComplete="family-name"
                                 className={errors.sobrenome ? "error" : ""}
                             />
-                            {errors.sobrenome && <span className="error-text">{errors.sobrenome}</span>}
+                            {errors.sobrenome && <span className="error-text" role="alert">{errors.sobrenome}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.dataNascimento ? "preenchido" : ""}`}>
-                            <label>Data de Nascimento</label>
+                            <label htmlFor="dataInputSignIn">Data de Nascimento</label>
                             <input
+                                id="dataInputSignIn"
                                 name="dataNascimento"
                                 type="date"
                                 value={form.dataNascimento}
@@ -335,12 +339,14 @@ export default function InputCadastro() {
                                 min={minDate}
                                 max={maxDate}
                                 className={errors.dataNascimento ? "error" : ""}
+                                required
                             />
-                            {errors.dataNascimento && <span className="error-text">{errors.dataNascimento}</span>}
+                            {errors.dataNascimento && <span className="error-text" role="alert">{errors.dataNascimento}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.cpf ? "preenchido" : ""}`}>
-                            <label>CPF</label>
+                            <label htmlFor="cpfInputSignIn" >CPF</label>
                             <input
+                                id="cpfInputSignIn"
                                 name="cpf"
                                 type="text"
                                 value={form.cpf}
@@ -348,12 +354,14 @@ export default function InputCadastro() {
                                 placeholder="000.000.000-00"
                                 autoComplete="off"
                                 className={errors.cpf ? "error" : ""}
+                                required
                             />
-                            {errors.cpf && <span className="error-text">{errors.cpf}</span>}
+                            {errors.cpf && <span className="error-text" role="alert">{errors.cpf}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.email ? "preenchido" : ""}`}>
-                            <label>Email</label>
+                            <label htmlFor="emailInputSignIn">Email</label>
                             <input
+                                id="emailInputSignIn"
                                 name="email"
                                 type="email"
                                 value={form.email}
@@ -361,13 +369,15 @@ export default function InputCadastro() {
                                 placeholder="seuemail@gmail.com "
                                 autoComplete="email"
                                 className={errors.email ? "error" : ""}
-                            /> {errors.email && <span className="error-text">{errors.email}</span>}
+                                required
+                            /> {errors.email && <span className="error-text" role="alert">{errors.email}</span>}
                         </div>
                         <div className={`input ${form.cep ? "preenchido" : ""} input-obrigatorio`}>
-                            <label>CEP</label>
+                            <label htmlFor="cepInputSignIn">CEP</label>
 
                             <div style={{ position: "relative" }}>
                                 <input
+                                    id="cepInputSignIn"
                                     name="cep"
                                     type="text"
                                     value={form.cep}
@@ -376,17 +386,19 @@ export default function InputCadastro() {
                                     autoComplete="postal-code"
                                     className={errors.cep ? "error" : ""}
                                     onBlur={handleCepBlur}
+                                    required
                                 />
 
                                 {loadingCep && (
                                     <span className="loading-cep">Buscando...</span>
                                 )}
                             </div>
-                            {errors.cep && <span className="error-text">{errors.cep}</span>}
+                            {errors.cep && <span className="error-text" role="alert">{errors.cep}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.uf ? "preenchido" : ""}`}>
-                            <label>UF</label>
+                            <label htmlFor="ufInputSignIn">UF</label>
                             <input
+                                id="ufInputSignIn"
                                 name="uf"
                                 type="text"
                                 value={form.uf}
@@ -395,11 +407,13 @@ export default function InputCadastro() {
                                 className={errors.uf ? "error" : ""}
                                 onBlur={handleEnderecoBlur}
                                 readOnly={isCepValid}
-                            /> {errors.uf && <span className="error-text">{errors.uf}</span>}
+                                required
+                            /> {errors.uf && <span className="error-text" role="alert">{errors.uf}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.cidade ? "preenchido" : ""}`}>
-                            <label>Cidade</label>
+                            <label htmlFor="cidadeInputSignIn">Cidade</label>
                             <input
+                                id="cidadeInputSignIn"
                                 name="cidade"
                                 type="text"
                                 value={form.cidade}
@@ -408,11 +422,13 @@ export default function InputCadastro() {
                                 className={errors.cep ? "error" : ""}
                                 onBlur={handleEnderecoBlur}
                                 readOnly={isCepValid}
-                            /> {errors.cidade && <span className="error-text">{errors.cidade}</span>}
+                                required
+                            /> {errors.cidade && <span className="error-text" role="alert">{errors.cidade}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.rua ? "preenchido" : ""}`}>
-                            <label>Rua</label>
+                            <label htmlFor="ruaInputSignIn">Rua</label>
                             <input
+                                id="ruaInputSignIn"
                                 name="rua"
                                 type="text"
                                 value={form.rua}
@@ -421,18 +437,20 @@ export default function InputCadastro() {
                                 className={errors.rua ? "error" : ""}
                                 onBlur={handleEnderecoBlur}
                                 readOnly={isCepValid}
-                            /> {errors.rua && <span className="error-text">{errors.rua}</span>}
+                                required
+                            /> {errors.rua && <span className="error-text" role="alert">{errors.rua}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.numeroResidencia ? "preenchido" : ""}`}>
-                            <label>Número da residencia</label>
+                            <label htmlFor="numeroInputSignIn">Número da residencia</label>
                             <input
+                                id="numeroInputSignIn"
                                 name="numeroResidencia"
                                 type="text"
                                 value={form.numeroResidencia}
                                 onChange={handleChange}
                                 placeholder="123"
                                 className={errors.cep ? "error" : ""}
-                            />{errors.numeroResidencia && <span className="error-text">{errors.numeroResidencia}</span>}
+                            />{errors.numeroResidencia && <span className="error-text" role="alert">{errors.numeroResidencia}</span>}
 
                         </div>
 
@@ -441,8 +459,9 @@ export default function InputCadastro() {
                         {tipoUsuario === "paciente" && (
                             <>
                                 <div className={`input input-obrigatorio ${form.telefone ? "preenchido" : ""}`}>
-                                    <label>Telefone</label>
+                                    <label htmlFor="telefoneInputSignIn">Telefone</label>
                                     <input
+                                        id="telefoneInputSignIn"
                                         name="telefone"
                                         type="tel"
                                         value={form.telefone}
@@ -450,11 +469,12 @@ export default function InputCadastro() {
                                         placeholder="11 94002-8922"
                                         autoComplete="tel"
                                         className={errors.telefone ? "error" : ""}
-                                    /> {errors.telefone && <span className="error-text">{errors.telefone}</span>}
+                                    /> {errors.telefone && <span className="error-text" role="alert">{errors.telefone}</span>}
                                 </div>
                                 <div className={`input input-obrigatorio ${form.genero ? "preenchido" : ""}`}>
-                                    <label>Gênero</label>
+                                    <label htmlFor="generoInputSignIn">Gênero</label>
                                     <input
+                                        id="generoInputSignIn"
                                         name="genero"
                                         type="text"
                                         value={form.genero}
@@ -462,7 +482,7 @@ export default function InputCadastro() {
                                         placeholder="Masculino / Feminino"
                                         autoComplete="sex"
                                         className={errors.genero ? "error" : ""}
-                                    /> {errors.genero && <span className="error-text">{errors.genero}</span>}
+                                    /> {errors.genero && <span className="error-text" role="alert">{errors.genero}</span>}
                                 </div>
                             </>
                         )}
@@ -470,26 +490,29 @@ export default function InputCadastro() {
                         {tipoUsuario === "psicologo" && (
                             <>
                                 <div className={`input input-obrigatorio ${form.crp ? "preenchido" : ""}`}>
-                                    <label>CRP</label>
+                                    <label htmlFor="crpInputSignIn">CRP</label>
                                     <input
+                                        id="crpInputSignIn"
                                         name="crp"
                                         type="text"
                                         value={form.crp}
                                         onChange={handleChange}
                                         placeholder="06/12345"
                                         className={errors.crp ? "error" : ""}
-                                    /> {errors.crp && <span className="error-text">{errors.crp}</span>}
+                                        required
+                                    /> {errors.crp && <span className="error-text" role="alert">{errors.crp}</span>}
                                 </div>
                                 <div className={`input input-obrigatorio ${form.especialidade ? "preenchido" : ""}`}>
-                                    <label>Especialidade</label>
+                                    <label htmlFor="especialidadeInputSignIn">Especialidade</label>
                                     <input
+                                        id="especialidadeInputSignIn"
                                         name="especialidade"
                                         type="text"
                                         value={form.especialidade}
                                         onChange={handleChange}
                                         placeholder="Terapia Cognitivo-Comportamental"
                                         className={errors.especialidade ? "error" : ""}
-                                    /> {errors.especialidade && <span className="error-text">{errors.especialidade}</span>}
+                                    /> {errors.especialidade && <span className="error-text" role="alert">{errors.especialidade}</span>}
                                 </div>
                             </>
                         )}
@@ -497,60 +520,72 @@ export default function InputCadastro() {
                         {tipoUsuario === "voluntario" && (
                             <>
                                 <div className={`input input-obrigatorio ${form.ra ? "preenchido" : ""}`}>
-                                    <label>R.A</label>
+                                    <label htmlFor="raInputSignIn">R.A</label>
                                     <input
+                                        id="raInputSignIn"
                                         name="ra"
                                         type="text"
                                         value={form.ra}
                                         onChange={handleChange}
                                         placeholder="123456"
                                         className={errors.ra ? "error" : ""}
-                                    /> {errors.ra && <span className="error-text">{errors.ra}</span>}
+                                    /> {errors.ra && <span className="error-text" role="alert">{errors.ra}</span>}
                                 </div>
                                 <div className={`input input-obrigatorio ${form.token ? "preenchido" : ""}`}>
-                                    <label>Token</label>
+                                    <label htmlFor="tokenInputSignIn">Token</label>
                                     <input
+                                        id="tokenInputSignIn"
                                         name="token"
                                         type="text"
                                         value={form.token}
                                         onChange={handleChange}
                                         placeholder="Token de autorização"
                                         className={errors.dataNascimento ? "error" : ""}
-                                    /> {errors.token && <span className="error-text">{errors.token}</span>}
+                                    /> {errors.token && <span className="error-text" role="alert">{errors.token}</span>}
                                 </div>
                             </>
                         )}
                         <div className={`input input-obrigatorio ${form.senha ? "preenchido" : ""}`}>
-                            <label>Senha</label>
+                            <label htmlFor="senhaInputSignIn">Senha</label>
                             <input
+                                id="senhaInputSignIn"
                                 name="senha"
                                 type="password"
                                 value={form.senha}
                                 onChange={handleChange}
                                 autoComplete="new-password"
                                 className={errors.senha ? "error" : ""}
-                            />{errors.senha && <span className="error-text">{errors.senha}</span>}
+                                required
+                            />{errors.senha && <span className="error-text" role="alert">{errors.senha}</span>}
                         </div>
                         <div className={`input input-obrigatorio ${form.confirmarSenha ? "preenchido" : ""}`}>
-                            <label>Confirmar Senha</label>
+                            <label htmlFor="confirmSenhaInputSignIn">Confirmar Senha</label>
                             <input
+                                id="confirmSenhaInputSignIn"
                                 name="confirmarSenha"
                                 type="password"
                                 value={form.confirmarSenha}
                                 onChange={handleChange}
                                 autoComplete="new-password"
                                 className={errors.confirmarSenha ? "error" : ""}
-                            />{errors.confirmarSenha && <span className="error-text">{errors.confirmarSenha}</span>}
+                                required
+                            />{errors.confirmarSenha && <span className="error-text" role="alert">{errors.confirmarSenha}</span>}
                         </div>
                     </div>
                     <div className="container-cadastrar-entrar">
                         <div className="container-termos">
-                            <input id="Checkbox" type="checkbox" className="checkbox" required />
                             <label htmlFor="Checkbox">
-                                {" "}
-                                <Link to="/termos-e-condicoes" className="link-cadastro">
-                                    Termos e Condições
-                                </Link>
+                                <input id="Checkbox" type="checkbox" className="checkbox" required/>
+                                <span className="label-text">
+                                    Eu aceito os{" "}
+                                    <Link 
+                                        to="/termos-e-condicoes" 
+                                        className="link-cadastro"
+                                        onClick={(e) => e.stopPropagation()}
+                                    >
+                                        Termos e Condições
+                                    </Link>
+                                </span>
                             </label>
                         </div>
 

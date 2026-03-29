@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { HiOutlineUser, HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
 import { useAuth } from '../../context/AuthContext';
 import foto from '../../assets/img/perfil-default.png';
 
@@ -204,17 +204,13 @@ export default function NavDesktop() {
                                                         </div>
 
                                                         {openNotif === notif.id && (
-
                                                             <div className="notif-confirm-body">
-
                                                                 <p>
                                                                     <strong>Nome:</strong> {notif.nome}
                                                                 </p>
-
                                                                 <p>
                                                                     <strong>Data:</strong> {notif.data}
                                                                 </p>
-
                                                                 <p>
                                                                     <strong>Horário:</strong> {notif.horario}
                                                                 </p>
@@ -226,23 +222,14 @@ export default function NavDesktop() {
                                                                 <button className="btn-cancelar">
                                                                     Cancelar Agendamento
                                                                 </button>
-
                                                             </div>
-
                                                         )}
-
                                                     </div>
-
                                                 )
-
                                             }
-
                                             return null
-
                                         })}
-
                                     </div>
-
                                 </div>
                             )}
                         </div>
@@ -273,9 +260,6 @@ export default function NavDesktop() {
                             </button>
                         </>
                     )}
-
-
-
 
                     <div className={`nav-login-drop-wrapper ${isAuthenticated && isDropdownOpen ? "show" : ""}`}>
                         <div className="nav-login-drop">
