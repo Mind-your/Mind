@@ -18,9 +18,9 @@ export default function ApiLibras() {
           container.setAttribute("vw", "");
           container.className = "enabled";
           container.innerHTML = `
-            <div vw-access-button class="active"></div>
+            <div vw-access-button className="active"></div>
             <div vw-plugin-wrapper>
-              <div class="vw-plugin-top-wrapper"></div>
+              <div className="vw-plugin-top-wrapper"></div>
             </div>
           `;
           document.body.appendChild(container);

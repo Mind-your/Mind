@@ -1,34 +1,41 @@
-export default function AtualizacaoCredenciais({ user }) {
+export default function AtualizacaoCredenciais({ formData, handleChange }) {
   return (
     <>
         <div className="container-input-2">
             <div className="input-e-span">
-                <span className="login-titulo"><label>Nome do login</label></span>
+                <label htmlFor="loginEdit" className="login-titulo">Nome do login</label>
                 <input 
                     id="loginEdit" 
-                    type="text" 
+                    type="text"
+                    name="login" 
                     className="form-control" 
                     placeholder="Login"
-                    defaultValue={user?.login || ""}
+                    value={formData.login}
+                    onChange={handleChange}
                 />
             </div>
             <div className="input-e-span">
-                <span className="login-titulo"><label>E-mail</label></span>
+                <label htmlFor="emailEdit" className="login-titulo">E-mail</label>
                 <input 
                     id="emailEdit" 
-                    type="email" 
+                    type="email"
+                    name="email"
                     className="form-control" 
                     placeholder="E-mail"
-                    defaultValue={user?.email || ""}
+                    value={formData.email}
+                    onChange={handleChange}
                 />
             </div>
             <div className="input-e-span">
-                <span className="login-titulo"><label>Nova Senha (deixe em branco para manter)</label></span>
+                <label htmlFor="senhaEdit" className="login-titulo">Nova Senha (deixe em branco para manter)</label>
                 <input 
                     id="senhaEdit" 
-                    type="password" 
+                    type="password"
+                    name="senha" 
                     className="form-control" 
                     placeholder="Nova senha"
+                    value={formData.senha}
+                    onChange={handleChange}
                 />    
             </div>
         </div>

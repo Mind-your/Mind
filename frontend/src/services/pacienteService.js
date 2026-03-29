@@ -87,6 +87,17 @@ export async function buscarPorId(id) {
     return res.json();
 }
 
+// Buscar configuracoes (com autenticação)
+export async function buscarConfiguracoes(id) {
+    const res = await authService.authenticatedFetch(`${API_URL}/${id}/configuracoes`);
+
+    if (!res.ok) {
+        throw new Error("Erro ao buscar configurações do usuário");
+    }
+
+    return res.json();
+}
+
 // Atualizar usuário (com autenticação)
 export async function atualizar(id, camposAtualizados) {
     const res = await authService.authenticatedFetch(`${API_URL}/${id}`, {

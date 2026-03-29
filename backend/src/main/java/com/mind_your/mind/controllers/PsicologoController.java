@@ -6,6 +6,8 @@ import com.mind_your.mind.dto.request.PsicologoUpdateRequestDTO;
 import com.mind_your.mind.dto.response.JwtResponseDTO;
 import com.mind_your.mind.dto.response.PsicologoCadastroResponseDTO;
 import com.mind_your.mind.dto.response.PsicologoResponseDTO;
+import com.mind_your.mind.dto.response.PsicologoConfiguracoesResponseDTO;
+import com.mind_your.mind.dto.response.PsicologoSessionResponseDTO;
 import com.mind_your.mind.dto.response.UploadImagemResponseDTO;
 import com.mind_your.mind.service.PsicologoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,15 +38,23 @@ public class PsicologoController {
 
     // Buscar por ID
     @GetMapping("/{id}")
-    public ResponseEntity<PsicologoResponseDTO> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<PsicologoResponseDTO> buscarPorId(@PathVariable("id") String id) {
         return psicologoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Buscar configurações completas por ID
+    @GetMapping("/{id}/configuracoes")
+    public ResponseEntity<PsicologoConfiguracoesResponseDTO> buscarConfiguracoesPorId(@PathVariable("id") String id) {
+        return psicologoService.buscarConfiguracoesPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // Buscar por email
     @GetMapping("/email/{email}")
-    public ResponseEntity<PsicologoResponseDTO> buscarPorEmail(@PathVariable String email) {
+    public ResponseEntity<PsicologoResponseDTO> buscarPorEmail(@PathVariable("email") String email) {
         return psicologoService.buscarPorEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -52,16 +62,16 @@ public class PsicologoController {
 
     // Buscar por nome
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<PsicologoResponseDTO> buscarPorNome(@PathVariable String nome) {
+    public ResponseEntity<PsicologoResponseDTO> buscarPorNome(@PathVariable("nome") String nome) {
         return psicologoService.buscarPorNome(nome)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Buscar por login
+    // Buscar SESSÃO por login
     @GetMapping("/login/{login}")
-    public ResponseEntity<PsicologoResponseDTO> buscarPorLogin(@PathVariable String login) {
-        return psicologoService.buscarPorLogin(login)
+    public ResponseEntity<PsicologoSessionResponseDTO> buscarSessaoPorLogin(@PathVariable("login") String login) {
+        return psicologoService.buscarSessaoPorLogin(login)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -69,7 +79,7 @@ public class PsicologoController {
     // Atualizar
     @PutMapping("/{id}")
     public ResponseEntity<PsicologoResponseDTO> atualizar(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestBody PsicologoUpdateRequestDTO dados) {
         return psicologoService.atualizar(id, dados)
                 .map(ResponseEntity::ok)
@@ -78,7 +88,7 @@ public class PsicologoController {
 
     // Deletar
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable String id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") String id) {
         return psicologoService.deletarPorId(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
@@ -95,7 +105,7 @@ public class PsicologoController {
     // Upload de imagem
     @PostMapping("/{id}/imagem")
     public ResponseEntity<UploadImagemResponseDTO> uploadImagem(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestParam("imagem") MultipartFile file) {
         return psicologoService.uploadImagem(id, file)
                 .map(ResponseEntity::ok)

@@ -6,10 +6,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.List;
 
 @Document(collection = "psicologos")
 public class Psicologo {
-
 
     @Id
     private String id; // Mongo usa String para ObjectId
@@ -24,13 +24,17 @@ public class Psicologo {
     private Integer idade;
     private String genero = "";
     private String telefone = "";
+    private String cep = "";
+    private String numeroResidencia = "";
+    private String cidade = "";
+    private String uf = "";
     private String endereco = "";
     private String imgPerfil = "";
     private String sobreMim;
     private String medicamentos;
     private String preferencias;
     private String crp;
-    private String Especialidade;
+    private List<String> especialidades;
 
     // Getters e Setters
 
@@ -113,6 +117,38 @@ public class Psicologo {
         this.telefone = telefone;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getNumeroResidencia() {
+        return numeroResidencia;
+    }
+
+    public void setNumeroResidencia(String numeroResidencia) {
+        this.numeroResidencia = numeroResidencia;
+    }
+
+    public String getCidade() {
+        return cidade;
+    }
+
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
     public String getEndereco() {
         return endereco;
     }
@@ -161,8 +197,11 @@ public class Psicologo {
         this.crp = crp;
     }
 
-    public String getEspecialidade() { return  Especialidade; }
+    public List<String> getEspecialidades() {
+    return especialidades;
+    }
 
-    public void setEspecialidade(String Especialidade) {this.Especialidade = Especialidade; }
+    public void setEspecialidades(List<String> especialidades) {
+    this.especialidades = especialidades;
+    }
 }
-

@@ -1,6 +1,7 @@
 package com.mind_your.mind.dto.request;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class PsicologoUpdateRequestDTO {
 
@@ -12,13 +13,17 @@ public class PsicologoUpdateRequestDTO {
     private LocalDate dtNascimento;
     private String genero;
     private String telefone;
+    private String cep;
+    private String numeroResidencia;
+    private String cidade;
+    private String uf;
     private String endereco;
     private String imgPerfil;
     private String sobreMim;
     private String medicamentos;
     private String preferencias;
     private String crp;
-    private String especialidade;
+    private List<String> especialidades;
 
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
@@ -44,6 +49,18 @@ public class PsicologoUpdateRequestDTO {
     public String getTelefone() { return telefone; }
     public void setTelefone(String telefone) { this.telefone = telefone; }
 
+    public String getCep() { return cep; }
+    public void setCep(String cep) { this.cep = cep; }
+
+    public String getNumeroResidencia() { return numeroResidencia; }
+    public void setNumeroResidencia(String numeroResidencia) { this.numeroResidencia = numeroResidencia; }
+
+    public String getCidade() { return cidade; }
+    public void setCidade(String cidade) { this.cidade = cidade; }
+
+    public String getUf() { return uf; }
+    public void setUf(String uf) { this.uf = uf; }
+
     public String getEndereco() { return endereco; }
     public void setEndereco(String endereco) { this.endereco = endereco; }
 
@@ -62,6 +79,6 @@ public class PsicologoUpdateRequestDTO {
     public String getCrp() { return crp; }
     public void setCrp(String crp) { this.crp = crp; }
 
-    public String getEspecialidade() { return especialidade; }
-    public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
+    public List<String> getEspecialidades() { return especialidades; }
+    public void setEspecialidades(List<String> especialidades) { this.especialidades = especialidades; }
 }

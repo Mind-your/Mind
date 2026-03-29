@@ -9,7 +9,6 @@
     font-weight: 600;
     font-size: 1.2rem;
     border: 3px solid var(--green-default-100);
-;
     border-radius: var(--spacing-xs);
     cursor: pointer;
 }
@@ -32,7 +31,8 @@
     display:flex;
     justify-content: center;
     align-items: center;
-    gap: var(--spacing-sm)
+    gap: var(--spacing-sm);
+    text-wrap: nowrap;
 }
 
 .button-confirm:hover{
@@ -141,97 +141,6 @@
     background-color: var(--paarl-100);
 }
 
-/* Botão de ("filtragem") da home*/
-
-/* .checkbox {
-    position: relative;
-    background: var(--green-default-100);
-    flex-direction: column;
-    display: none;
-    padding: 6px;
-    padding-left: 0;
-    border-radius: 10px;
-}
-
-#filtro-checkbox, #filtro-local-checkbox {
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    padding: 12px;
-    border-radius: 0px 0px 8px 8px;
-    background: var(--green-default-100);
-    cursor: pointer;
-}
-
-#filtro-checkbox.show, #filtro-local-checkbox.show{
-    transform: scaleY(1);
-    top: -10px;
-    opacity: 1;
-    width: 195px;
-    height: max-content;
-}
-
-#seta-checkbox, #seta-local-checkbox {
-    transition: transform 0.3s ease;
-    width: 28px;
-    height: 28px;
-    margin-bottom: -1px;
-}
-.checkbox-input .titulo-checkbox {
-    color: var(--white-default-100);
-    cursor: pointer;
-    transition: color 0.15s ease;
-}
-.checkbox-input .titulo-checkbox:hover {
-    color: var(--green-light-default-100);
-}
-.checkbox-input input:checked + .titulo-checkbox {
-    color: var(--green-light-default-100);
-    font-weight: 600;
-}
-.checkbox-input {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    cursor: pointer;
-}
-.checkbox-input input {
-    display: none;
-    cursor: pointer;
-    height: 120px;
-}
-.checkbox-input input+label:before {
-    content: '';
-    vertical-align: middle;
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    border-radius: 50%;
-    border: 2px solid var(--green-light-default-100);
-    margin-right: 6px;
-}
-.checkbox-input input:checked+label:before {
-    background-color: var(--green-light-default-100);
-    transition: 80ms;
-}
-.checkbox-input {
-    cursor: pointer;
-}
-.titulo-checkbox {
-    font-size: 80%;
-    color: var(--white-default-100);
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    background: transparent;
-    white-space: nowrap;
-    width: 100%;
-} */
-
 /* Botão de ("mais") da home*/
 .button-mais {
     background-color: var(--green-default-100);
@@ -267,4 +176,36 @@
   height: 30px;
   color: #388e3c;
   cursor: pointer;
+}
+
+/* Botão Skip Navigation (Acessibilidade) */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.sr-only:focus {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+    color: var(--black-950);
+    font-weight: 500;
+    background-color: var(--tertiary-light-green-700);
+    padding: 0.5rem 1rem; 
+    border-radius: var(--border-radius-sm); 
+    z-index: 50;
 }

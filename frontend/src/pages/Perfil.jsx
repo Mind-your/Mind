@@ -1,15 +1,41 @@
-import { useAuth } from "../context/authContext";
+import { useAuth } from "../context/AuthContext";
 import { useParams, Navigate } from "react-router-dom";
 
 // importa as sections específicas
-import SectionPsicologo from "../components/perfil-page/sectionPsicologo";
-import SectionPaciente from "../components/perfil-page/sectionPaciente";
+import SectionPsicologo from "../components/perfil-page/SectionPsicologo";
+import SectionPaciente from "../components/perfil-page/SectionPaciente";
+import { buscarPorId as buscarPaciente } from "../services/pacienteService";
+import { buscarPorId as buscarPsicologo } from "../services/psicologoService";
+import { useState, useEffect } from "react";
 
 export default function Perfil() {
   const { user, loading } = useAuth();
   const { id, tipo } = useParams();
+  const [profileData, setProfileData] = useState(null);
+  const [loadingProfile, setLoadingProfile] = useState(true);
 
-  if (loading) {
+  useEffect(() => {
+    async function loadProfile() {
+      if (!user) return;
+      try {
+        setLoadingProfile(true);
+        if (tipo.toLowerCase() === "psicologo") {
+          const data = await buscarPsicologo(id);
+          setProfileData(data);
+        } else if (tipo.toLowerCase() === "paciente") {
+          const data = await buscarPaciente(id);
+          setProfileData(data);
+        }
+      } catch (err) {
+        console.error("Erro ao carregar perfil completo", err);
+      } finally {
+        setLoadingProfile(false);
+      }
+    }
+    loadProfile();
+  }, [id, tipo, user]);
+
+  if (loading || loadingProfile) {
     return <div>Carregando...</div>;
   }
 
@@ -33,12 +59,12 @@ export default function Perfil() {
 
   // 🔹 se for psicólogo, mostra o layout específico
   if (user.tipo.toLowerCase() === "psicologo") {
-    return <SectionPsicologo />;
+    return <SectionPsicologo profileData={profileData} />;
   }
 
   // 🔹 se for paciente, mostra o layout específico
   if (user.tipo.toLowerCase() === "paciente") {
-    return <SectionPaciente />;
+    return <SectionPaciente profileData={profileData} />;
   }
 
   // fallback caso tipo seja inesperado

@@ -1,4 +1,4 @@
-export default function InfosGerais({ user }) {
+export default function InfosGerais({ formData, handleChange, handleCepBlur, handleEnderecoBlur }) {
 
     const formatarData = (dtNascimento) => {
         if (!dtNascimento) return "";
@@ -13,96 +13,162 @@ export default function InfosGerais({ user }) {
         return dtNascimento;
     };
 
+    const isCepValid = (formData.cep || "").replace(/\D/g, "").length === 8;
+
     return (
         <>
             <div className="container-input-1">
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label htmlFor="nomeEdit">Nome</label>
-                    </span>
+                    <label htmlFor="nomeConfig" className="login-titulo">Nome</label>
                     <input
-                        id="nomeEdit"
+                        id="nomeConfig"
                         type="text"
                         className="form-control"
                         placeholder="Nome"
-                        defaultValue={user?.nome || ""}
+                        name="nome"
+                        value={formData.nome}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label>Sobrenome</label>
-                    </span>
+                    <label htmlFor="sobrenomeEdit" className="login-titulo">Sobrenome</label>
                     <input
                         id="sobrenomeEdit"
                         type="text"
+                        name="sobrenome"
                         className="form-control"
                         placeholder="Sobrenome"
-                        defaultValue={user?.sobrenome || ""}
+                        value={formData.sobrenome}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label>Data de nascimento</label>
-                    </span>
+                    <label htmlFor="nascimentoEdit" className="login-titulo">Data de nascimento</label>
                     <input
                         id="nascimentoEdit"
                         type="date"
+                        name="dtNascimento"
                         className="form-control"
                         placeholder="Data de nascimento"
-                        defaultValue={formatarData(user?.dtNascimento)}
+                        value={formatarData(formData.dtNascimento)}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label>Telefone</label>
-                    </span>
+                    <label htmlFor="telefoneEdit" className="login-titulo">Telefone</label>
                     <input
                         id="telefoneEdit"
                         type="text"
+                        name="telefone"
                         className="form-control"
                         placeholder="Telefone"
-                        defaultValue={user?.telefone || ""}
+                        value={formData.telefone}
+                        onChange={handleChange}
                     />
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label>Local</label>
-                    </span>
-                    <select
-                        id="localEdit"
+                    <label htmlFor="cpfEdit" className="login-titulo">CPF</label>
+                    <input
+                        id="cpfEdit"
+                        type="text"
+                        name="CPF"
                         className="form-control"
-                        defaultValue={user?.endereco || ""}
-                    >
-                        <option value="" disabled hidden>Escolha a Cidade</option>
-                        <option value="São Paulo">São Paulo</option>
-                        <option value="Diadema">Diadema</option>
-                        <option value="São Bernardo">São Bernardo</option>
-                        <option value="Santo André">Santo André</option>
-                        <option value="Santo Amaro">Santo Amaro</option>
-                        <option value="Jabaquara">Jabaquara</option>
-                        <option value="Osasco">Osasco</option>
-                        <option value="Guarulhos">Guarulhos</option>
-                    </select>
+                        placeholder="CPF"
+                        value={formData.CPF}
+                        onChange={handleChange}
+                    />
                 </div>
 
                 <div className="input-e-span">
-                    <span className="login-titulo">
-                        <label>Sexo</label>
-                    </span>
+                    <label htmlFor="sexoEdit" className="login-titulo">Sexo</label>
                     <select
-                        id="generoEdit"
+                        id="sexoEdit"
                         className="form-control"
-                        defaultValue={user?.genero || ""}
+                        name="sexo"
+                        value={formData.sexo}
+                        onChange={handleChange}
                     >
-                        <option value="" disabled hidden>Escolha o gênero</option>
+                        <option value="" disabled hidden>Escolher opções</option>
                         <option value="Feminino">Feminino</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Outro">Outro</option>
                     </select>
+                </div>
+
+                <div className="input-e-span">
+                    <label htmlFor="cepEdit" className="login-titulo">CEP</label>
+                    <input
+                        id="cepEdit"
+                        type="text"
+                        name="cep"
+                        className="form-control"
+                        placeholder="00000-000"
+                        value={formData.cep}
+                        onChange={handleChange}
+                        onBlur={handleCepBlur}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <label htmlFor="ruaEdit" className="login-titulo">Rua / Logradouro</label>
+                    <input
+                        id="ruaEdit"
+                        type="text"
+                        name="rua"
+                        className="form-control"
+                        placeholder="Rua"
+                        value={formData.rua}
+                        onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <label htmlFor="numeroEdit" className="login-titulo">Número</label>
+                    <input
+                        id="numeroEdit"
+                        type="text"
+                        name="numeroResidencia"
+                        className="form-control"
+                        placeholder="Número da Residência"
+                        value={formData.numeroResidencia}
+                        onChange={handleChange}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <label htmlFor="cidadeEdit" className="login-titulo">Cidade</label>
+                    <input
+                        id="cidadeEdit"
+                        type="text"
+                        name="cidade"
+                        className="form-control"
+                        placeholder="Cidade"
+                        value={formData.cidade}
+                        onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
+                    />
+                </div>
+
+                <div className="input-e-span">
+                    <label htmlFor="ufEdit" className="login-titulo">UF</label>
+                    <input
+                        id="ufEdit"
+                        type="text"
+                        name="uf"
+                        className="form-control"
+                        placeholder="UF"
+                        value={formData.uf}
+                        onChange={handleChange}
+                        onBlur={handleEnderecoBlur}
+                        readOnly={isCepValid}
+                    />
                 </div>
             </div>
         </>

@@ -29,13 +29,13 @@ export default function Informacoes() {
 
   return (
     <>
-      <section className="section section-info">
+      <section className="section-info">
         <h1>A terapia online pode ti apoiar</h1>
         <p> A mind oferece um espaço seguro e sigiloso para falar sobre suas emoções sem precisar sair de casa. Podendo ser útil em situações do dia a dia — como dificuldades no trabalho, desafios nos relacionamentos, crises de ansiedade ou momentos de incerteza.</p>
         <div className="info-grid">
 
           {listInfo.map((item) => (
-            <div className={`info info-${item.id}`}>
+            <div key={item.id} className={`info info-${item.id}`}>
               <h2>{item.title}</h2>
               <p>{item.text}</p>
             </div>
@@ -44,7 +44,7 @@ export default function Informacoes() {
         </div>
         <div className="btn-ver-mais">
           <Link to="/artigos">
-            <button>Ver main <HiArrowNarrowUp className="icon-btn-ver-mais"/></button>
+            <button>Ver mais <HiArrowNarrowUp className="icon-btn-ver-mais"/></button>
           </Link>
         </div>
       </section>

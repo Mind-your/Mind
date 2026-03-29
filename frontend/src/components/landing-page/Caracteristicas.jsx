@@ -34,12 +34,12 @@ export default function Caracteristicas() {
 
   return (
     <>
-      <section className="section section-caract">
+      <section className="section-caract">
         <h1>Aqui você encontra</h1>
 
-        <article class="container-goals">
+        <article className="container-goals">
           {listCaract.map((item, index) => (
-            <div key={index} class="goal">
+            <div key={index} className="goal">
                 <span>
                     {item.icon}
                     <h2>{item.title}</h2>

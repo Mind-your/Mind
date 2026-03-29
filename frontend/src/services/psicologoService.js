@@ -87,6 +87,17 @@ export async function buscarPorId(id) {
     return res.json();
 }
 
+// Buscar configurações do perfil (com endereço completo)
+export async function buscarConfiguracoes(id) {
+    const res = await authService.authenticatedFetch(`${API_URL}/${id}/configuracoes`);
+
+    if (!res.ok) {
+        throw new Error("Configurações do psicólogo não encontradas");
+    }
+
+    return res.json();
+}
+
 // Atualizar psicólogo (com autenticação)
 export async function atualizar(id, camposAtualizados) {
     const res = await authService.authenticatedFetch(`${API_URL}/${id}`, {

@@ -1,8 +1,10 @@
+import defaultAvatar from "../assets/img/perfil-default.png";
+import defaultWallpaper from "../assets/img/wallpaper-default.png";
 const API_URL = "http://localhost:8080";
 
 // Imagem SVG padrão em base64 como fallback absoluto
-const DEFAULT_AVATAR_BASE64 = "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiB2aWV3Qm94PSIwIDAgMjAwIDIwMCI+PHJlY3Qgd2lkdGg9IjIwMCIgaGVpZ2h0PSIyMDAiIGZpbGw9IiNlMGUwZTAiLz48Y2lyY2xlIGN4PSIxMDAiIGN5PSI4MCIgcj0iNDAiIGZpbGw9IiM5OTkiLz48ZWxsaXBzZSBjeD0iMTAwIiBjeT0iMTYwIiByeD0iNjAiIHJ5PSI0MCIgZmlsbD0iIzk5OSIvPjwvc3ZnPg==";
-
+const DEFAULT_AVATAR_BASE64 = defaultAvatar; // Substitua pelo caminho correto do seu arquivo de imagem
+const DEFAULT_WALLPAPER = defaultWallpaper;
 /**
  * Retorna a URL completa para uma imagem de perfil
  * @param {string} imgPerfil - Nome do arquivo (ex: "perfil-snoopy.png")
@@ -39,6 +41,9 @@ export function getImageUrl(imgPerfil) {
  */
 export function getDefaultAvatar() {
     return DEFAULT_AVATAR_BASE64;
+}
+export function getDefaultWallpaper() {
+    return DEFAULT_WALLPAPER;
 }
 
 /**

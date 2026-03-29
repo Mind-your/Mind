@@ -21,9 +21,14 @@ import com.mind_your.mind.dto.request.PacienteUpdateRequestDTO;
 import com.mind_your.mind.dto.response.JwtResponseDTO;
 import com.mind_your.mind.dto.response.PacienteCadastroResponseDTO;
 import com.mind_your.mind.dto.response.PacienteResponseDTO;
+import com.mind_your.mind.dto.response.PacienteSessionResponseDTO;
+import com.mind_your.mind.dto.response.PacienteConfiguracoesResponseDTO;
 import com.mind_your.mind.dto.response.UploadImagemResponseDTO;
+import java.util.Optional;
+import com.mind_your.mind.mapper.PacienteMapper; // Added import
 import com.mind_your.mind.repository.PacienteRepository;
 import com.mind_your.mind.service.PacienteService;
+import com.mind_your.mind.models.Paciente;
 
 @RestController
 @RequestMapping("/pacientes")
@@ -54,7 +59,7 @@ public class PacienteController {
 
     // Buscar por email
     @GetMapping("/email/{email}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorEmail(@PathVariable String email) {
+    public ResponseEntity<PacienteResponseDTO> buscarUsuarioPorEmail(@PathVariable String email) {
         return pacienteService.buscarPorEmail(email)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -63,24 +68,32 @@ public class PacienteController {
 
     // Buscar por nome
     @GetMapping("/nome/{nome}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorNome(@PathVariable String nome) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorNome(@PathVariable("nome") String nome) {
         return pacienteService.buscarPorNome(nome)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // Buscar por login (email ou username)
+    // Buscar SESSÃO por login (email ou nome de usuário) - Retorna apenas dados essenciais de login
     @GetMapping("/login/{login}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorLogin(@PathVariable String login) {
-        return pacienteService.buscarPorLogin(login)
+    public ResponseEntity<PacienteSessionResponseDTO> buscarSessaoPorLogin(@PathVariable("login") String login) {
+        return pacienteService.buscarSessaoPorLogin(login)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     // Buscar por ID
     @GetMapping("/{id}")
-    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable String id) {
+    public ResponseEntity<PacienteResponseDTO> buscarPorId(@PathVariable("id") String id) {
         return pacienteService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // Buscar configurações por ID
+    @GetMapping("/{id}/configuracoes")
+    public ResponseEntity<PacienteConfiguracoesResponseDTO> buscarConfiguracoes(@PathVariable("id") String id) {
+        return pacienteService.buscarConfiguracoesPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -88,7 +101,7 @@ public class PacienteController {
     // Atualizar
     @PutMapping("/{id}")
     public ResponseEntity<PacienteResponseDTO> atualizar(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestBody PacienteUpdateRequestDTO dados) {
 
         return pacienteService.atualizar(id, dados)
@@ -99,7 +112,7 @@ public class PacienteController {
 
     // Deletar por ID
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletar(@PathVariable String id) {
+    public ResponseEntity<Void> deletar(@PathVariable("id") String id) {
         return pacienteService.deletarPorId(id)
                 ? ResponseEntity.noContent().build()
                 : ResponseEntity.notFound().build();
@@ -114,7 +127,7 @@ public class PacienteController {
 
     @PostMapping("/{id}/imagem")
     public ResponseEntity<UploadImagemResponseDTO> uploadImagem(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestParam("imagem") MultipartFile file) {
 
         return pacienteService.uploadImagem(id, file)

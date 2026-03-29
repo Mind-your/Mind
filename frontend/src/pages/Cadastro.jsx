@@ -1,10 +1,12 @@
-import InputCadastro from "../components/cadastro-page/inputCadastro.jsx"
+import InputCadastro from "../components/cadastro-page/InputCadastro.jsx"
+import SkipNavigation from "../components/SkipNavigation";
 
 export default function Cadastro() {
     
   return (
     <>
-      <InputCadastro/>
+      < SkipNavigation mainContent="signinPageForm" />
+      < InputCadastro />
     </>
   )
 }

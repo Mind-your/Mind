@@ -1,15 +1,26 @@
 @import url("../main.css");
 @import url("../ui/buttons.css");
 
-section.section-filters-searchbox{
+section.section-filter{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding-inline: 5%;
+    flex-direction: column;
+    
+}
+.section-filters-searchbox{
     background-color: var(--alabaster-100);
     border-radius: var(--border-radius-md);
     margin: var(--spacing-xs);
-    padding: 10px;
+    padding-top: var(--spacing-xs);
+    padding-bottom: var(--spacing-xs) ;
+    padding-inline: var(--spacing-xl);
+    width: 100%;
     display: grid;
     grid-template-areas: 
-        "search search search search visual"
-        "filter filter filter filter visual"
+        "search search search search "
+        "filter filter filter filter "
     ;
 }
 
@@ -45,6 +56,10 @@ section.section-filters-searchbox{
 }
 
 /*-----------FILTER------------ */
+.container-filter-view{
+    display: flex;
+    flex-direction: column;
+}
 .search-filters{
     grid-area: filter;
     display:flex;
@@ -172,6 +187,7 @@ button.btn-searchbox{
 .search-visualizacao{
     grid-area: visual;
     margin: auto;
+    padding-left: 10%;
 }
 
 .container-visualizacao{
@@ -218,12 +234,11 @@ button.btn-searchbox{
 /*-----------RESPONSIVIDADE------------- */
 
 @media(max-width: 798px){
-    section.section-filters-searchbox{
+    .section-filters-searchbox{
         grid-template-areas: 
             "search search"
             "filter filter"
             "filter filter"
-            "visual visual"
         ;
     }
     .container-visualizacao{
@@ -237,7 +252,7 @@ button.btn-searchbox{
     }
 }
 
-@media(max-width:716px){
+@media(max-width:425px){
     .search-visualizacao{
         display: none;
     }
