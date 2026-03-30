@@ -9,7 +9,8 @@
     "i:frontend": "cd frontend && npm install",
     "start:backend": "cd backend && mvnw.cmd spring-boot:run",
     "start:frontend": "npm run dev --prefix frontend",
-    "dev": "concurrently --kill-others --names \"BACK,FRONT\" -c \"bgBlue.bold,bgMagenta.bold\" \"npm run start:backend\" \"npm run start:frontend\"",
+    "start:email": "cd email-service && mvnw.cmd spring-boot:run -Dspring-boot.run.profiles=local",
+    "dev": "concurrently --kill-others --names \"BACK,FRONT,EMAIL\" -c \"bgBlue.bold,bgMagenta.bold,bgYellow.bold\" \"npm run start:backend\" \"npm run start:frontend\" \"npm run start:email\"",
     "reset:db": "node reset-db.js"
   },
   "devDependencies": {

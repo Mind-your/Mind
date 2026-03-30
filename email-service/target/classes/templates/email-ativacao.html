@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ative sua conta no Mind</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .content {
+            padding: 40px;
+            text-align: center;
+            line-height: 1.6;
+        }
+        .content p {
+            font-size: 16px;
+            margin-bottom: 30px;
+        }
+        .btn {
+            display: inline-block;
+            background: #6e8efb;
+            color: white !important;
+            padding: 15px 35px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background 0.3s ease;
+            box-shadow: 0 4px 10px rgba(110, 142, 251, 0.3);
+        }
+        .btn:hover {
+            background: #5a7be2;
+        }
+        .footer {
+            background-color: #f9fbfd;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Mind Your Mind</h1>
+        </div>
+        <div class="content">
+            <h2 th:text="'Olá, ' + ${nome} + '!'">Olá, Usuário!</h2>
+            <p>Seja muito bem-vindo(a) ao Mind! Estamos felizes em ter você conosco.</p>
+            <p>Para concluir seu cadastro e começar a usar todas as funcionalidades da nossa plataforma, clique no botão abaixo para ativar sua conta:</p>
+            
+            <a th:href="${link}" class="btn">Ativar minha conta</a>
+            
+            <p style="margin-top: 30px; font-size: 14px; color: #666;">
+                Se o botão acima não funcionar, copie e cole o link abaixo no seu navegador:<br>
+                <span th:text="${link}" style="color: #6e8efb; word-break: break-all;">http://link-de-ativacao</span>
+            </p>
+        </div>
+        <div class="footer">
+            &copy; 2026 Mind Your Mind. Todos os direitos reservados.
+        </div>
+    </div>
+</body>
+</html>

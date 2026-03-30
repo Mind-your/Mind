@@ -32,6 +32,8 @@ public class Paciente {
     private String medicamentos;
     private String preferencias;
     private String especialidade;
+    private boolean ativo = true; // Ativo por padrão para contas existentes
+    private String tokenAtivacao;
 
 
     private String endereco = ""; // Logradouro
@@ -106,4 +108,10 @@ public class Paciente {
 
     public String getEspecialidade() { return  especialidade; }
     public void setEspecialidade(String especialidade) { this.especialidade = especialidade; }
+
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
+
+    public String getTokenAtivacao() { return tokenAtivacao; }
+    public void setTokenAtivacao(String tokenAtivacao) { this.tokenAtivacao = tokenAtivacao; }
 }

@@ -8,4 +8,5 @@ public interface PsicologoRepository extends MongoRepository<Psicologo, String> 
     Optional<Psicologo> findByEmail(String email);
     Optional<Psicologo> findByNome(String nome);
     Optional<Psicologo> findByLogin(String login);
+    Optional<Psicologo> findByTokenAtivacao(String token);
 }

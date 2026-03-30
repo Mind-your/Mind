@@ -5,6 +5,8 @@ import com.mind_your.mind.dto.response.JwtResponseDTO;
 import com.mind_your.mind.models.RefreshToken;
 import com.mind_your.mind.security.JwtUtil;
 import com.mind_your.mind.service.RefreshTokenService;
+import com.mind_your.mind.repository.PacienteRepository;
+import com.mind_your.mind.repository.PsicologoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -22,6 +24,36 @@ public class AuthController {
 
     @Autowired
     private RefreshTokenService refreshTokenService;
+
+    @Autowired
+    private PacienteRepository pacienteRepository;
+
+    @Autowired
+    private PsicologoRepository psicologoRepository;
+
+    @GetMapping("/ativar")
+    public ResponseEntity<?> ativarConta(@RequestParam String token, @RequestParam String tipo) {
+        if ("paciente".equalsIgnoreCase(tipo)) {
+            return pacienteRepository.findByTokenAtivacao(token)
+                    .map(p -> {
+                        p.setAtivo(true);
+                        p.setTokenAtivacao(null);
+                        pacienteRepository.save(p);
+                        return ResponseEntity.ok("Conta de paciente ativada com sucesso! Agora você pode fazer login.");
+                    })
+                    .orElse(ResponseEntity.status(400).body("Token de ativação inválido ou conta já ativada."));
+        } else if ("psicologo".equalsIgnoreCase(tipo)) {
+            return psicologoRepository.findByTokenAtivacao(token)
+                    .map(p -> {
+                        p.setAtivo(true);
+                        p.setTokenAtivacao(null);
+                        psicologoRepository.save(p);
+                        return ResponseEntity.ok("Conta de psicólogo ativada com sucesso! Agora você pode fazer login.");
+                    })
+                    .orElse(ResponseEntity.status(400).body("Token de ativação inválido ou conta já ativada."));
+        }
+        return ResponseEntity.status(400).body("Tipo de usuário inválido.");
+    }
 
     // Renovar JWT usando refresh token
     @PostMapping("/refresh")

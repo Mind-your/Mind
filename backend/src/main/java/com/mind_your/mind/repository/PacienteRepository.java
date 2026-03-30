@@ -9,4 +9,5 @@ public interface PacienteRepository extends MongoRepository<Paciente, String> {
     Optional<Paciente> findByEmail(String email);
     Optional<Paciente> findByNome(String nome);
     Optional<Paciente> findByLogin(String login);
+    Optional<Paciente> findByTokenAtivacao(String token);
 }

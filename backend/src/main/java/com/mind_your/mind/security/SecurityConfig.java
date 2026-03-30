@@ -79,8 +79,8 @@ public class SecurityConfig {
                 .requestMatchers("/psicologos/login", "/psicologos/cadastrar").permitAll()
                 .requestMatchers("/voluntarios/login", "/voluntarios/cadastrar").permitAll()
 
-                // Refresh token público, logout exige autenticação
-                .requestMatchers("/api/auth/refresh").permitAll()
+                // Refresh token e ativação públicos, logout exige autenticação
+                .requestMatchers("/api/auth/refresh", "/api/auth/ativar").permitAll()
 
                 // Imagens públicas
                 .requestMatchers("/api/images/**").permitAll()

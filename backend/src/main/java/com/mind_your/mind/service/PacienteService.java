@@ -60,8 +60,16 @@ public class PacienteService {
     @Autowired
     private EnderecoService enderecoService;
 
+    @Autowired
+    private EmailClientService emailService;
+
     public PacienteCadastroResponseDTO cadastrar(PacienteCadastroRequestDTO dados) {
         Paciente paciente = new Paciente();
+        
+        // Configurar ativação
+        String token = UUID.randomUUID().toString();
+        paciente.setAtivo(false);
+        paciente.setTokenAtivacao(token);
 
         paciente.setNome(dados.getNome());
         paciente.setSobrenome(dados.getSobrenome());
@@ -94,6 +102,9 @@ public class PacienteService {
         paciente.setSenha(passwordEncoder.encode(dados.getSenha()));
 
         Paciente salvo = pacienteRepository.save(paciente);
+
+        // Enviar e-mail de ativação via microserviço
+        emailService.enviarEmailAtivacao(salvo.getEmail(), salvo.getNome(), token, "paciente");
 
         return PacienteMapper.toCadastroResponseDTO(salvo);
     }
@@ -173,6 +184,12 @@ public class PacienteService {
     // fazer login com JWT
     public Optional<JwtResponseDTO> fazerLogin(String login, String senha) {
         return buscarPorLoginAuth(login)
+                .filter(p -> {
+                    if (!p.isAtivo()) {
+                        throw new RuntimeException("Conta inativa. Verifique seu e-mail para ativar.");
+                    }
+                    return true;
+                })
                 .filter(p -> passwordEncoder.matches(senha, p.getSenha()))
                 .map(p -> {
                     Authentication authentication = authenticationManager.authenticate(

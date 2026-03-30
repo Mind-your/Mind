@@ -54,9 +54,17 @@ public class PsicologoService {
     @Autowired
     private EnderecoService enderecoService;
 
+    @Autowired
+    private EmailClientService emailService;
+
     // Cadastrar
     public PsicologoCadastroResponseDTO cadastrar(PsicologoCadastroRequestDTO dados) {
         Psicologo psicologo = new Psicologo();
+
+        // Configurar ativação
+        String token = UUID.randomUUID().toString();
+        psicologo.setAtivo(false);
+        psicologo.setTokenAtivacao(token);
 
         psicologo.setNome(dados.getNome());
         psicologo.setSobrenome(dados.getSobrenome());
@@ -80,6 +88,10 @@ public class PsicologoService {
         }
 
         Psicologo salvo = psicologoRepository.save(psicologo);
+
+        // Enviar e-mail de ativação via microserviço
+        emailService.enviarEmailAtivacao(salvo.getEmail(), salvo.getNome(), token, "psicologo");
+
         return PsicologoMapper.toCadastroResponseDTO(salvo);
     }
 
@@ -145,6 +157,12 @@ public class PsicologoService {
     // Login com JWT
     public Optional<JwtResponseDTO> fazerLogin(String login, String senha) {
         return buscarPorLoginAuth(login)
+                .filter(p -> {
+                    if (!p.isAtivo()) {
+                        throw new RuntimeException("Conta inativa. Verifique seu e-mail para ativar.");
+                    }
+                    return true;
+                })
                 .filter(p -> passwordEncoder.matches(senha, p.getSenha()))
                 .map(p -> {
                     Authentication authentication = authenticationManager.authenticate(

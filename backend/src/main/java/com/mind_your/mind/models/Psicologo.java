@@ -35,6 +35,8 @@ public class Psicologo {
     private String preferencias;
     private String crp;
     private List<String> especialidades;
+    private boolean ativo = true;
+    private String tokenAtivacao;
 
     // Getters e Setters
 
@@ -204,4 +206,10 @@ public class Psicologo {
     public void setEspecialidades(List<String> especialidades) {
     this.especialidades = especialidades;
     }
+
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
+
+    public String getTokenAtivacao() { return tokenAtivacao; }
+    public void setTokenAtivacao(String tokenAtivacao) { this.tokenAtivacao = tokenAtivacao; }
 }

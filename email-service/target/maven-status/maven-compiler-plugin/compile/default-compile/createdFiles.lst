@@ -1,0 +1,4 @@
+com\mind_your\email\controller\EmailController.class
+com\mind_your\email\EmailServiceApplication.class
+com\mind_your\email\dto\EmailAtivacaoRequestDTO.class
+com\mind_your\email\service\EmailService.class
