@@ -4,7 +4,6 @@ import article01 from "../assets/img/article01.jpg";
 import article02 from "../assets/img/article02.jpg";
 import articles from "../assets/img/articles.png";
 
-
 export default function Artigos() {
 
   const infoTest = [

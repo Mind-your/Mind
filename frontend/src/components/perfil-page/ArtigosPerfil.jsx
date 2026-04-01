@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { FaSearch, FaEye, FaThumbsUp } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 import "../../assets/styles/perfil/artigos-perfil.css";
 
 export default function ArtigosPerfil({ id }) {
-
+  const navigate = useNavigate();
   const [busca, setBusca] = useState("");
 
   const artigos = [
@@ -55,21 +56,20 @@ export default function ArtigosPerfil({ id }) {
 
               <p>{artigo.descricao}</p>
 
-              <div className="artigo-stats">
-                <span>
-                  <FaThumbsUp /> {artigo.likes}
-                </span>
+              <div class="artigo-info-footer">
+                <div className="artigo-stats">
+                  <span>
+                    <FaThumbsUp /> {artigo.likes}
+                  </span>
+                  <span>
+                    <FaEye /> {artigo.views}
+                  </span>
+                </div>
 
-                <span>
-                  <FaEye /> {artigo.views}
-                </span>
+                <button className="button-proceed" onClick={() => navigate(`/artigo/1`)}>Ver</button>
               </div>
+
             </div>
-
-            <button className="btn-ver">
-              Ver
-            </button>
-
           </div>
         ))}
       </div>

@@ -2,9 +2,9 @@
 @import url("../ui/buttons.css");
 @import url("../ui/icons.css");
 .artigos-container{
-    background-color:var(--bege-default);
-    padding:40px;
-    border-radius:20px;
+    background-color:var(--secondary-cream-700);
+    padding:20px;
+    border-radius:10px;
 }
 
 .artigos-header{
@@ -15,18 +15,19 @@
 }
 
 .artigos-header h2{
-    font-size:32px;
-    font-weight:700;
+    font-size:1.5rem;
+    font-weight:600;
 }
 
 .search-box{
     display:flex;
     align-items:center;
-    background:#fff;
+    background:var(--white-50);
     border-radius:30px;
     padding:8px 15px;
     width:300px;
     gap:10px;
+    color: var(--black-950)
 }
 
 .search-box input{
@@ -43,8 +44,8 @@
 }
 
 .artigo-card{
-    background:var(--alabaster-100);
-    border-radius:20px;
+    background:var(--white-200);
+    border-radius:10px;
     padding:25px;
     display:flex;
     justify-content:space-between;
@@ -52,24 +53,31 @@
 }
 
 .artigo-info{
-    max-width:70%;
+    max-width: 100%;
 }
 
 .artigo-info h3{
-    font-size:36px;
+    font-size:1.3rem;
+    font-weight: 600;
     margin-bottom:10px;
 }
 
 .artigo-info p{
-    font-size:18px;
-    color:#444;
-    margin-bottom:15px;
+    font-size:1rem;
+    color:var(--black-950);
+    padding: 10px 0;
+}
+
+.artigo-info-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
 .artigo-stats{
     display:flex;
     gap:20px;
-    color:#555;
+    color:var(--white-900);
 }
 
 .artigo-stats span{
@@ -78,19 +86,6 @@
     gap:5px;
 }
 
-.btn-ver{
-    background:var(--red-default-100);
-    border:none;
-    padding:12px 40px;
-    border-radius:12px;
-    font-size:18px;
-    font-weight:600;
-    cursor:pointer;
-}
-
-.btn-ver:hover{
-    opacity:0.9;
-}
 @media (max-width:768px){
     .artigos-header{
         flex-direction: column;
