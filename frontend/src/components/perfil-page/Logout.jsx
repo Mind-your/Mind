@@ -10,26 +10,23 @@ export default function Logout() {
     };
 
     return (
-
-        <div className={`container-sair`}>
-            {isAuthenticated ? (
+        <>{isAuthenticated ? (
                 <button
                     type="button"
-                    className='icon-sair'
+                    className='container-sair button-proceed'
                     onClick={() => {
                         handleLogout();
                         setDropdownOpen(false);
-                    }}
-                >
-                    <HiOutlineLogout />
+                    }}>
+
+                    <HiOutlineLogout className="icon-sair"/>
+                    <h3>Log out</h3>
 
                 </button>
             ) : (
                 <>
                 </>
-            )}<h3>Log out</h3>
-        </div>
-        
-
+            )}
+        </>
     );
 }

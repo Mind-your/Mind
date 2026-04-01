@@ -60,10 +60,10 @@ export default function InfoPsicologo({ profileData }) {
         </div>
 
         <div className="container-config-artigos">
-          <Link to="/adicionar-artigos" className="button-config btn-mob">
+          <Link to="/adicionar-artigos" className="button-confirm">
             Criar Artigos
           </Link>
-          <Link to={`/${user.tipo}/perfil/${user.id}/configuracoes`} className="button-config btn-mob">
+          <Link to={`/${user.tipo}/perfil/${user.id}/configuracoes`} className="button-confirm">
             Configurações
           </Link>
         </div>

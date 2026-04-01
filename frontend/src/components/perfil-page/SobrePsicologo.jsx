@@ -18,15 +18,19 @@ export default function SobrePsicologo({ profileData }) {
             </div>
             <div className="container-horarios-psi">
                 <h4>Horários de Atendimento</h4>
+
+                {profileData.horarios && profileData.horarios.forEach((horario, index) => (
+                    <div className="container-horario-atendimento-psi" key={index}>
+                        <p>{horario.diaDaSemana}</p>
+                        <p>{horario.horaInicio}</p>
+                        <p>{horario.horaFim}</p>
+                    </div>
+                ))}
+
                 <div className="container-horario-atendimento-psi">
                     <p>Segunda-feira</p>
                     <p>09:00</p>
                     <p>09:40</p>
-                </div>
-                <div className="container-horario-atendimento-psi">
-                    <p>Sexta-feira</p>
-                    <p>19:00</p>
-                    <p>20:00</p>
                 </div>
                 
             </div>

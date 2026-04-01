@@ -8,6 +8,7 @@
   import LandingPage from "./pages/LandingPage";
   import Home from "./pages/Home";
   import Artigos from "./pages/Artigos";
+  import Artigo from "./pages/Artigo";
   import Login from "./pages/Login";
   import Perfil from "./pages/Perfil";
   import PerfilPublicoPsicologo from "./components/perfil-page/SectionPublicoPsicologo";
@@ -40,6 +41,7 @@
             />
 
             <Route path="artigos" element={<Artigos />} />
+            <Route path="/artigo/1" element={<Artigo />} />
             <Route path="sobre-nos" element={<SobreNos />} />
             <Route path="termos-e-condicoes" element={<TermosCondicoes />} />
             <Route path="/perfil/psicologo/:id" element={<PerfilPublicoPsicologo />} />
