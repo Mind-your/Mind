@@ -1,64 +1,61 @@
-.artigo-container{
-    display:flex;
-    background-color: var(--lime-light-100);
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-xs);
-    gap: var(--spacing-sm);
-    height:max-content;
-    position: relative;
+.artigo-page-card{
     width: 100%;
-    /* border: 1px solid #dddddd; */
+    max-width: 820px;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    background: var(--secondary-cream-700);
+    display: flex;
+    flex-direction: column;
 }
 
 /* Imagem principal do artigo */
-.artigo-container > img{
-    width:clamp(90px, 20vw, 120px);
-    height: clamp(90px, 20vw, 120px);
-    border-radius: 10px;
+.artigo-banner > img{
+    width: 100%;
+    height: 100px;
     object-fit: cover;
-    background-color: #ccc;
-    background-size:auto;
-    background-position: center;
-    display: flex;
-    align-self: center;
 }
 
 /* Enunciado do card de artigo */
-.artigo-texto .visible{
+.artigo-content{
     display: flex;
     height:100%;
+    padding: var(--spacing-sm);
     flex-direction: column;
     justify-content: space-between;
-    gap:15px;
+    gap:10px;
 }
-.artigo-texto h3{
+.artigo-content h2{
     color: var(--dark-100);
-    font-weight: 500;
+    font-weight: 600;
     font-size: clamp(1.1rem, 2vw, 1.3rem);
 }
-.artigo-texto p {
+.artigo-content p {
     font-size: 1rem;
 }
 
-/* Botão "Ver" artigo */
-.artigo-btn{
-    width: max-content;
+/* Outras infos */
+.artigo-autor{
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    font-weight: 600;
 }
 
-/* .artigo-texto > p > *, .artigo-texto > p > *::before{
-    color: var(--color-03);
-    text-decoration: underline;
-    transition: color 0.1s;
-} */
+.artigo-autor .foto-autor{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
 
-@media(max-width:698px){
-    .artigo-container{
-        width:100%;
-    }
-    .artigo-texto > p {
-        margin-left:-110px;
-    }
-    .artigo-texto > div{
-        justify-content: flex-start;
-    }
+.artigo-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Button */
+
+.btn-artigo {
+    width: clamp(100px, 40%, 200px);
 }

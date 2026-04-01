@@ -2,12 +2,7 @@
 @import url("../ui/buttons.css");
 @import url("../ui/icons.css");
 
-.container-sair {
-  background-color: var(--apricot-100);
-  padding: 10px;
-  border-radius: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 5%;
+.container-sair h3{
+  font-weight: 600;
+  font-size: 1.1rem;
 }

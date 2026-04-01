@@ -4,10 +4,6 @@ import { HiChevronLeft, HiChevronRight } from "react-icons/hi";
 
 const diasSemana = ["Dom", "Seg", "Ter", "Qua", "Qui", "Sex", "Sab"];
 
-function formatDia(date) {
-  return date.toISOString().split("T")[0];
-}
-
 function gerarDiasCalendario(data) {
 
   const ano = data.getFullYear();
