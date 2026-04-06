@@ -3,6 +3,7 @@ package com.mind_your.mind.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -11,12 +12,14 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import com.mind_your.mind.models.Endereco;
 import com.mind_your.mind.dto.response.EnderecoResponseDTO;
+import com.mind_your.mind.dto.response.ClienteApiResponseDTO;
 import com.mind_your.mind.mapper.EnderecoMapper;
 
 @Service
 public class EnderecoService implements IEnderecoService {
-    
-    private static final String API_URL = "https://viacep.com.br/ws/{cep}/json/";
+
+    @Value("${cliente.api.url:http://localhost:8081/api/v1/clientes/{cep}}")
+    private String apiUrl;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -27,13 +30,14 @@ public class EnderecoService implements IEnderecoService {
 
     public Optional<Endereco> obtemLogradouroPorCep(String cep) {
         try {
-            ResponseEntity<Endereco> response = restTemplate.exchange(
-                API_URL,
+            ResponseEntity<ClienteApiResponseDTO> response = restTemplate.exchange(
+                apiUrl,
                 HttpMethod.GET,
                 null,
-                Endereco.class,
+                ClienteApiResponseDTO.class,
                 cep);
-            return Optional.ofNullable(response.getBody());
+            ClienteApiResponseDTO body = response.getBody();
+            return Optional.ofNullable(body != null ? body.getData() : null);
         } catch (HttpClientErrorException e) {
             System.out.println("Erro ao buscar CEP: " + e.getMessage());
             return Optional.empty();
@@ -45,14 +49,15 @@ public class EnderecoService implements IEnderecoService {
 
     public Optional<EnderecoResponseDTO> obtemEnderecoPorCep(String cep) {
         try {
-            ResponseEntity<Endereco> response = restTemplate.exchange(
-                API_URL,
+            ResponseEntity<ClienteApiResponseDTO> response = restTemplate.exchange(
+                apiUrl,
                 HttpMethod.GET,
                 null,
-                Endereco.class,
+                ClienteApiResponseDTO.class,
                 cep);
-            
-            Endereco endereco = response.getBody();
+
+            ClienteApiResponseDTO body = response.getBody();
+            Endereco endereco = body != null ? body.getData() : null;
             if (endereco != null) {
                 return Optional.of(EnderecoMapper.toResponseDTO(endereco));
             }

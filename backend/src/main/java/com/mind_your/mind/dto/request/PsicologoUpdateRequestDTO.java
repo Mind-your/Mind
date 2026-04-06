@@ -1,5 +1,7 @@
 package com.mind_your.mind.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -17,6 +19,7 @@ public class PsicologoUpdateRequestDTO {
     private String numeroResidencia;
     private String cidade;
     private String uf;
+    @JsonAlias({ "rua" })
     private String endereco;
     private String imgPerfil;
     private String sobreMim;
