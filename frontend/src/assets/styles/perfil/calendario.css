@@ -3,7 +3,7 @@
 @import url("../ui/icons.css");
 
 .container-calendario {
-  background: var(--bege-default-100);
+  background: var(--secondary-cream-700);
   border-radius: 10px;
   width: 100%;
   margin: 0 auto;
@@ -13,9 +13,11 @@
 /* Título */
 .container-calendario h1 {
   text-align: center;
-  background: var(--orange-default-100);
+  background: var(--primary-orange-700);
   border-radius: 10px 10px 0px 0px;
   padding: 5px;
+  font-size: 1.5rem;
+  font-weight: 600;
 }
 
 /* =========================
@@ -29,7 +31,7 @@
 }
 
 .header-calendario h2 {
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   color: var(--black-default-100);
   text-transform: capitalize;
   margin: 10px 0 0 0;

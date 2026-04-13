@@ -255,6 +255,8 @@ export default function Configuracoes() {
     const getDadosAtualizados = (imgPerfil, imgWallpaper) => {
         const dados = {
             ...formData,
+            // Mantem compatibilidade com DTOs que esperam "endereco" em vez de "rua"
+            endereco: formData.rua ?? formData.endereco ?? '',
             imgPerfil,
             imgWallpaper
         };

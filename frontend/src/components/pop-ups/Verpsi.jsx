@@ -16,11 +16,9 @@ export default function VerPsi({ open = false, close = () => { }, perfil }) {
   const tags = Array.isArray(perfil.tags) ? perfil.tags : (perfil.tags ? [perfil.tags] : []);
   const foto = perfil.foto || fotoPsi;
   const handleOpenProfile = () => {
-  console.log("➡️ Enviando perfil para a rota:", perfil);
+  console.log(" Enviando perfil para a rota:", perfil);
   navigate(`/perfil/psicologo/${perfil.id}`, { state: { perfil } });
 };
-
-
 
   return (
     <div className="container-ver-psi">

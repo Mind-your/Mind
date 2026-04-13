@@ -5,7 +5,7 @@
 
 /* Card de perfil */
 .card-perfil-content {
-  background: var(--bege-default-100);
+  background: var(--secondary-cream-700);
   border-radius: var(--border-radius-md);
   padding: 24px 32px;
   display: flex;
