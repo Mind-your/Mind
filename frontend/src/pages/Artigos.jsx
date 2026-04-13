@@ -1,72 +1,103 @@
-import "../assets/styles/artigos/artigos.css"
-import CardArtigos from "../components/cards/CardArtigos"
+import { useState } from "react";
+import "../assets/styles/artigos/artigos.css";
+import ArticleCard from "../components/cards/ArticleCard";
+import ArticlesMostLiked from "../components/cards/ArticlesMostLiked";
+import ArticlesMostViewed from "../components/cards/ArticlesMostViewed";
+import { HiOutlineSearch } from "react-icons/hi";
+
 import article01 from "../assets/img/article01.jpg";
 import article02 from "../assets/img/article02.jpg";
-import articles from "../assets/img/articles.png";
-
+import user01 from "../assets/img/perfil-default.png";
 
 export default function Artigos() {
+  const [searchText, setSearchText] = useState("");
 
-  const infoTest = [
+  const articles = [
     {
       id: 1,
       img: article01,
-      tipo: "destaque", 
-      title: "Importância da consulta psicologica",
+      title: "Importância da consulta psicológica",
       autor: "@LuigiAmaral",
-      text:  "Segundo a OMS em seu relatório sobre Saúde Mental Global ao cumprimento dos objetivos de saúde entre 2013 a 2030. A saúde mental existe em um processo complexo e contínuo de experiências que variam de um estado de bem-estar a estados debilitantes de grande sofrimento e dor emocional.Problemas como crises econômicas, polarização social, emergências de saúde pública e humanitárias generalizadas, deslocamento forçado e a crescente crise climáticas expõe circunstâncias como pobreza, violência e desigualdade como principal elemento de risco ao sofrimentos de problemas de saúde mental.Portanto, nos da Mind, assim como os Objetivos da ODS, temos o compromisso de influenciar no debate sobre saúde mental e disponibilizar um ambiente acolhedor para o bem-estar social. Tendo assim a ciência popular que a sáude psicológica é valida e é um direito de todos",
-      references: [
-        "https://www.who.int/teams/mental-health-and-substance-use/world-mental-health-report"
-      ]
+      avatar: user01,
+      data: "12 Dez 2025",
+      likes: 20,
+      views: 100,
+      descricao: "A saúde mental é essencial para o bem-estar. Entenda como a terapia pode ajudar no equilíbrio emocional.",
     },
     {
       id: 2,
       img: article02,
-      tipo: "destaque", 
-      title: "Números de emergência para segurança pessoal",
+      title: "Números de emergência",
       autor: "@LuigiAmaral",
-      text:  <p> Em situações de risco, ter acesso rápido aos números de emergência é essencial para garantir a segurança e o atendimento adequado. No Brasil, diversos serviços públicos estão disponíveis 24 horas por dia para atender a população em casos de urgência. <br /> A Polícia Militar (190) é o contato imediato para ocorrências de segurança pública, como assaltos, violência doméstica ou perturbação da ordem. Já o Corpo de Bombeiros (193) atua em incêndios, acidentes de trânsito, resgates e salvamentos diversos. <br /> Para emergências médicas, o SAMU (192) é responsável pelo atendimento pré-hospitalar, enviando ambulâncias equipadas com profissionais de saúde. <br /> Outros números também são fundamentais: a Polícia Civil (197) para investigações e denúncias, a Polícia Rodoviária Federal (191) e a Polícia Rodoviária Estadual (198) para ocorrências em rodovias. Além disso, a Defesa Civil (199) atua em situações de desastres naturais, como enchentes e deslizamentos. <br /> Há ainda o Disque Denúncia (118) e a Guarda Municipal (153), que reforçam a segurança local e recebem informações da população para prevenir crimes e garantir a ordem. Conhecer e divulgar esses números pode salvar vidas, facilitar o trabalho das autoridades e garantir que o socorro chegue de forma mais rápida e eficiente. </p> ,
-      references: []
+      avatar: user01,
+      data: "10 Dez 2025",
+      likes: 15,
+      views: 80,
+      descricao: "Conheça os principais números de emergência no Brasil e saiba como agir rapidamente.",
     },
     {
       id: 3,
-      img: articles,
-      tipo: "normal", 
-      title: "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
-      autor: "@Unknown",
-      text:  "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel blanditiis veniam veritatis alias, iure tempora. Natus aperiam nisi accusantium neque explicabo quisquam? Voluptates quod esse, eaque molestiae eligendi ab nam perferendis! Consequatur at porro deleniti debitis suscipit adipisci nam magni quidem! Nesciunt delectus numquam, voluptatum aliquid ea eius soluta? Optio alias sed inventore quasi aperiam, incidunt illo soluta earum voluptas neque non ipsam voluptatum tenetur consectetur ea hic corrupti officia animi! Natus similique mollitia a et quos ut itaque cupiditate tempora, autem vero exercitationem minima non molestias cum sit. Mollitia officia exercitationem fugiat incidunt quo neque culpa libero eaque omnis.",
-      references: []
-    }
-  ]
+      img: article01,
+      title: "Saúde mental no dia a dia",
+      autor: "@Maria",
+      avatar: user01,
+      data: "08 Dez 2025",
+      likes: 30,
+      views: 120,
+      descricao: "Pequenas mudanças na rotina podem melhorar sua saúde mental e reduzir o estresse.",
+    },
+  ];
 
-  let tipoDestaque = infoTest.filter((info) => info.tipo == "destaque")
-  let tipoNormal = infoTest.filter((info) => info.tipo == "normal")
+  const filteredArticles = articles.filter((article) =>
+    article.title.toLowerCase().includes(searchText.toLowerCase()) ||
+    article.autor.toLowerCase().includes(searchText.toLowerCase())
+  );
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+  };
 
   return (
-    <>
-      <main className="artigo-sect">
-          <h1>Artigos de Saúde Mental</h1>
-          <h2>Rápidas dicas e recomendações sobre saúde mental e segurança pessoal para o seu dia a dia</h2>
-          <hr/> 
-          <section id="local_dos_artigos" className="artigos">
+    <main className="container-artigos">
+      {/* SEARCH */}
+      <div className="search-section">
+        <form className="search-form" onSubmit={handleSearch}>
+          <input
+            type="text"
+            placeholder="Pesquisar por nome, autor..."
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
+            className="search-input"
+          />
+          <button type="submit" className="search-button">
+            <HiOutlineSearch className="search-icon" />
+          </button>
+        </form>
+      </div>
 
-            <main className="destaques">
-              <h3>Destaques</h3>
-              {tipoDestaque.map((info, i) => (
-                <CardArtigos key={i} info={info} styleArticle={"column"}/>
-              ))}
-            </main>
+      {/* CONTEÚDO */}
+      <div className="articles-container">
+        {/* SEÇÃO ESQUERDA - ARTIGOS PRINCIPAIS */}
+        <div className="articles-main">
+          <div className="articles-list">
+            {filteredArticles.length > 0 ? (
+              filteredArticles.map((article) => (
+                <ArticleCard key={article.id} article={article} />
+              ))
+            ) : (
+              <div className="no-results">
+                <p>Nenhum artigo encontrado</p>
+              </div>
+            )}
+          </div>
+        </div>
 
-            <aside className="outros-artigos">
-              <h3>Outros artigos</h3>
-              {tipoNormal.map((info, i) => (
-                <CardArtigos key={i} info={info}/>
-              ))}
-            </aside>
-
-          </section>
-      </main>
-    </>
-  )
+        {/* SEÇÃO DIREITA - SIDEBARS */}
+        <aside className="articles-sidebar">
+          <ArticlesMostLiked articles={articles} />
+          <ArticlesMostViewed articles={articles} />
+        </aside>
+      </div>
+    </main>
+  );
 }

@@ -1,82 +1,184 @@
-@import url("./cards-artigos.css");
+@import url("./article-card.css");
+@import url("./articles-sidebar.css");
 
-.artigo-sect{
-    display: flex;
-    flex-direction: column;
-    justify-self: center;
-    height: 100%;
-    width: 90%;
-    margin:10px;
-    margin-bottom:6rem;
+.container-artigos {
+  padding: 30px;
+  background: var(--grayish-white-100);
+  min-height: 100vh;
 }
 
-/* Titulo e subtitulo -------- */
-.artigo-sect h1{
-    font-size:clamp(1.1rem, 6vw, 2.6rem);
-    font-weight: 500;
-}
-.artigo-sect h2{
-    font-size: 1rem;
-    font-weight: 500;
-}
-.artigo-sect hr{
-    background-color: #474747c5;
-    width: 100%;
-    margin: var(--spacing-sm) 0 
+/* SEARCH SECTION */
+.search-section {
+  background: var(--alto-100);
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 8px;
 }
 
-/* Container de artigos ------- */
-.artigos{
-    display:grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-areas: 
-        "destaques artigos"
-    ;
-    gap:var(--spacing-sm);
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.artigos h3{
-    color: var(--deep-cerulean-100);
+.search-input {
+  flex: 1;
+  border: none;
+  padding: 12px 16px;
+  background: var(--white-600);
+  outline: none;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Seção de artigos em destaques ===== */
-.artigos .destaques{
+.search-input:focus {
+  box-shadow: 0 0 0 2px rgba(31, 92, 75, 0.1);
+}
+
+.search-input::placeholder {
+  color: var(--gray-100);
+}
+
+.search-button {
+  all: unset;
+  cursor: pointer;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-dark-green-700);
+  border-radius: 8px;
+  transition: background 0.3s ease;
+}
+
+.search-button:hover {
+  background: var(--accent-dark-green-800);
+}
+
+.search-icon {
+  font-size: 20px;
+  color: var(--white-600);
+}
+
+/* ARTICLES CONTAINER */
+.articles-container {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 25px;
+}
+
+.articles-main {
+  display: flex;
+  flex-direction: column;
+}
+
+.articles-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.no-results {
+  background: var(--white-600);
+  padding: 60px 20px;
+  border-radius: 12px;
+  text-align: center;
+  color: var(--gray-100);
+}
+
+.no-results p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.articles-sidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .articles-container {
+    gap: 20px;
+  }
+
+  .container-artigos {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 900px) {
+  .articles-container {
+    grid-template-columns: 1fr;
+  }
+
+  .articles-sidebar {
     display: grid;
-    grid-area: destaques;
-    gap:var(--spacing-sm);
-    align-content:start;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .container-artigos {
+    padding: 20px;
+  }
 }
 
-/* Seção de outros artigos =========== */
-.artigos .outros-artigos{
-    /* background-color: #ce813415; */
-    border-radius: var(--border-radius-md);
-    padding: var(--spacing-xs);
-    display:flex;
-    flex-direction: column;
-    grid-area: artigos;
-    gap:var(--spacing-sm);
-    border: 1px solid #ccc
+@media (max-width: 700px) {
+  .articles-sidebar {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .search-section {
+    margin-bottom: 25px;
+    padding: 6px;
+  }
+
+  .articles-container {
+    gap: 15px;
+  }
 }
 
-/* Artigos dessa seção */
-.outros-artigos .artigo-container h3{
-    font-size: clamp(1rem, 2vw, 1.2rem);
+@media (max-width: 600px) {
+  .container-artigos {
+    padding: 15px;
+  }
+
+  .search-section {
+    margin-bottom: 20px;
+    padding: 6px;
+  }
+
+  .search-input,
+  .search-button {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .search-icon {
+    font-size: 18px;
+  }
+
+  .articles-container {
+    gap: 15px;
+  }
 }
 
+@media (max-width: 400px) {
+  .container-artigos {
+    padding: 10px;
+  }
 
-/* Responsividade =================== */
-@media(max-width:1200px){
-   .artigos{
-        grid-template-columns: 1fr 1fr;
-    }
-}
-@media(max-width:698px){
-    .artigos{
-        display: flex;
-        flex-direction: column;
-    }
-    section{
-        margin:0;
-    } 
+  .search-form {
+    gap: 6px;
+  }
+
+  .search-input {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+
+  .search-button {
+    padding: 8px 12px;
+  }
 }

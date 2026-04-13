@@ -1,64 +1,70 @@
-@import url("../main.css");
-@import url("../ui/buttons.css");
-@import url("./main_login_cadastro.css");
-
+/* ===== Layout principal ===== */
 section.login-inputs {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
+    min-height: 100%;       
     background-color: white;
     padding-inline: 0px !important;
+    flex: 1;        
 }
 
-/* Container da imagem */
-.background-img-login-cadastro {
-    width: 105%;
+/* ===== Container de conteúdo ===== */
+.container-input-login {
+    width: 50%;
     height: 100vh;
-    /* ocupa altura total da tela */
-    overflow: hidden;
-    /* corta excesso da imagem */
-    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-inline: 30px;
+    justify-content: center;
 }
 
-/* Imagem */
+
+/* ===== Imagem lateral ===== */
+.background-img-login-cadastro {
+    width: 50%;
+    position: relative;
+    height: calc(100vh + 40px); /* ex: calc(100vh - 60px) */
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
 .background-img-login-cadastro img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    /* mantém proporção sem deformar */
     object-position: right;
-    /* centraliza o foco */
+    display: block;
+    position: absolute;     
+    top: 0;
+    left: 0;
 }
 
-/* Título */
+/* ===== Título ===== */
 .container-input-login h1 {
     font-size: 2.3rem;
     font-weight: 600;
-    
 }
 
-/* bloco inputs */
+.login-titulo {
+    width: 100%;
+    color: var(--dark-100);
+    display: flex;
+    padding: 5px;
+    letter-spacing: 2px;
+    font-weight: 600;
+}
+
+/* ===== Inputs ===== */
 .inputs {
-    margin-top: var(--spacing-lg);
+    margin-top: var(--spacing-sm);
     display: flex;
     flex-direction: column;
     width: 80%;
     gap: 5px;
 }
 
-/* título */
-.login-titulo {
-    width: 100%;
-    right: 10px;
-    color: var(--dark-100);
-    display: flex;
-    padding: 5px;
-    letter-spacing: 2px;
-    font-weight: 600;
-    
-}
-
-/* ===== Inputs ===== */
 .input {
     opacity: 0;
     transform: translateY(10px);
@@ -71,26 +77,15 @@ section.login-inputs {
 }
 
 @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(12px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
-
-
-/* Labels */
 .input label {
     font-size: 0.85rem;
     margin-bottom: 6px;
     font-weight: 500;
     color: #333;
-    
 }
 
 .input-obrigatorio label::after {
@@ -108,7 +103,6 @@ input[readonly] {
     cursor: not-allowed;
 }
 
-/* Inputs estilo moderno */
 .input input {
     margin-top: 5px;
     padding: 12px 14px;
@@ -121,19 +115,14 @@ input[readonly] {
     border-radius: 10px;
 }
 
-/* Hover */
-.input input:hover {
-    border-color: #b8b8b8;
-}
+.input input:hover { border-color: #b8b8b8; }
 
-/* Focus premium */
 .input input:focus {
     border-color: #2f6f5e;
     background: #fff;
     box-shadow: 0 0 0 3px rgba(47, 111, 94, 0.1);
 }
 
-/* ===== ERRO===== */
 .input input.error {
     border: 1.5px solid #ff4d4f;
     background-color: #fff;
@@ -146,22 +135,20 @@ input[readonly] {
     display: block;
 }
 
-/* -------------OPTIONS---------------- */
-
+/* ===== Options (toggle) ===== */
 .container-options {
     display: flex;
     margin-top: 10px;
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--gray-100);
     width: fit-content;
-    min-height: fit-content
+    min-height: fit-content;
 }
 
 .container-options button {
     width: 100%;
     height: 35px;
     border: none;
-    mask-clip: border-box;
     border-radius: var(--border-radius-lg);
     padding: 10px 20px;
     display: flex;
@@ -171,11 +158,8 @@ input[readonly] {
     background-color: transparent;
 }
 
-.container-options button:hover {
-    background-color: var(--white-default-100);
-}
+.container-options button:hover { background-color: var(--white-default-100); }
 
-/* Cor quando o botão estiver ativo */
 .container-options button.active {
     background-color: var(--green-light-default-100);
     color: var(--black-default-100);
@@ -183,7 +167,7 @@ input[readonly] {
     font-weight: 500;
 }
 
-/* Botão */
+/* ===== Botão confirmar ===== */
 .button-confirm {
     background: #2f6f5e;
     color: white;
@@ -196,19 +180,26 @@ input[readonly] {
     height: min-content;
 }
 
-.button-confirm:hover {
-    background: #255a4d;
-}
+.button-confirm:hover { background: #255a4d; }
 
 /* ===== Responsivo ===== */
-@media (max-width: 1000px) {
+
+/* Tablet */
+@media (max-width: 800px) {
     .background-img-login-cadastro {
         display: none;
     }
 
     .container-input-login {
         width: 100%;
-        padding: 30px;
+        height: auto; 
+        min-height: 100vh;
+        padding-bottom: 65px;
+        justify-content: flex-start; 
+    }
+
+    .inputs {
+        width: 100%;
     }
 
     .cadastro-input {
@@ -217,17 +208,24 @@ input[readonly] {
     }
 }
 
-@media (max-width: 1024px) {
-    .background-img-login-cadastro {
-        width: 50%;
+/* Mobile */
+@media (max-width: 480px) {
+    .container-input-login {
+        padding-bottom: 75px;
     }
 
-    .background-img-login-cadastro img {
+    .container-input-login h1 {
+        font-size: 1.8rem;
+    }
+
+    .container-cadastrar-entrar {
+        flex-direction: column;
+        gap: 12px;
+        align-items: flex-start;
+    }
+
+    .button-confirm {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        /* mantém proporção sem deformar */
-        object-position: right;
-        /* centraliza o foco */
+        text-align: center;
     }
 }

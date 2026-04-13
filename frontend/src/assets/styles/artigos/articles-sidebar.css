@@ -1,0 +1,158 @@
+.sidebar-box {
+  background: var(--white-600);
+  padding: 18px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+  border-bottom: 2px solid var(--accent-dark-green-700);
+  padding-bottom: 12px;
+}
+
+.sidebar-icon {
+  font-size: 20px;
+  color: var(--accent-dark-green-700);
+  flex-shrink: 0;
+}
+
+.sidebar-header h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--black-700);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.sidebar-articles {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sidebar-article-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--tertiary-light-green-700);
+  padding: 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.sidebar-article-card:hover {
+  background: var(--tertiary-light-green-600);
+  transform: translateX(2px);
+}
+
+.sidebar-article-card .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.sidebar-article-info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sidebar-article-info h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--black-700);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.like-count,
+.view-count {
+  font-size: 11px;
+  color: var(--black-700);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .sidebar-box {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .sidebar-header {
+    margin-bottom: 12px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 12px;
+  }
+
+  .sidebar-article-card {
+    padding: 10px;
+    gap: 10px;
+  }
+
+  .sidebar-article-card .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .sidebar-article-info h4 {
+    font-size: 11px;
+  }
+
+  .like-count,
+  .view-count {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidebar-box {
+    padding: 12px;
+  }
+
+  .sidebar-header {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+  }
+
+  .sidebar-header h3 {
+    font-size: 11px;
+  }
+
+  .sidebar-articles {
+    gap: 10px;
+  }
+
+  .sidebar-article-card {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .sidebar-article-card .avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .sidebar-article-info h4 {
+    font-size: 11px;
+    -webkit-line-clamp: 1;
+  }
+}
