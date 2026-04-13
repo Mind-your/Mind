@@ -14,17 +14,17 @@ export default function PerfilPublicoPsicologo() {
   const [openPsi, setOpenPsi] = useState(false);
 
   useEffect(() => {
-    // 1️⃣ Se veio o perfil pelo navigate (state), usa ele direto
+    // Se veio o perfil pelo navigate (state), usa ele direto
     if (location.state?.perfil) {
       setPerfil(location.state.perfil);
       return;
     }
 
-    // 2️⃣ Se não veio, tenta buscar pelo contexto
+    // Se não veio, tenta buscar pelo contexto
     if (psicologos?.length > 0) {
       const encontrado = psicologos.find(p => String(p.id) === String(id));
       if (encontrado) {
-        console.log("✅ Perfil encontrado no contexto:", encontrado);
+        console.log("Perfil encontrado no contexto:", encontrado);
         setPerfil(encontrado);
       }
     }

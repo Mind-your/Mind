@@ -19,7 +19,7 @@ export default function Logout() {
                         setDropdownOpen(false);
                     }}>
 
-                    <HiOutlineLogout className="icon-sair"/>
+                    <HiOutlineLogout className="container-sair-icon"/>
                     <h3>Log out</h3>
 
                 </button>

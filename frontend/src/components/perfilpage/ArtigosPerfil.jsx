@@ -1,16 +1,21 @@
 import { useState } from "react";
-import { FaSearch, FaEye, FaThumbsUp } from "react-icons/fa";
+import { FaEye, FaThumbsUp } from "react-icons/fa";
+import { HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
+import Deletar from "../popups/Deletar";
 import "../../assets/styles/perfil/artigos-perfil.css";
+import "../../assets/styles/ui/icons.css";
 
 export default function ArtigosPerfil({ id }) {
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
+  const [artigoSelecionado, setArtigoSelecionado] = useState(null); // Para verificar qual artigo está sendo deletado
+  const [deletando, setDeletando] = useState(false);
   const [busca, setBusca] = useState("");
-
-  const artigos = [
+  const [artigos, setArtigos] = useState([
     {
       id: 1,
-      titulo: "Titulo",
+      titulo: "Titulo1",
       descricao:
         "Lorem ipsum dolor sit amet consectetur. Venenatis bibendum odio diam magna vitae sit urna molestie imperdie...",
       likes: 15,
@@ -18,17 +23,24 @@ export default function ArtigosPerfil({ id }) {
     },
     {
       id: 2,
-      titulo: "Titulo",
+      titulo: "Titulo2",
       descricao:
         "Lorem ipsum dolor sit amet consectetur. Venenatis bibendum odio diam magna vitae sit urna molestie imperdie...",
       likes: 15,
-      views: 20,
+      views: 21,
     },
-  ];
+  ]); 
+
 
   const artigosFiltrados = artigos.filter((artigo) =>
     artigo.titulo.toLowerCase().includes(busca.toLowerCase())
   );
+
+  const removePublishedArticle = (id) => {
+    setDeletando(true);
+    setArtigos(artigos.filter((artigo) => artigo.id !== id));
+    setDeletando(false);
+  }
 
   return (
     <div className="artigos-container">
@@ -43,7 +55,7 @@ export default function ArtigosPerfil({ id }) {
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
           />
-          <FaSearch />
+          <HiOutlineSearch />
         </div>
       </div>
 
@@ -56,7 +68,7 @@ export default function ArtigosPerfil({ id }) {
 
               <p>{artigo.descricao}</p>
 
-              <div class="artigo-info-footer">
+              <div className="artigo-info-footer">
                 <div className="artigo-stats">
                   <span>
                     <FaThumbsUp /> {artigo.likes}
@@ -66,14 +78,42 @@ export default function ArtigosPerfil({ id }) {
                   </span>
                 </div>
 
-                <button className="button-proceed" onClick={() => navigate(`/artigo/1`)}>Ver</button>
-              </div>
+                <div className="btns-articles-edit">
 
+                  <button className="icon-attention" 
+                    onClick={() => {
+                      setIsOpen(true);
+                      setArtigoSelecionado(artigo.id)
+                    }} 
+                    disabled={deletando}><HiOutlineTrash/>
+                  </button>
+
+                  <button 
+                    className="icon-edit" 
+                    onClick={() => navigate(`/adicionar-artigos/${artigo.id}`)}> 
+                    <HiOutlinePencilAlt />
+                  </button>
+
+                  <button 
+                    className="button-confirm button-ver-artigo" 
+                    onClick={() => navigate(`/artigo/${artigo.id}`)}>
+                      Ver
+                  </button>
+                </div>
+              </div>
             </div>
+            <Deletar 
+                open={isOpen && artigoSelecionado === artigo.id} 
+                close={() => {
+                  setIsOpen(false);
+                  setArtigoSelecionado(null);
+                }}
+                onConfirm={() => removePublishedArticle(artigo.id)}
+                loading={deletando}
+            />
           </div>
         ))}
       </div>
-
     </div>
   );
 }
