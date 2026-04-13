@@ -1,6 +1,5 @@
 .artigo-page-card{
     width: 100%;
-    max-width: 820px;
     border-radius: var(--border-radius-md);
     overflow: hidden;
     background: var(--secondary-cream-700);

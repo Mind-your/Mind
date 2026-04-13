@@ -41,7 +41,7 @@
             />
 
             <Route path="artigos" element={<Artigos />} />
-            <Route path="/artigo/1" element={<Artigo />} />
+            <Route path="/artigo/:id" element={<Artigo />} />
             <Route path="sobrenos" element={<SobreNos />} />
             <Route path="termos-e-condicoes" element={<TermosCondicoes />} />
             <Route path="/perfil/psicologo/:id" element={<PerfilPublicoPsicologo />} />
@@ -84,6 +84,15 @@
             {/* Rota protegida APENAS para psicólogos */}
             <Route
               path='adicionar-artigos'
+              element={
+                <ProtectedRoute requirePsicologo={true}>
+                  <AddArtigos />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path='adicionar-artigos/:id'
               element={
                 <ProtectedRoute requirePsicologo={true}>
                   <AddArtigos />
