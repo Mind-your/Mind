@@ -82,7 +82,7 @@ export default function NavDesktop() {
         <>
             <nav id="nav-desktop">
                 <ul>
-                    <NavLink id="linkSobreNos" to="/sobre-nos">
+                    <NavLink id="linkSobreNos" to="/sobrenos">
                         <li>Sobre nós</li>
                     </NavLink>
                     <NavLink

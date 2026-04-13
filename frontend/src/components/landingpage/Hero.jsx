@@ -1,4 +1,4 @@
-import '../../assets/styles/landing-page/hero-apresentacao.css';
+import '../../assets/styles/landingpage/hero-apresentacao.css';
 
 import logomarca from '../../assets/img/logomarca.svg'
 import logo from '../../assets/img/logo.svg'

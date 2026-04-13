@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import background from "../../assets/img/background_input.png";
-import "../../assets/styles/login-cadastro/input_cadastro.css";
+import "../../assets/styles/logincadastro/input_cadastro.css";
 import OptionsCadastro from "./OptionsCadastro";
 import { useAuth } from "../../context/AuthContext";
 import { HiChevronLeft } from "react-icons/hi";
@@ -253,7 +253,7 @@ export default function InputCadastro() {
 
     return (
         <section className="login-inputs">
-            <div className="background-img-login-cadastro">
+            <div className="background-img-logincadastro">
                 <img className="background" src={background} alt="Imagem de fundo" />
             </div>
 

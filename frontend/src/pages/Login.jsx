@@ -1,4 +1,4 @@
-import InputLogin from "../components/login-page/InputLogin";
+import InputLogin from "../components/loginpage/InputLogin";
 import SkipNavigation from "../components/SkipNavigation";
 
 export default function Login() {

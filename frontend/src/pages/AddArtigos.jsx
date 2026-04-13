@@ -1,8 +1,8 @@
-import "../assets/styles/add-artigos/add-artigos.css";
+import "../assets/styles/addartigos/addartigos.css";
 import "../assets/styles/configuracoes/configuracoes.css"; // Utilizando de alguns layouts da página de configurações
 
-import FormArticle from "../components/add-artigos/FormArticle";
-import PublishedArticle from "../components/add-artigos/PublishedArticle";
+import FormArticle from "../components/addartigos/FormArticle";
+import PublishedArticle from "../components/addartigos/PublishedArticle";
 import DefaultImg from "../assets/img/articles.png"
 import { useState } from "react";
 

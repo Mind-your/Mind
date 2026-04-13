@@ -1,6 +1,7 @@
+@import url("../main.css");
+
 .container-options {
-  
-  background: var(--white-600);
+  background: var(--white-50);
   border-radius: 50px;
   border: 2px solid var(--alto-100);
   margin-bottom: 30px;

@@ -1,6 +1,6 @@
 import { Link } from "react-router"
 import apresentacao from "../../assets/img/home_img_3.svg"
-import '../../assets/styles/landing-page/hero-apresentacao.css';
+import '../../assets/styles/landingpage/hero-apresentacao.css';
 
 export default function Apresentacao() {
   return (
@@ -16,7 +16,7 @@ export default function Apresentacao() {
             <p>Aqui nossa missão é tornar o cuidado psicológico acessível a todos, oferecendo uma plataforma intuitiva que conecta você a psicólogos qualificados, de forma simples e segura.</p>
           
           <span className="btn-article">
-            <Link to="/sobre-nos">
+            <Link to="/sobrenos">
               <button className="conhecer-btn button-confirm">Conhecer!</button>
             </Link>
           </span>

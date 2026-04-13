@@ -1,7 +1,8 @@
 import "../../assets/styles/artigos/article-card.css";
 import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
-import FullArticle from "../pop-ups/FullArticle";
+
+
 
 export default function ArticleCard({ article }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -47,8 +48,6 @@ export default function ArticleCard({ article }) {
                     </div>
                 </div>
             </article>
-
-            <FullArticle info={article} open={isOpen} close={() => setIsOpen(false)} />
         </>
     );
 }

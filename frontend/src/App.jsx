@@ -11,7 +11,7 @@
   import Artigo from "./pages/Artigo";
   import Login from "./pages/Login";
   import Perfil from "./pages/Perfil";
-  import PerfilPublicoPsicologo from "./components/perfil-page/SectionPublicoPsicologo";
+  import PerfilPublicoPsicologo from "./components/perfilpage/SectionPublicoPsicologo";
   import SobreNos from "./pages/SobreNos";
   import AddArtigos from "./pages/AddArtigos";
   import Configuracoes from "./pages/Configuracoes";
@@ -42,7 +42,7 @@
 
             <Route path="artigos" element={<Artigos />} />
             <Route path="/artigo/1" element={<Artigo />} />
-            <Route path="sobre-nos" element={<SobreNos />} />
+            <Route path="sobrenos" element={<SobreNos />} />
             <Route path="termos-e-condicoes" element={<TermosCondicoes />} />
             <Route path="/perfil/psicologo/:id" element={<PerfilPublicoPsicologo />} />
 
@@ -73,7 +73,7 @@
               }
             />
             <Route
-              path=':tipo/perfil/:id/video-chamada'
+              path=':tipo/perfil/:id/videochamada'
               element={
                 <ProtectedRoute>
                   <VideoChamada />

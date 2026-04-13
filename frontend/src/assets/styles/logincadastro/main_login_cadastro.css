@@ -23,7 +23,7 @@ section.login-inputs {
 
 
 /* ===== Imagem lateral ===== */
-.background-img-login-cadastro {
+.background-img-logincadastro {
     width: 50%;
     min-height: 100vh;
     flex-shrink: 0;
@@ -32,7 +32,7 @@ section.login-inputs {
     align-items: stretch;
 }
 
-.background-img-login-cadastro img {
+.background-img-logincadastro img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -198,7 +198,7 @@ input[readonly] {
 }
 /* Tablet */
 @media (max-width: 800px) {
-    .background-img-login-cadastro {
+    .background-img-logincadastro {
         display: none;
     }
 
