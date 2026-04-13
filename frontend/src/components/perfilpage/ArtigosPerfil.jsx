@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaEye, FaThumbsUp } from "react-icons/fa";
 import { HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
-import Deletar from "../pop-ups/Deletar";
+import Deletar from "../popups/Deletar";
 import "../../assets/styles/perfil/artigos-perfil.css";
 import "../../assets/styles/ui/icons.css";
 

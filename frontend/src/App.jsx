@@ -42,7 +42,7 @@
 
             <Route path="artigos" element={<Artigos />} />
             <Route path="/artigo/:id" element={<Artigo />} />
-            <Route path="sobre-nos" element={<SobreNos />} />
+            <Route path="sobrenos" element={<SobreNos />} />
             <Route path="termos-e-condicoes" element={<TermosCondicoes />} />
             <Route path="/perfil/psicologo/:id" element={<PerfilPublicoPsicologo />} />
 
