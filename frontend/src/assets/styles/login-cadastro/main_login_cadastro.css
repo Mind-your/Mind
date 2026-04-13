@@ -3,31 +3,33 @@ section.login-inputs {
     display: flex;
     flex-direction: row;
     align-items: stretch;
-    min-height: 100%;       
+    min-height: 100vh;
     background-color: white;
     padding-inline: 0px !important;
-    flex: 1;        
+    flex: 1;
 }
+
 
 /* ===== Container de conteúdo ===== */
 .container-input-login {
     width: 50%;
-    height: 100vh;
+    min-height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding-inline: 30px;
-    justify-content: center;
+    justify-content: start;
 }
 
 
 /* ===== Imagem lateral ===== */
 .background-img-login-cadastro {
     width: 50%;
-    position: relative;
-    height: calc(100vh + 40px); /* ex: calc(100vh - 60px) */
+    min-height: 100vh;
     flex-shrink: 0;
     overflow: hidden;
+    display: flex;
+    align-items: stretch;
 }
 
 .background-img-login-cadastro img {
@@ -36,9 +38,6 @@ section.login-inputs {
     object-fit: cover;
     object-position: right;
     display: block;
-    position: absolute;     
-    top: 0;
-    left: 0;
 }
 
 /* ===== Título ===== */
@@ -191,6 +190,12 @@ input[readonly] {
 
 /* ===== Responsivo ===== */
 
+/* Desktop */
+@media (max-width: 1024px) {
+    .container-input-login{
+        padding-top: 5%;
+    }
+}
 /* Tablet */
 @media (max-width: 800px) {
     .background-img-login-cadastro {
