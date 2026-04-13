@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-import "../../assets/styles/landing-page/hero-apresentacao.css";
+import "../../assets/styles/login-cadastro/options-cadastro.css";
 
 export default function OptionsCadastro() {
     const [tipoUsuario, setTipoUsuario] = useState("paciente");
@@ -32,7 +32,7 @@ export default function OptionsCadastro() {
                 <li>
                     <Link to="/cadastro=1" 
                           className={tipoUsuario === "psicologo" ? "active" : ""}
-                          aria-current={tipoUsuario === "psicologo" ? "active" : ""}>
+                          aria-current={tipoUsuario === "psicologo" ? "true" : "false"}>
                         Psicologo
                     </Link>
                 </li>

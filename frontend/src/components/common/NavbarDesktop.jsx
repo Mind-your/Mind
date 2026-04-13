@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX, HiOutlineUser } from "react-icons/hi";
 import { useAuth } from '../../context/AuthContext';
 import foto from '../../assets/img/perfil-default.png';
 
@@ -105,6 +105,9 @@ export default function NavDesktop() {
                         <>
                             <NavLink to="/home">
                                 <HiOutlineSearch id="search-icon-btn" className="icon-ui" />
+                            </NavLink>
+                            <NavLink to={`/${user.tipo.toLowerCase()}/perfil/${user.id}`}>
+                                <HiOutlineUser id="search-icon-btn" className="icon-ui" />
                             </NavLink>
                         </>
                     )}
@@ -244,22 +247,11 @@ export default function NavDesktop() {
                                     className="nav-btn-login"
                                     onClick={() => setDropdownOpen(prev => !prev)}
                                 >
-                                    {isAuthenticated ? user.nome : "Login"}
+                                    Login
                                 </button>
                             </Link>
                         </>
-
-                    ) : (
-                        <>
-                            <button
-                                type="button"
-                                className="nav-btn-login"
-                                onClick={() => setDropdownOpen(prev => !prev)}
-                            >
-                                {isAuthenticated ? user.nome : "Login"}
-                            </button>
-                        </>
-                    )}
+                    ) : null}
 
                     <div className={`nav-login-drop-wrapper ${isAuthenticated && isDropdownOpen ? "show" : ""}`}>
                         <div className="nav-login-drop">

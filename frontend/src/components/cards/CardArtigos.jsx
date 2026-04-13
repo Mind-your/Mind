@@ -1,60 +1,44 @@
-import "../../assets/styles/artigos/cards-artigos.css"
-import fotoPsi from '../../assets/img/perfil-default.png';
-import { useNavigate } from "react-router-dom";
-import { FaThumbsUp, FaEye } from "react-icons/fa";
+import "../../assets/styles/artigos/cards-artigos.css";
+import "../../assets/styles/pop-ups/full-article.css";
+import FullArticle from "../pop-ups/FullArticle";
+import { useState } from "react";
 
-export default function CardArtigos({info, styleArticle = "row"}) {
-  const navigate = useNavigate();
+export default function CardArtigos({ info, styleArticle = "row" }) {
+  const [isOpen, setIsOpen] = useState(false);
 
-  // Preview do conteudo
-  const conteudo = {
-      titulo: "Titulo do Artigo",
-      descricao: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris. Maecenas congue ligula ac quam viverra nec consectetur ante hendrerit. Donec et mollis dolor.",
-      autor: "Psicólogo",
-      data: "01/01/2024",
-      likes: 0,
-      views: 0,
-      wallpaper_img: true
-  };
+  const isDestaque = styleArticle === "column";
 
   return (
     <>
-      <article className="artigo-page-card" style={{flexDirection: info.id == 1 ? styleArticle : ""}}>
-        <div className="artigo-banner">
-          {conteudo.wallpaper_img ? (
-            <img src={info.img} alt="banner do artigo" style={{
-                width: 
-                  info.id == 1 && styleArticle == "column" ? 
-                  "100%" : 
-                  "clamp(100px, 20vw, 150px)"}}/>
-          ) : (
-            <></>
-          )}
-        </div>
+      <article
+        className="artigo-container"
+        style={{ flexDirection: isDestaque ? "column" : "row" }}
+      >
+        <img
+          src={info.img}
+          alt="imagem de artigo"
+          className="img-artigos"
+          style={{ width: isDestaque ? "100%" : "clamp(100px, 20vw, 150px)" }}
+        />
 
-        <div className="artigo-content">
-          <h2>{conteudo.titulo}</h2>
-
-          <p className="artigo-descricao">{conteudo.descricao}</p>
-
-          <div className="artigo-autor">
-            <img id="perfilFoto" src={fotoPsi} alt="Foto do Psicólogo" className="foto-autor"/>
-            <p>@{conteudo.autor} • {conteudo.data}</p>
-          </div>
-
-          <div className="artigo-footer">
-            <div className="artigo-stats">
-              <span><FaThumbsUp /> {conteudo.likes}</span>
-              <span><FaEye /> {conteudo.views}</span>
-            </div>
-
-            <button onClick={() => navigate(`/artigo/1`)} className="btn-artigo button-proceed">
+        <div className="artigo-texto">
+          <div className="visible">
+            <span>
+              <h3>{info.title}</h3>
+              <p>{info.autor}</p>
+            </span>
+            <button
+              type="button"
+              className="artigo-btn button-proceed"
+              onClick={() => setIsOpen(true)}
+            >
               Ver
             </button>
           </div>
-
         </div>
-    </article>
+
+        <FullArticle info={info} open={isOpen} close={() => setIsOpen(false)} />
+      </article>
     </>
-  )
+  );
 }

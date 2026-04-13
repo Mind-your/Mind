@@ -5,9 +5,12 @@ import logo from '../../assets/img/logo.svg'
 import bg from "../../assets/img/Wallpaper01.png"
 import bg2 from "../../assets/img/Wallpaper02.png"
 
+import { useAuth } from '../../context/AuthContext';
+
 import { Link } from 'react-router'
 
 export default function Hero() {
+  const { user, isAuthenticated, logout } = useAuth();
   return (
     <>
       <main className="main">
@@ -23,27 +26,28 @@ export default function Hero() {
           </div>
           <p>A plataforma que tem cuidado com a sua saúde mental diária</p>
           <div className="buttons-hero">
-          <Link
-            to="/"
-            onClick={(e) => {
-              if (window.location.pathname === "/") {
-                e.preventDefault();
-                document.getElementById('planos')?.scrollIntoView({
-                  behavior: 'smooth'
-                });
-              }
-            }}>
-            <button className="button-confirm" >Ver planos</button>
-          </Link>
-          <Link
-            to="/login=0"
-          >
-            <button className="nav-btn-login btn-hero" >Começar</button>
-          </Link>
+            <Link
+              to="/"
+              onClick={(e) => {
+                if (window.location.pathname === "/") {
+                  e.preventDefault();
+                  document.getElementById('planos')?.scrollIntoView({
+                    behavior: 'smooth'
+                  });
+                }
+              }}>
+              <button className="button-confirm" >Ver planos</button>
+            </Link>
+            {!isAuthenticated ? (<Link
+              to="/login=0"
+            >
+              <button className="nav-btn-login btn-hero" >Começar</button>
+            </Link>) : (<></>)}
 
-        </div>
+
+          </div>
         </span>
-        
+
 
       </main>
     </>
