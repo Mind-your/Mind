@@ -4,12 +4,29 @@
     gap: var(--spacing-xs)
 }
 
+/* Indice Página de edit/add artigos ----------------*/
+.container-edit-artigo{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    margin-left:0px;
+    padding:10px;
+    width: 250px;
+}
+
 /* Tipografia da página ---------------------------- */
-.containers-articles h4{
+.containers-articles label{
     font-weight: 500;
 }
 
-.containers-articles h2{
+.container-edit-artigo > h3{
+    font-weight: 500;
+    font-size: 1.2rem;
+    margin-top: 30px;
+}
+
+.containers-articles > h1,
+.containers-articles > h2{
     font-weight: 600;
     font-size: 1.6rem;
     border-bottom: 3px solid var(--green-kelp-100);
@@ -17,16 +34,74 @@
 }
 
 /* Imagem de perfil ---------------------------------*/
-.imgEdit{
-    border-radius: 10px !important;
-}  
+.img-wallpaper-artigo{
+    width: clamp(300px, 50vw, 800px);
+    height: 180px;
+    border-radius: 10px;
+    background-color: #29292969;
+    border: 1px solid #ccc;
+    object-fit: cover;
+    object-position: center;
+}
+
+.img-wallpaper figure.figcaption-artigo{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
 
 /* Inputs de informação para criação de artigos ---- */
-#nomeEdit{
+.inputs-article{
+    width:100%;
+    padding: var(--spacing-xs);
     border-radius: var(--border-radius-sm);
-    border: 1px solid #bec0c2;
+    border: 1px solid var(--gray-100);
+    font-size: 1rem;
+    margin-top:2px;
+}
+
+/* Area de adicionar referencias ----------------- */
+.container-referencias{
+    background-color: var(--silver-chalice-100);
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-xs);
+    border-radius: var(--border-radius-md);
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto auto 40px;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.container-referencias input{
+    border: none!important;
+    border-radius: var(--border-radius-sm);
     padding: var(--spacing-xs);
 }
+
+.container-referencias > div{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+
+}
+
+.container-referencias > div > .icon-label-references{
+    display: flex;
+    gap: var(--spacing-xs);
+    align-items: center;
+}
+
+.close-icon-reference-card{
+    font-size: 30px;
+    margin: 5px 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    width: 30px;
+    display: flex;
+}
+
 /* Botão ----------------------------------- */
 .container-atualizar-article{
     display: flex;
@@ -34,9 +109,28 @@
     margin: 2rem 0;
 }
 
+.button-ver-artigo{
+    font-size: 1.2rem !important;
+}
+
+
 /* Responsividade -------------------------- */
 @media(max-width:800px){
     .container-atualizar{
         justify-content: end;
+    }
+
+    .container-referencias{
+        grid-template-columns: auto;
+        grid-template-rows: auto auto;
+    }   
+
+    .close-icon-reference-card{
+        display: flex;
+        align-self: flex-end;
+    }
+
+    .container-edit-artigo > h3{
+        margin-top: 0px
     }
 }

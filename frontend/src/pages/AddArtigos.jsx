@@ -1,51 +1,211 @@
 import "../assets/styles/addartigos/addartigos.css";
 import "../assets/styles/configuracoes/configuracoes.css"; // Utilizando de alguns layouts da página de configurações
 
-import FormArticle from "../components/addartigos/FormArticle";
-import PublishedArticle from "../components/addartigos/PublishedArticle";
+import FormArticle from "../components/add-artigos/FormArticle";
+import PublishedArticle from "../components/add-artigos/PublishedArticle";
 import DefaultImg from "../assets/img/articles.png"
-import { useState } from "react";
+import SkipNavigation from "../components/SkipNavigation";
+import ArtigosPerfil from "../components/perfil-page/ArtigosPerfil";
+import { useAuth } from "../context/AuthContext";
+import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
+import { getDefaultWallpaper } from "../utils/imageHelper";
+import { Navigate, useParams } from "react-router-dom";
 
 export default function AddArtigos() {
-  const [imgArticle, setImgArticle] = useState(DefaultImg);
+  const { id } = useParams();
+  const isEdit = Boolean(id);
 
-  const chooseImgArticle = (img) => {
-        const file = img.target.files[0];
-        const formData = new FormData();
-
-        const imageUrl = URL.createObjectURL(file);
-        setImgArticle(imageUrl);
-
-        formData.append('imagem', file);
-        console.log(imageUrl);
+  const { user, loading } = useAuth();
+  const [novaImagem, setNovaImagem] = useState(null);
+  const [salvando, setSalvando] = useState(false);
+  const [imgWallpaperArtigo, setImgWallpaperArtigo] = useState(getDefaultWallpaper()); // para wallpaper
+  const initialArticleData = {
+    id: '',
+    titulo: '',
+    artigo_texto: '',
+    referencias: [
+      {
+        id: `ref-${Date.now()}`,
+        nome_referencia: '',
+        link: ''
+      }
+    ],
   }
+  const [articleData, setArticleData] = useState(initialArticleData);
+
+  const handleSubmitArticle = async (e) => {
+    e.preventDefault();
+    setSalvando(true);
+
+    try {
+      if (!articleData.titulo.trim() || !articleData.artigo_texto.trim()) {
+        toast.error('Título e conteúdo do artigo é obrigatório');
+        return;
+      }
+
+      // Area de salvar dados do artigo, incluindo upload da imagem (Funcão getDadosArtigo())
+      /*
+      const wallpaperUrl = await uploadWallpaper();
+      const dados = getDadosArtigo(wallpaperUrl);
+      */
+
+      if (isEdit) {
+        // atualizado
+        // await atualizarArtigo(id, dados); // exemplo de backend futuro
+        toast.success("Artigo atualizado!");
+      } else {
+        // criado
+        // await criarArtigo(id, dados); // exemplo de backend futuro
+        toast.success("Artigo criado!");
+      }
+
+      setArticleData({ // reset
+        id: '',
+        titulo: '',
+        artigo_texto: '',
+        referencias: initialArticleData.referencias
+      });
+
+      setImgWallpaperArtigo(getDefaultWallpaper());
+      setNovaImagem(null);
+
+    } catch (error) {
+      toast.error('Erro ao criar artigo');
+    } finally {
+      setSalvando(false);
+    }
+  };
+
+  const getDadosArtigo = (imgWallpaper) => {
+    return {
+      ...articleData,
+      imgWallpaper,
+      autorId: user.id,
+      criadoEm: new Date(),
+      referencias: articleData.referencias.filter(
+        ref => ref.nome_referencia.trim() || ref.link.trim()
+      )
+    };
+  };
+
+  useEffect(() => { 
+    if (!id) { // Para zerar caixa de textos de informações ao voltar a página
+      setArticleData(initialArticleData);
+      setImgWallpaperArtigo(getDefaultWallpaper());
+      setNovaImagem(null);
+      return;
+    }
+
+    const carregarArtigo = async () => {
+      try {
+        // Exemplo com artigo Teste
+        const artigoFake = {
+          id: id,
+          titulo: "Artigo exemplo",
+          artigo_texto: "Conteúdo do artigo...",
+          referencias: [
+            {
+              id: "ref-1",
+              nome_referencia: "Google",
+              link: "https://google.com"
+            }
+          ]
+        };
+
+        setArticleData(artigoFake);
+
+      } catch (error) {
+        toast.error("Erro ao carregar artigo");
+      }
+    };
+    carregarArtigo();
+
+  }, [id]);
+
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+
+    setArticleData(prev => ({
+      ...prev,
+      [id]: value
+    }));
+  }
+
+  const handleNewImage = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    if (file.size > 5 * 1024 * 1024) {
+        toast.error('A imagem deve ter no máximo 5MB');
+        return;
+    }
+
+    // Validar tipo
+    if (!file.type.startsWith('image/')) {
+        toast.error('Selecione uma imagem válida');
+        return;
+    }
+    
+    setNovaImagem(file); 
+    setImgWallpaperArtigo(URL.createObjectURL(file)); // Criar preview local da nova imagem
+  }
+
+  const newCardReference = () => {
+    setArticleData(prev => ({
+        ...prev,
+        referencias: [...prev.referencias, { id: `ref-${Date.now()}`, nome_referencia: '', link: '' }]
+    }));
+  }
+
+  const removeCardReference = (id) => {
+    setArticleData(prev => ({
+        ...prev,
+        referencias: prev.referencias.filter(card => card.id !== id)
+    }));
+  }
+
+  const handleReferenceChange = (id, type, value) => {
+      setArticleData(prev => ({
+          ...prev,
+          referencias: prev.referencias.map(card => 
+              card.id === id ? { ...card, [type]: value } : card
+          )
+      }));
+  }
+
+  if (loading) return <div>Carregando...</div>;
+  if (!user) return <Navigate to="/login" replace />;
     
   return (
     <>
+      < SkipNavigation mainContent="formPageArticle" />
       <section className="config">
           <div className="container-section">
-            {/* Foto de perfil */}
-            <div className="container-img">
-                <div className="img-options">
-
-                    <img id="imagePreview" src={imgArticle} alt="" className="imgEdit"/>
-                    <div>
-                        <input 
-                            id="foto-preview" 
-                            type="file" 
-                            accept="image/*" 
-                            onChange={(e) => chooseImgArticle(e)}
-                            required/>
-                        <label className="btns button-confirm" htmlFor="foto-preview">Mudar Foto</label>
-                    </div>
-                    
-                </div>
+            <div className="container-edit-artigo">
+                <h3>Indice</h3>
+                <nav aria-label="Seções das artigos ">
+                    <ul className="atalhos">
+                        <li><a href="#formPageArticle" id="novoArtigo">Novo Artigo</a></li>
+                        <li><a href="#formPageReferences" id="referencias">Referências</a></li>
+                        <li><a href="#artigosPublicados" id="artigosAnteriores">Artigos anteriores</a></li>
+                    </ul>
+                </nav>
             </div>
             <div className="container-inputs">
-                <div className="containers-articles">
-                  <FormArticle />
-                  <PublishedArticle />
-                </div>  
+                <FormArticle 
+                  imgWallpaperArtigo={imgWallpaperArtigo}
+                  articleData={articleData}
+                  handleSubmitArticle={handleSubmitArticle}
+                  handleChange={handleChange}
+                  handleNewImage={handleNewImage}
+
+                  handleReferenceChange={handleReferenceChange}
+                  newCardReference={newCardReference}
+                  removeCardReference={removeCardReference}
+                  salvando={salvando}
+                />
+                <ArtigosPerfil /> 
             </div>
           </div>
       </section>
