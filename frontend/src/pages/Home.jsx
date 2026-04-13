@@ -1,7 +1,7 @@
-import SearchSection from "../components/home-page/SearchSection";
-import AreaCards from "../components/home-page/AreaCards";
-import VerPsi from "../components/pop-ups/Verpsi";
-import ActiveFilters from "../components/home-page/ActiveFilters";
+import SearchSection from "../components/homepage/SearchSection";
+import AreaCards from "../components/homepage/AreaCards";
+import VerPsi from "../components/popups/Verpsi";
+import ActiveFilters from "../components/homepage/ActiveFilters";
 import { useState, useEffect } from "react";
 import { usePsicologos } from "../context/Psicologos";
 import '../assets/styles/home/filtros-home.css';

@@ -4,7 +4,7 @@ import { usePsicologos } from "../../context/Psicologos";
 import InfoPublicoPsicologo from "./InfoPublicoPsicologo.jsx";
 import Calendario from "./Calendario.jsx";
 import SobrePsicologo from "./SobrePsicologo.jsx";
-import VerPsi from "../pop-ups/Verpsi.jsx";
+import VerPsi from "../popups/Verpsi.jsx";
 
 export default function PerfilPublicoPsicologo() {
   const { id } = useParams();

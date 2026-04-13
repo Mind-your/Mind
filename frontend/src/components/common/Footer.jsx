@@ -8,7 +8,7 @@ export default function Footer() {
         <footer>
             <nav className="grid-footer" aria-label="Navegação geral do site">
                 <ul>
-                    <li><Link to="/sobre-nos">Sobre nós</Link></li>
+                    <li><Link to="/sobrenos">Sobre nós</Link></li>
                     <li><Link to="/artigos">Artigos</Link></li>
                     <li><Link to="/termos-e-condicoes">Termos e Acordos</Link></li>
                     <li><Link to="">Entre para nosso time</Link></li>

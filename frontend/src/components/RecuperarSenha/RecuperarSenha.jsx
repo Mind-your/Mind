@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import background from "../../assets/img/background_input.png";
-import "../../assets/styles/login-cadastro/input_recuperar_senha.css";
+import "../../assets/styles/logincadastro/input_recuperar_senha.css";
 import { HiChevronLeft } from "react-icons/hi";
 import { toast } from "react-toastify";
 
@@ -92,7 +92,7 @@ export default function SectionRecuperarSenha() {
 
     return (
         <section className="login-inputs">
-            <div className="background-img-login-cadastro">
+            <div className="background-img-logincadastro">
                 <img
                     className="background"
                     src={background}

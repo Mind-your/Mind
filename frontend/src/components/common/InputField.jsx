@@ -1,4 +1,4 @@
-import "../../assets/styles/login-cadastro/main_login_cadastro.css";
+import "../../assets/styles/logincadastro/main_login_cadastro.css";
 
 function InputField({
   label,

@@ -2,7 +2,7 @@ import { useAuth } from '../context/AuthContext';
 import { useParams, Navigate, useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { Video, VideoOff, Mic, MicOff, PhoneOff } from 'lucide-react';
-import '../components/video-chamada/streaming.css';
+import '../components/videochamada/streaming.css';
 
 export default function VideoChamada() {
     const { user, loading } = useAuth();

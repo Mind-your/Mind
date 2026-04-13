@@ -2,7 +2,7 @@ import InfosGerais from "./InfosGerais"
 import AtualizacaoCredenciais from "./AtualizacaoCredenciais"
 import InfosPerfilPsicologo from "./InfosPerfilPsicologo"
 import InfosPerfilPaciente from "./InfosPerfilPaciente"
-import Deletar from "../pop-ups/Deletar"
+import Deletar from "../popups/Deletar"
 import Horarios from "./Horarios";
 import { useRef } from "react";
 import { getImageUrl, getDefaultAvatar } from "../../utils/imageHelper";

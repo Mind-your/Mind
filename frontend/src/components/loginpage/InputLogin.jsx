@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link, useLocation } from "react-router";
 import background from "../../assets/img/background_input.png";
-import "../../assets/styles/login-cadastro/input_login.css";
+import "../../assets/styles/logincadastro/input_login.css";
 import OptionsLogin from "./OptionsLogin";
 import { useAuth } from "../../context/AuthContext";
 import { toast } from 'react-toastify';
@@ -93,7 +93,7 @@ export default function InputLogin() {
     return (
         <>  
             <section className="login-inputs">
-                <div className="background-img-login-cadastro">
+                <div className="background-img-logincadastro">
                     <img className="background"
                         src={background}
                         alt="Imagem de fundo - tela de cadastro"

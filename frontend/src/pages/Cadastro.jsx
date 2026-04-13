@@ -1,4 +1,4 @@
-import InputCadastro from "../components/cadastro-page/InputCadastro.jsx"
+import InputCadastro from "../components/cadastropage/InputCadastro.jsx"
 import SkipNavigation from "../components/SkipNavigation";
 
 export default function Cadastro() {

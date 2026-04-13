@@ -1,6 +1,4 @@
 import "../../assets/styles/artigos/cards-artigos.css";
-import "../../assets/styles/pop-ups/full-article.css";
-import FullArticle from "../pop-ups/FullArticle";
 import { useState } from "react";
 
 export default function CardArtigos({ info, styleArticle = "row" }) {
@@ -36,8 +34,6 @@ export default function CardArtigos({ info, styleArticle = "row" }) {
             </button>
           </div>
         </div>
-
-        <FullArticle info={info} open={isOpen} close={() => setIsOpen(false)} />
       </article>
     </>
   );

@@ -1,4 +1,4 @@
-import Section from "../components/landing-page/SectionLandingPage"
+import Section from "../components/landingpage/SectionLandingPage"
 
 
 export default function LandingPage() {

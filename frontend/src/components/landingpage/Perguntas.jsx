@@ -1,4 +1,4 @@
-import "../../assets/styles/landing-page/perguntas.css";
+import "../../assets/styles/landingpage/perguntas.css";
 import { HiChevronDown } from "react-icons/hi";
 import { useState } from "react"
 import {Link} from "react-router"
