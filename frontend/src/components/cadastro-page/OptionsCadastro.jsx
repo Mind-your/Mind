@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-import "../../assets/styles/landing-page/hero-apresentacao.css";
+import "../../assets/styles/login-cadastro/options-cadastro.css";
 
 export default function OptionsCadastro() {
     const [tipoUsuario, setTipoUsuario] = useState("paciente");
@@ -20,22 +20,30 @@ export default function OptionsCadastro() {
     }, [location.pathname]);
 
     return (
-        <div className="container-options">
-            <Link to="/cadastro=0">
-                <button className={tipoUsuario === "paciente" ? "active" : ""}>
-                    Paciente
-                </button>
-            </Link>
-            <Link to="/cadastro=1">
-                <button className={tipoUsuario === "psicologo" ? "active" : ""}>
-                    Psicólogo
-                </button>
-            </Link>
-            <Link to="/cadastro=2">
-                <button className={tipoUsuario === "voluntario" ? "active" : ""}>
-                    Voluntário
-                </button>
-            </Link>
+          <div role="region" className="container-options" aria-label="Tipo de usuário">
+            <ul>
+                <li>
+                    <Link to="/cadastro=0" 
+                          className={tipoUsuario === "paciente" ? "active" : ""}
+                          aria-current={tipoUsuario === "paciente" ? "true" : "false"}>
+                        Paciente
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/cadastro=1" 
+                          className={tipoUsuario === "psicologo" ? "active" : ""}
+                          aria-current={tipoUsuario === "psicologo" ? "true" : "false"}>
+                        Psicologo
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/cadastro=2" 
+                          className={tipoUsuario === "voluntario" ? "active" : ""}
+                          aria-current={tipoUsuario === "voluntario" ? "active" : ""}>
+                        Voluntario
+                    </Link>
+                </li>
+            </ul>
         </div>
     );
 }

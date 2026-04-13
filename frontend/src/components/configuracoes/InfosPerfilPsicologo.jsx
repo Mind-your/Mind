@@ -1,4 +1,5 @@
 import { getDefaultWallpaper } from "../../utils/imageHelper";
+import { useRef } from "react";
 
 import { HiOutlineX } from "react-icons/hi";
 
@@ -12,7 +13,7 @@ export default function InfosPerfilPsicologo({
     adicionarEspecializacao,
     removerEspecializacao,
 }) {
-
+    const inputRef = useRef(null);
     const tagsEspecializacoes = [
         "Ansiedade",
         "Depressão",
@@ -23,8 +24,8 @@ export default function InfosPerfilPsicologo({
 
   return (
     <>
-        <div className="container-perfil" id="container-perfil">
-            <h1>Perfil</h1>
+        <section className="container-perfil" id="container-perfil" aria-labelledby="titulo-perfil">
+            <h1 id="titulo-perfil">Perfil</h1>
             <div className="img-wallpaper">
                 <img 
                     src={imgWallpaper || getDefaultWallpaper()}
@@ -37,21 +38,27 @@ export default function InfosPerfilPsicologo({
                 />
 
                 <div>
+                    <label className="sr-only" htmlFor="file-image-psicologo" aria-hidden="true">Escolha uma imagem</label>
                     <input 
-                    id="file-wallpaper" 
-                    type="file" 
-                    accept="image/*" 
-                    onChange={chooseWallpaper}
+                        ref={inputRef}
+                        id="file-image-psicologo" 
+                        type="file" 
+                        accept="image/*" 
+                        aria-hidden="true"
+                        onChange={chooseWallpaper}
                     />
-                    <label className="btns button-confirm" htmlFor="file-wallpaper">
-                    {novaWallpaper ? 'Wallpaper selecionado' : 'Mudar Wallpaper'}
-                    </label>
-                </div>
+                    <button
+                        type="button"
+                        className="btns button-confirm btns-image"
+                        onClick={() => inputRef.current.click()}>
+                        {novaWallpaper ? 'Wallpaper selecionado' : 'Mudar Wallpaper'}
+                    </button>
+                </div>  
             </div>
 
             <div className="container-sobre-mim">
-                <h3 id="sobreMim">Sobre mim</h3>
-                <span>Escreva sobre você, formações, histórico de estudos recentes, artigos publicados em portais de periodicos ou revistas cientificas</span>
+                <label htmlFor="sobreMimEdit" className="login-titulo">Sobre mim</label>
+                <span id="descricao-sobre-mim">Escreva sobre você, formações, histórico de estudos recentes, artigos publicados em portais de periodicos ou revistas cientificas</span>
                 <textarea 
                     id="sobreMimEdit" 
                     type="text" 
@@ -59,14 +66,17 @@ export default function InfosPerfilPsicologo({
                     value={formData.sobreMim}
                     onChange={handleChange}
                     rows="4"
+                    aria-describedby="descricao-sobre-mim"
                 ></textarea>
             </div>
 
             <div className="container-especializacoes">
-                <h3 id="especializacoes">Especializações</h3>
-                <span>Escolha as especializações que mais combinam com o seu perfil profissional.</span>
+                <label htmlFor="especializacoesEdit" className="login-titulo">Especializações</label>
+                <span id="descricao-especializacoes">Escolha as especializações que mais combinam com o seu perfil profissional.</span>
                 <select
+                    id="especializacoesEdit"
                     className="tags-especializacoes-input"
+                    aria-describedby="descricao-especializacoes"
                     onChange={(e) => {
                         adicionarEspecializacao(e.target.value);
                         e.target.value = ""; // reseta
@@ -83,23 +93,24 @@ export default function InfosPerfilPsicologo({
                     ))}
                 </select>
 
-                <div className="tags-list">
+                <ul className="tags-list" aria-label="especialidades selecionadas">
                     {especializacoes.map((esp) => (
-                        <div key={esp} className="tag-item">
+                        <li key={esp} className="tag-item">
                             <span>{esp}</span>
                             <button
                                 className="btn-remove-tag"
                                 type="button"
                                 onClick={() => removerEspecializacao(esp)}
+                                aria-label={`Remover especialização ${esp}`}
                             >
                                 <HiOutlineX />
                             </button>
-                        </div>
+                        </li>
                     ))}
-                </div>
+                </ul>
 
             </div>
-        </div>
+        </section>
     </>
   )
 }

@@ -43,7 +43,7 @@ export default function SearchSection({
 
     return (
         <>
-            <section>
+            <section className="section-filter">
                 <div className="section-filters-searchbox">
                     <div className="search-boxes">
                         <form onSubmit={handleSearchSubmit} style={{ display: 'flex', width: '100%' }}>

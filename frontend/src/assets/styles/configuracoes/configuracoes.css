@@ -62,13 +62,14 @@ section.config h1{
 .img-wallpaper{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
 }
 
 .img-edit-wallpaper{
-    width: 100%;
+    width: 70%;
     height: clamp(150px, 20vw, 180px);
     border-radius: 10px;
     background-color: #29292969;
@@ -87,25 +88,31 @@ section.config h1{
     border-radius: 12px;
 }
 
-#Geral,
-#Perfil,
-#Horarios {
+.atalhos li {
     color: black;
     padding: 5px;
     border-bottom: 1px solid black;
+    cursor: pointer;
 }
 
-#Deletar {
+.atalhos li:last-child {
     color: var(--metallic-copper-100);
     padding: 5px;
+    border-bottom: none ;
 }
 
-#Geral:hover,
-#Perfil:hover,
-#Horarios:hover,
-#Deletar:hover{
+.atalhos li:hover{
     background-color: var(--dairy-cream-100);
     border-radius: var(--border-radius-sm);
+}
+
+li > a#Geral,
+li > a#Perfil,
+li > a#Horarios,
+li > a#Deletar{
+    display:block;
+    width: 100%;
+    height: 100%;
 }
 
 /* Forms =============================== */
@@ -170,7 +177,7 @@ section.config h1{
 .containers-articles textarea{
     height: 100px;
     border-radius: var(--border-radius-sm);
-    border: 1px solid #bec0c2;
+    border: 1px solid var(--gray-100);
     padding: var(--spacing-sm);
     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 
@@ -186,19 +193,19 @@ section.config h1{
 .containers-articles textarea:focus{
     outline: 0;
     border-color: var(--orange-default-100);
-    box-shadow: 0 0 0 0.2rem #f8a76498;
+    box-shadow: 0 0 0 0.2rem var(--primary-orange-700);
 }
 
 /* Tags de especializações */
 
-div.tags-list{
+ul.tags-list{
     display: flex;
     flex-wrap: row;
     gap: 10px;
     margin-top: 10px;
 }
 
-div.tags-list > .tag-item{
+ul.tags-list > .tag-item{
     display: flex;
     align-items: center;
     gap: 5px;
@@ -209,6 +216,7 @@ div.tags-list > .tag-item{
     margin-top: 10px;
     font-size: 0.9rem;
     text-align: center;
+    list-style:none;
 }
 
 .btn-remove-tag{
@@ -238,13 +246,12 @@ div.tags-list > .tag-item{
     border-radius: var(--border-radius-md);
     color:var(--white-default-100);
     gap:2rem;
-    margin-top:30px;
+    margin:30px 0px;
 }
 
 input[type="file"]{
     display:none;
 }
-
 /* Responsividade -------------------------- */
 
 @media(max-width:800px){
@@ -275,5 +282,8 @@ input[type="file"]{
     }
     .pop-up-deletar div{
         width:80%;
+    }
+    .img-edit-wallpaper{
+        width: 100%;
     }
 }

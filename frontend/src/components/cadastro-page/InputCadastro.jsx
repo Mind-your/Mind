@@ -265,7 +265,7 @@ export default function InputCadastro() {
                     
                 </div>
 
-                <h1>Cadastro</h1>
+                <h1 id="signinPageForm">Cadastro</h1>
                 <OptionsCadastro />
 
                 <form className="inputs" onSubmit={handleSubmit} noValidate>
@@ -309,7 +309,6 @@ export default function InputCadastro() {
 
                     <div className="container-cadastrar-entrar">
                         <div className="container-termos">
-                            <input id="Checkbox" type="checkbox" className="checkbox" required />
                             <label htmlFor="Checkbox">
                                 <Link to="/termos-e-condicoes" className="link-cadastro">
                                     Termos e Condições

@@ -1,7 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { useState, useEffect, useRef } from 'react'
-import { HiOutlineUser, HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX } from "react-icons/hi";
+import { HiOutlineSearch, HiOutlineBell, HiChevronDown, HiChevronRight, HiOutlineX, HiOutlineUser } from "react-icons/hi";
 import { useAuth } from '../../context/AuthContext';
 import foto from '../../assets/img/perfil-default.png';
 
@@ -207,17 +207,13 @@ export default function NavDesktop() {
                                                         </div>
 
                                                         {openNotif === notif.id && (
-
                                                             <div className="notif-confirm-body">
-
                                                                 <p>
                                                                     <strong>Nome:</strong> {notif.nome}
                                                                 </p>
-
                                                                 <p>
                                                                     <strong>Data:</strong> {notif.data}
                                                                 </p>
-
                                                                 <p>
                                                                     <strong>Horário:</strong> {notif.horario}
                                                                 </p>
@@ -229,23 +225,14 @@ export default function NavDesktop() {
                                                                 <button className="btn-cancelar">
                                                                     Cancelar Agendamento
                                                                 </button>
-
                                                             </div>
-
                                                         )}
-
                                                     </div>
-
                                                 )
-
                                             }
-
                                             return null
-
                                         })}
-
                                     </div>
-
                                 </div>
                             )}
                         </div>
@@ -260,16 +247,54 @@ export default function NavDesktop() {
                                     className="nav-btn-login"
                                     onClick={() => setDropdownOpen(prev => !prev)}
                                 >
-                                    {isAuthenticated ? user.nome : "Login"}
+                                    Login
                                 </button>
                             </Link>
                         </>
+                    ) : null}
 
-                    ) : (
-                        <>
-                            
-                        </>
-                    )}
+                    <div className={`nav-login-drop-wrapper ${isAuthenticated && isDropdownOpen ? "show" : ""}`}>
+                        <div className="nav-login-drop">
+                            {isAuthenticated ? (
+                                <>
+                                    {user && (
+                                        <Link
+                                            to={`/${user.tipo.toLowerCase()}/perfil/${user.id}`}
+                                            onClick={() => setDropdownOpen(false)}
+                                        >
+                                            <button type="button">Meu Perfil</button>
+                                        </Link>
+                                    )}
+                                    <Link
+                                        to={`/${user.tipo}/perfil/${user.id}/configuracoes`}
+                                        onClick={() => setDropdownOpen(false)}
+                                    >
+                                        <button type="button">Configurações</button>
+                                    </Link>
+                                    {user.tipo === "psicologo" && (
+                                        <Link
+                                            to="/adicionar-artigos"
+                                            onClick={() => setDropdownOpen(false)}
+                                        >
+                                            <button type="button">Adicionar Artigos</button>
+                                        </Link>
+                                    )}
+                                    <button
+                                        type="button"
+                                        onClick={() => {
+                                            handleLogout();
+                                            setDropdownOpen(false);
+                                        }}
+                                    >
+                                        Sair
+                                    </button>
+                                </>
+                            ) : (
+                                <>
+                                </>
+                            )}
+                        </div>
+                    </div>
                 </div>
             </nav>
         </>

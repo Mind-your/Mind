@@ -39,35 +39,36 @@ export default function Horarios() {
 
   return (
     <>
-        <div className="container-perfil" id="container-horario-atendimento">
-            <h1>Horário de atendimento</h1>
-            <span>Escolha seus horários de atendimento por dia. Lembre-se que o periodo máximo padrão da
+        <section className="container-perfil" id="container-horario-atendimento" aria-labelledby="titulo-horarios">
+            <h1 id="titulo-horarios">Horário de atendimento</h1>
+            <span id="descricao-horarios">Escolha seus horários de atendimento por dia. Lembre-se que o periodo máximo padrão da
                 plataforma para atendimento psicologico é de 40 min.</span>
             
-            {error && <div className="error-message" style={{color: "red"}}>{error}</div>}
+            {error && <div role="alert" className="error-message" style={{color: "red"}}>{error}</div>}
 
             <button 
               type="button"
               className="btn-adicionar button-proceed"
-              onClick={() => newCardHorario()}>
+              onClick={() => newCardHorario()}
+              aria-describedby="descricao-horarios">
               + Adicionar Horário</button>
 
             {loading ? (
                 <p>Carregando horários...</p>
             ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '15px' }}>
-                  {horarios.map((horario) => (
+                <ul className="cards-horarios">
+                {horarios.map((horario) => (
+                    <li key={horario.id || horario.tempId}>
                     <CardHorarios 
-                        key={horario.id || horario.tempId}
                         horario={horario}
                         onSaved={fetchHorarios}
                         onDeleted={fetchHorarios}
-                        onRemoveTemp={() => removeTempCard(horario.tempId)}
-                    />
+                        onRemoveTemp={() => removeTempCard(horario.tempId)}/>
+                    </li>
                   ))}
-                </div> 
+                </ul> 
             )}
-        </div>
+        </section>
     </>
   )
 }

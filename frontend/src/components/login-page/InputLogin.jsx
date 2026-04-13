@@ -91,7 +91,7 @@ export default function InputLogin() {
 };
 
     return (
-        <>
+        <>  
             <section className="login-inputs">
                 <div className="background-img-login-cadastro">
                     <img className="background"
@@ -99,14 +99,15 @@ export default function InputLogin() {
                         alt="Imagem de fundo - tela de cadastro"
                     />
                 </div>
-                <div className="container-input-login">
+                <div className="container-input-login" id="loginPageForm">
                     <h1>Login</h1>
-                    <OptionsLogin></OptionsLogin>
+                    < OptionsLogin />
                     <form className="inputs" onSubmit={handleSubmit}>
                         <div className={`login-input ${animar ? "animar" : ""}`}>
                             <div className={`input input-obrigatorio ${form.login ? "preenchido" : ""}`}>
-                                <label>Login</label>
+                                <label htmlFor="loginInput" >Login</label>
                                 <input
+                                    id="loginInput"
                                     type="text"
                                     name="login"
                                     value={form.login}
@@ -120,8 +121,9 @@ export default function InputLogin() {
                                 />{errors.login && <span className="error-text">{errors.login}</span>}
                             </div>
                             <div className={`input input-obrigatorio ${form.senha ? "preenchido" : ""}`}>
-                                <label>Senha</label>
+                                <label htmlFor="senhaLogInInput" >Senha</label>
                                 <input
+                                    id="senhaLogInInput"
                                     type="password"
                                     name="senha"
                                     value={form.senha}
