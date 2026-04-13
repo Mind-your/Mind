@@ -1,53 +1,68 @@
 import "../../assets/styles/artigos/article-card.css";
 import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
-
-
+import { useNavigate } from "react-router-dom";
+import DefaultArticleImg from "../../assets/img/articles.png";
+import DefaultProfileImg from "../../assets/img/perfil-default.png";
 
 export default function ArticleCard({ article }) {
-    const [isOpen, setIsOpen] = useState(false);
+    const navigate = useNavigate();
+
+    const articleImg = article.imagem 
+        ? `http://localhost:8080/api/images/articles/${article.imagem}` 
+        : DefaultArticleImg;
+
+    const authorImg = article.autorAvatar 
+        ? `http://localhost:8080/api/images/${article.autorAvatar}` 
+        : DefaultProfileImg;
+
+    const formattedDate = article.dataCriacao 
+        ? new Date(article.dataCriacao).toLocaleDateString('pt-BR') 
+        : "";
 
     return (
-        <>
-            <article className="article-card">
-                <div className="article-image-container">
-                    <img src={article.img} alt={article.title} className="article-image" />
-                </div>
+        <article className="article-card">
+            <div className="article-image-container">
+                <img src={articleImg} alt={article.titulo} className="article-image" />
+            </div>
 
-                <div className="article-content">
-                    <h2 className="article-title">{article.title}</h2>
-                    <p className="article-description">{article.descricao}</p>
+            <div className="article-content">
+                <h2 className="article-title">{article.titulo}</h2>
+                <p className="article-description">
+                    {article.corpo?.length > 120 
+                        ? `${article.corpo.substring(0, 120)}...` 
+                        : article.corpo}
+                </p>
 
-                    <div className="article-footer">
-                        <div className="article-meta">
-                            <img src={article.avatar} alt={article.autor} className="author-avatar" />
-                            <div className="author-info">
-                                <span className="author-name">{article.autor}</span>
-                                <span className="article-date">{article.data}</span>
-                            </div>
+                <div className="article-footer">
+                    <div className="article-meta">
+                        <img src={authorImg} alt={article.autorNome} className="author-avatar" />
+                        <div className="author-info">
+                            <span className="author-name">{article.autorNome}</span>
+                            <span className="article-date">{formattedDate}</span>
                         </div>
                     </div>
-                    <div className="container-likes-view">
-                        <div className="article-stats">
-                            <div className="stat">
-                                <AiOutlineLike className="stat-icon" />
-                                <span>{article.likes}</span>
-                            </div>
-                            <div className="stat">
-                                <AiOutlineEye className="stat-icon" />
-                                <span>{article.views}</span>
-                            </div>
-                        </div>
-
-                        <button
-                            className="btn-see-more"
-                            onClick={() => setIsOpen(true)}
-                        >
-                            Ver
-                        </button>
-                    </div>
                 </div>
-            </article>
-        </>
+                <div className="container-likes-view">
+                    <div className="article-stats">
+                        <div className="stat">
+                            <AiOutlineLike className="stat-icon" />
+                            <span>{article.likes || 0}</span>
+                        </div>
+                        <div className="stat">
+                            <AiOutlineEye className="stat-icon" />
+                            <span>{article.views || 0}</span>
+                        </div>
+                    </div>
+
+                    <button
+                        className="btn-see-more"
+                        onClick={() => navigate(`/artigo/${article.id}`)}
+                    >
+                        Ver
+                    </button>
+                </div>
+            </div>
+        </article>
     );
 }

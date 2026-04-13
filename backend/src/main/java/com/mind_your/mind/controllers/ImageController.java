@@ -17,6 +17,7 @@ import java.nio.file.Paths;
 public class ImageController {
 
     private final Path imageStorageLocation = Paths.get("uploads/users-pictures").toAbsolutePath().normalize();
+    private final Path articlesStorageLocation = Paths.get("uploads/articles-pictures").toAbsolutePath().normalize();
 
     @GetMapping("/{filename:.+}")
     public ResponseEntity<Resource> getImage(@PathVariable("filename") String filename) {
@@ -26,6 +27,30 @@ public class ImageController {
 
             if (resource.exists() && resource.isReadable()) {
                 // Detectar o tipo de conteúdo
+                String contentType = Files.probeContentType(filePath);
+                if (contentType == null) {
+                    contentType = "application/octet-stream";
+                }
+
+                return ResponseEntity.ok()
+                        .contentType(MediaType.parseMediaType(contentType))
+                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/articles/{filename:.+}")
+    public ResponseEntity<Resource> getArticleImage(@PathVariable("filename") String filename) {
+        try {
+            Path filePath = articlesStorageLocation.resolve(filename).normalize();
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() && resource.isReadable()) {
                 String contentType = Files.probeContentType(filePath);
                 if (contentType == null) {
                     contentType = "application/octet-stream";

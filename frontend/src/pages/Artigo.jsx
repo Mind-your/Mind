@@ -1,33 +1,50 @@
 import { HiOutlineReply } from "react-icons/hi";
 import { FaThumbsUp, FaEye } from "react-icons/fa";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { buscarPorId } from "../services/artigoService";
 import "../assets/styles/artigos/artigo.css";
 import "../assets/styles/artigos/cards-artigos.css";
-import imgWallpaper from "../assets/img/article01.jpg";
+import DefaultImg from "../assets/img/articles.png";
 
 export default function Artigo() {
+  const { id } = useParams();
   const navigate = useNavigate();
+  const [artigo, setArtigo] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const artigo = {
-        id: 1,
-        titulo: "Titulo",
-        autor: "Author",
-        data: "00/00/0000",
-        likes: 0,
-        views: 0,
-        text: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut molestias qui mollitia soluta commodi quisquam cupiditate debitis nihil sapiente, officia rerum fugit, pariatur dolor a possimus dicta aspernatur. Reprehenderit quisquam dolor ipsam corporis placeat eos officiis nihil. Adipisci debitis eum quidem eveniet, dolorem ea, repudiandae eligendi mollitia quod inventore ab iure suscipit ipsum velit corrupti illum iusto a laboriosam numquam, aliquam provident. Tempore officiis ipsa dignissimos velit perspiciatis voluptas quia eos recusandae asperiores in atque cupiditate placeat totam similique magni, quo aspernatur odio sequi quasi quidem aperiam dolores. Ducimus unde accusamus delectus ipsum optio natus repudiandae aut perferendis assumenda doloribus!`,
-        references: [
-        "https://www.exemplo.com/referencia-1",
-        "https://www.exemplo.com/referencia-2"
-        ]
-    
-  };
+  useEffect(() => {
+    const fetchArtigo = async () => {
+      try {
+        const data = await buscarPorId(id);
+        setArtigo(data);
+      } catch (error) {
+        toast.error("Artigo não encontrado ou sem permissão");
+        navigate("/artigos");
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArtigo();
+  }, [id, navigate]);
+
+  if (loading) return <div className="loading">Carregando artigo...</div>;
+  if (!artigo) return null;
+
+  const articleImg = artigo.imagem 
+    ? `http://localhost:8080/api/images/articles/${artigo.imagem}` 
+    : DefaultImg;
+
+  const formattedDate = artigo.dataCriacao 
+    ? new Date(artigo.dataCriacao).toLocaleDateString('pt-BR') 
+    : "";
 
   return (
     <main className="article-page">
       <div className="article-page-wrapper">
           <img
-            src={imgWallpaper}
+            src={articleImg}
             alt="banner do artigo"
             className="article-banner"
           />
@@ -35,33 +52,37 @@ export default function Artigo() {
           <h1>{artigo.titulo}</h1>
           <div className="article-author">
             <p>
-              <span>@{artigo.autor}</span>
+              <span>{artigo.autorNome}</span>
               <span>•</span>
-              <span>{artigo.data}</span>
+              <span>{formattedDate}</span>
             </p>
           </div>
           <hr />
 
           <div className="article-stats">
-            <span><FaThumbsUp /> {artigo.likes}</span>
-            <span><FaEye /> {artigo.views}</span>
+            <span><FaThumbsUp /> {artigo.likes || 0}</span>
+            <span><FaEye /> {artigo.views || 0}</span>
           </div>
           <hr />
 
           <div className="article-content">
-            <p>{artigo.text}</p>
+             <div dangerouslySetInnerHTML={{ __html: artigo.corpo?.replace(/\n/g, '<br/>') }} />
           </div>
 
-          <h2>Referências</h2>
-          <ul>
-            {artigo.references.map((ref, i) => (
-              <li key={i}>
-                <a href={ref} target="_blank">
-                  {ref}
-                </a>
-              </li>
-            ))}
-          </ul>
+          {artigo.referencias && artigo.referencias.length > 0 && (
+            <>
+              <h2>Referências</h2>
+              <ul>
+                {artigo.referencias.map((ref, i) => (
+                  <li key={i}>
+                    <a href={ref.link} target="_blank" rel="noopener noreferrer">
+                      {ref.nome_referencia || ref.link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
 
           <button
             className="button-proceed"
@@ -70,7 +91,6 @@ export default function Artigo() {
           </button>
 
       </div>
-
     </main>
   );
 }

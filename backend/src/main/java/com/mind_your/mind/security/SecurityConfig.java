@@ -103,6 +103,10 @@ public class SecurityConfig {
                 // Endereços (ViaCEP)
                 .requestMatchers(HttpMethod.GET, "/enderecos/**").permitAll()
                 
+                // Artigos
+                .requestMatchers(HttpMethod.GET, "/artigos/meus-artigos").authenticated()
+                .requestMatchers(HttpMethod.GET, "/artigos", "/artigos/{id}", "/artigos/psicologo/{psicologoId}").permitAll()
+                
                 .anyRequest().authenticated()
             );
 

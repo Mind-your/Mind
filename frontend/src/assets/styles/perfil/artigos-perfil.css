@@ -92,6 +92,32 @@
     gap:10px;
 }
 
+.btn-publish {
+    background-color: var(--green-600) !important;
+}
+
+.btn-unpublish {
+    background-color: var(--attention-600) !important;
+}
+
+.status-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    font-weight: 500;
+}
+
+.status-published {
+    background-color: var(--green-100);
+    color: var(--green-700);
+}
+
+.status-private {
+    background-color: var(--attention-100);
+    color: var(--attention-700);
+}
+
 @media (max-width:768px){
     .artigos-header{
         flex-direction: column;

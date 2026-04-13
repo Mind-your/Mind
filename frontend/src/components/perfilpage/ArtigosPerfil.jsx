@@ -1,46 +1,64 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FaEye, FaThumbsUp } from "react-icons/fa";
 import { HiOutlinePencilAlt, HiOutlineTrash, HiOutlineSearch } from "react-icons/hi";
 import { useNavigate } from "react-router-dom";
 import Deletar from "../popups/Deletar";
+import { listarMeusArtigos, deletarArtigo, alternarPublicacao } from "../../services/artigoService";
+import { toast } from "react-toastify";
 import "../../assets/styles/perfil/artigos-perfil.css";
 import "../../assets/styles/ui/icons.css";
 
 export default function ArtigosPerfil({ id }) {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
-  const [artigoSelecionado, setArtigoSelecionado] = useState(null); // Para verificar qual artigo está sendo deletado
+  const [artigoSelecionado, setArtigoSelecionado] = useState(null);
   const [deletando, setDeletando] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [busca, setBusca] = useState("");
-  const [artigos, setArtigos] = useState([
-    {
-      id: 1,
-      titulo: "Titulo1",
-      descricao:
-        "Lorem ipsum dolor sit amet consectetur. Venenatis bibendum odio diam magna vitae sit urna molestie imperdie...",
-      likes: 15,
-      views: 20,
-    },
-    {
-      id: 2,
-      titulo: "Titulo2",
-      descricao:
-        "Lorem ipsum dolor sit amet consectetur. Venenatis bibendum odio diam magna vitae sit urna molestie imperdie...",
-      likes: 15,
-      views: 21,
-    },
-  ]); 
+  const [artigos, setArtigos] = useState([]); 
 
+  useEffect(() => {
+    fetchArtigos();
+  }, []);
+
+  const fetchArtigos = async () => {
+    try {
+      const data = await listarMeusArtigos();
+      setArtigos(data);
+    } catch (error) {
+      toast.error("Erro ao carregar seus artigos");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removePublishedArticle = async (id) => {
+    setDeletando(true);
+    try {
+      await deletarArtigo(id);
+      setArtigos(artigos.filter((artigo) => artigo.id !== id));
+      toast.success("Artigo removido com sucesso");
+      setIsOpen(false);
+    } catch (error) {
+      toast.error("Erro ao remover artigo");
+    } finally {
+      setDeletando(false);
+    }
+  }
+
+  const togglePublicacao = async (id) => {
+    try {
+      const updated = await alternarPublicacao(id);
+      setArtigos(artigos.map(a => a.id === id ? { ...a, publicado: updated.publicado } : a));
+      toast.success(updated.publicado ? "Artigo publicado!" : "Artigo privado!");
+    } catch (error) {
+      toast.error("Erro ao alterar status do artigo");
+    }
+  }
 
   const artigosFiltrados = artigos.filter((artigo) =>
-    artigo.titulo.toLowerCase().includes(busca.toLowerCase())
+    artigo.titulo?.toLowerCase().includes(busca.toLowerCase())
   );
-
-  const removePublishedArticle = (id) => {
-    setDeletando(true);
-    setArtigos(artigos.filter((artigo) => artigo.id !== id));
-    setDeletando(false);
-  }
 
   return (
     <div className="artigos-container">
@@ -64,17 +82,26 @@ export default function ArtigosPerfil({ id }) {
           <div className="artigo-card" key={artigo.id}>
 
             <div className="artigo-info">
-              <h3>{artigo.titulo}</h3>
+              <h3>
+                {artigo.titulo}
+                <span className={`status-badge ${artigo.publicado ? 'status-published' : 'status-private'}`}>
+                  {artigo.publicado ? 'Publicado' : 'Privado'}
+                </span>
+              </h3>
 
-              <p>{artigo.descricao}</p>
+              <p>
+                {artigo.corpo?.length > 100 
+                  ? `${artigo.corpo.substring(0, 100)}...` 
+                  : artigo.corpo}
+              </p>
 
               <div className="artigo-info-footer">
                 <div className="artigo-stats">
                   <span>
-                    <FaThumbsUp /> {artigo.likes}
+                    <FaThumbsUp /> {artigo.likes || 0}
                   </span>
                   <span>
-                    <FaEye /> {artigo.views}
+                    <FaEye /> {artigo.views || 0}
                   </span>
                 </div>
 
@@ -92,6 +119,12 @@ export default function ArtigosPerfil({ id }) {
                     className="icon-edit" 
                     onClick={() => navigate(`/adicionar-artigos/${artigo.id}`)}> 
                     <HiOutlinePencilAlt />
+                  </button>
+
+                  <button 
+                    className={`button-confirm button-ver-artigo ${artigo.publicado ? 'btn-unpublish' : 'btn-publish'}`}
+                    onClick={() => togglePublicacao(artigo.id)}>
+                      {artigo.publicado ? 'Tornar Privado' : 'Publicar'}
                   </button>
 
                   <button 

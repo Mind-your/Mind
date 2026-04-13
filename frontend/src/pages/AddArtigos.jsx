@@ -10,10 +10,12 @@ import { useAuth } from "../context/AuthContext";
 import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { getDefaultWallpaper } from "../utils/imageHelper";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useParams, useNavigate } from "react-router-dom";
+import { criarArtigo, atualizarArtigo, buscarPorId, uploadImagem } from "../services/artigoService";
 
 export default function AddArtigos() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const isEdit = Boolean(id);
 
   const { user, loading } = useAuth();
@@ -26,6 +28,7 @@ export default function AddArtigos() {
     id: "",
     titulo: "",
     artigo_texto: "",
+    publicado: false,
     referencias: [
       {
         id: `ref-${Date.now()}`,
@@ -46,24 +49,32 @@ export default function AddArtigos() {
         return;
       }
 
-      // Area de salvar dados do artigo, incluindo upload da imagem (Funcão getDadosArtigo())
-      /*
-      const wallpaperUrl = await uploadWallpaper();
-      const dados = getDadosArtigo(wallpaperUrl);
-      */
+      const dados = {
+        titulo: articleData.titulo,
+        corpo: articleData.artigo_texto,
+        publicado: articleData.publicado || false, // Assuming default is false or maintained
+        referencias: articleData.referencias.filter(
+          (ref) => ref.nome_referencia.trim() || ref.link.trim()
+        )
+      };
+
+      let savedArticleId = id;
 
       if (isEdit) {
-        // atualizado
-        // await atualizarArtigo(id, dados); // exemplo de backend futuro
+        await atualizarArtigo(id, dados);
         toast.success("Artigo atualizado!");
       } else {
-        // criado
-        // await criarArtigo(id, dados); // exemplo de backend futuro
+        const response = await criarArtigo(dados);
+        savedArticleId = response.id;
         toast.success("Artigo criado!");
       }
 
+      // Upload image if a new image was selected
+      if (novaImagem && savedArticleId) {
+        await uploadImagem(savedArticleId, novaImagem);
+      }
+
       setArticleData({
-        // reset
         id: "",
         titulo: "",
         artigo_texto: "",
@@ -72,6 +83,10 @@ export default function AddArtigos() {
 
       setImgWallpaperArtigo(getDefaultWallpaper());
       setNovaImagem(null);
+      
+      if (!isEdit) {
+         navigate(`/artigos`); // O redirecionar para lista
+      }
     } catch (error) {
       toast.error("Erro ao criar artigo");
     } finally {
@@ -102,21 +117,23 @@ export default function AddArtigos() {
 
     const carregarArtigo = async () => {
       try {
-        // Exemplo com artigo Teste
-        const artigoFake = {
-          id: id,
-          titulo: "Artigo exemplo",
-          artigo_texto: "Conteúdo do artigo...",
-          referencias: [
-            {
-              id: "ref-1",
-              nome_referencia: "Google",
-              link: "https://google.com",
-            },
-          ],
+        const response = await buscarPorId(id);
+        
+        const artigoCarregado = {
+          id: response.id,
+          titulo: response.titulo,
+          artigo_texto: response.corpo,
+          publicado: response.publicado,
+          referencias: response.referencias && response.referencias.length > 0 
+            ? response.referencias 
+            : initialArticleData.referencias
         };
 
-        setArticleData(artigoFake);
+        if (response.imagem) {
+            setImgWallpaperArtigo(`http://localhost:8080/api/images/articles/${response.imagem}`);
+        }
+
+        setArticleData(artigoCarregado);
       } catch (error) {
         toast.error("Erro ao carregar artigo");
       }
@@ -126,10 +143,9 @@ export default function AddArtigos() {
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-
     setArticleData((prev) => ({
       ...prev,
-      [id]: value,
+      [id]: e.target.type === 'checkbox' ? e.target.checked : value,
     }));
   };
 
