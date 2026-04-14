@@ -13,7 +13,7 @@
 
 .pop-up-deletar{
     position: fixed; 
-    background-color: var(--white-default-100);
+    background-color: var(--white-200);
     width:600px;
     padding: clamp(10px, 10vw, 30px);
     display: flex;

@@ -36,15 +36,15 @@
 
 /* Card 1 */
 .cards:nth-child(1){
-    background-color: var(--bege-default-100);
-    color: var(--black-default-100);
+    background-color: var(--primary-orange-300);
+    color: var(--black-950);
 }
 
 
 /* Card 2 (Maior) */
 .cards:nth-child(2){
-    background-color: var(--orange-default-100);
-    color:var(--black-default-100);
+    background-color: var(--primary-orange-700);
+    color:var(--black-950);
 
     height: clamp(380px, 75vw, 570px);
     transform: scale(1.05);
@@ -53,8 +53,8 @@
 
 /* Card 3 */
 .cards:nth-child(3){
-    background-color: var(--green-light-default-100);
-    color: var(--black-default-100);
+    background-color: var(--tertiary-light-green-700);
+    color: var(--black-950);
 }
 
 

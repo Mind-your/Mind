@@ -29,8 +29,8 @@ export default function ArticleCard({ article }) {
             <div className="article-content">
                 <h2 className="article-title">{article.titulo}</h2>
                 <p className="article-description">
-                    {article.corpo?.length > 120 
-                        ? `${article.corpo.substring(0, 120)}...` 
+                    {article.corpo?.length > 240 
+                        ? `${article.corpo.substring(0, 220)}...` 
                         : article.corpo}
                 </p>
 
@@ -38,7 +38,7 @@ export default function ArticleCard({ article }) {
                     <div className="article-meta">
                         <img src={authorImg} alt={article.autorNome} className="author-avatar" />
                         <div className="author-info">
-                            <span className="author-name">{article.autorNome}</span>
+                            <span className="author-name">@{article.autorNome}</span>
                             <span className="article-date">{formattedDate}</span>
                         </div>
                     </div>
@@ -46,11 +46,11 @@ export default function ArticleCard({ article }) {
                 <div className="container-likes-view">
                     <div className="article-stats">
                         <div className="stat">
-                            <AiOutlineLike className="stat-icon" />
+                            <AiOutlineLike className="stat-icon" id="IconLike" />
                             <span>{article.likes || 0}</span>
                         </div>
                         <div className="stat">
-                            <AiOutlineEye className="stat-icon" />
+                            <AiOutlineEye className="stat-icon" id="IconView"/>
                             <span>{article.views || 0}</span>
                         </div>
                     </div>

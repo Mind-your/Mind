@@ -32,7 +32,7 @@
 
 .header-calendario h2 {
   font-size: 1.1rem;
-  color: var(--black-default-100);
+  color: var(--black-950);
   text-transform: capitalize;
   margin: 10px 0 0 0;
 }
@@ -40,7 +40,7 @@
 /* Botões de navegação */
 
 .button-seta-calendario {
-  background: var(--gray-100);
+  background: var(--white-800);
   border: none;
   border-radius: 8px;
   padding: 8px;
@@ -75,7 +75,7 @@
   text-align: center;
   font-weight: 600;
   padding: 8px 0;
-  color: var(--black-default-100);
+  color: var(--black-950);
 }
 
 /* =========================
@@ -83,8 +83,8 @@
 ========================= */
 
 .dia-calendario {
-  background: var(--alabaster-100);
-  border: 1px solid var(--alto-100);
+  background: var(--white-300);
+  border: 1px solid var(--white-600);
   border-radius: 10px;
   padding: 8px;
   min-height: max-content;
@@ -95,8 +95,8 @@
 }
 
 .dia-calendario:hover {
-  background: var(--green-default-100);
-  color: var(--white-default-100);
+  background: var(--accent-dark-green-700);
+  color: var(--white-200);
 }
 
 /* Número do dia */
@@ -110,14 +110,14 @@
 /* Dia atual */
 
 .dia-hoje {
-  background: var(--green-default-100);
-  color: var(--white-default-100);
+  background: var(--accent-dark-green-700);
+  color: var(--white-200);
 }
 
 /* Dia mes que vem */
 
 .dia-outro-mes{
-  background: var(--silver-chalice-100);
+  background: var(--white-700);
 }
 /* =========================
    HORÁRIOS DO DIA
@@ -131,7 +131,7 @@
 
 .horario {
   font-size: 0.75rem;
-  background: var(--white-default-100);
+  background: var(--white-200);
   padding: 2px 6px;
   border-radius: 5px;
   width: fit-content;
@@ -165,7 +165,7 @@
 .consulta-marcada{
   width: 20px;
   height: 20px;
-  background-color: var(--green-light-default-100);
+  background-color: var(--tertiary-light-green-700);
   display: inline-block;
   border-radius: 3px;
 }
@@ -173,7 +173,7 @@
 .consulta-nao-confirmada{
   width: 20px;
   height: 20px;
-  background-color: var(--orange-default-100);
+  background-color: var(--primary-orange-700);
   display: inline-block;
   border-radius: 3px;
 }

@@ -2,53 +2,59 @@
 @import url("./articles-sidebar.css");
 
 .container-artigos {
-  padding: 30px;
-  background: var(--grayish-white-100);
+  padding: 30px 60px;
   min-height: 100vh;
 }
 
 /* SEARCH SECTION */
 .search-section {
-  background: var(--alto-100);
   border-radius: 10px;
   margin-bottom: 30px;
-  padding: 8px;
+  padding: 20px;
+  background: var(--white-300);
 }
 
 .search-form {
   display: flex;
   align-items: center;
-  gap: 8px;
+  position: relative;
 }
 
 .search-input {
   flex: 1;
   border: none;
-  padding: 12px 16px;
-  background: var(--white-600);
+  padding: 12px 16px 12px 16px;
+  padding-right: 50px;
+  background: var(--white-50);
   outline: none;
   border-radius: 8px;
-  font-size: 14px;
+  font-size: 0.875rem;
   transition: box-shadow 0.3s ease;
+  border: solid 2px var(--white-700);
 }
 
 .search-input:focus {
-  box-shadow: 0 0 0 2px rgba(31, 92, 75, 0.1);
+  border: solid 2px var(--accent-mid-orange-500);
 }
 
 .search-input::placeholder {
-  color: var(--gray-100);
+  color: var(--white-800);
 }
 
 .search-button {
   all: unset;
   cursor: pointer;
-  padding: 12px 16px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 0 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: var(--accent-dark-green-700);
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
+  color: var(--white-50);
   transition: background 0.3s ease;
 }
 
@@ -57,20 +63,24 @@
 }
 
 .search-icon {
-  font-size: 20px;
-  color: var(--white-600);
+  height: auto!important;
+  font-size: 1.25rem;
+  color: var(--white-50);
 }
 
 /* ARTICLES CONTAINER */
 .articles-container {
-  display: grid;
-  grid-template-columns: 3fr 1fr;
+  display: flex;
+  flex-direction: row;
   gap: 25px;
+  width: 100%;
 }
 
 .articles-main {
   display: flex;
   flex-direction: column;
+  width: 80%;
+  padding: auto;
 }
 
 .articles-list {
@@ -83,7 +93,7 @@
   padding: 60px 20px;
   border-radius: 12px;
   text-align: center;
-  color: var(--gray-100);
+  color: var(--white-800);
 }
 
 .no-results p {
@@ -94,6 +104,7 @@
 .articles-sidebar {
   display: flex;
   flex-direction: column;
+  width: 25%;
 }
 
 /* RESPONSIVE */
@@ -152,11 +163,11 @@
   .search-input,
   .search-button {
     padding: 10px 12px;
-    font-size: 13px;
+    font-size: 0.8125rem;
   }
 
   .search-icon {
-    font-size: 18px;
+    font-size: 1.125rem;
   }
 
   .articles-container {
@@ -175,7 +186,7 @@
 
   .search-input {
     padding: 8px 12px;
-    font-size: 12px;
+    font-size: 0.75rem;
   }
 
   .search-button {

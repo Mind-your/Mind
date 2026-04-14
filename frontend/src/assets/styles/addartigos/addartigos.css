@@ -29,7 +29,7 @@
 .containers-articles > h2{
     font-weight: 600;
     font-size: 1.6rem;
-    border-bottom: 3px solid var(--green-kelp-100);
+    border-bottom: 3px solid var(--accent-dark-green-900);
     margin:30px 0;
 }
 
@@ -55,14 +55,14 @@
     width:100%;
     padding: var(--spacing-xs);
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--gray-100);
+    border: 1px solid var(--white-800);
     font-size: 1rem;
     margin-top:2px;
 }
 
 /* Area de adicionar referencias ----------------- */
 .container-referencias{
-    background-color: var(--silver-chalice-100);
+    background-color: var(--white-700);
     padding: var(--spacing-xs);
     margin-top: var(--spacing-xs);
     border-radius: var(--border-radius-md);
