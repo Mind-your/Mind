@@ -109,6 +109,7 @@ export default function ArtigosPerfil({ id }) {
 
                   <button className="icon-attention" 
                     onClick={() => {
+                      setOpenDeletePopup(true)
                       setIsOpen(true);
                       setArtigoSelecionado(artigo.id)
                     }} 
@@ -135,6 +136,7 @@ export default function ArtigosPerfil({ id }) {
                 </div>
               </div>
             </div>
+            
             <Deletar 
                 open={isOpen && artigoSelecionado === artigo.id} 
                 close={() => {
@@ -143,6 +145,9 @@ export default function ArtigosPerfil({ id }) {
                 }}
                 onConfirm={() => removePublishedArticle(artigo.id)}
                 loading={deletando}
+                title="Deletar artigo"
+                message="Você tem certeza que deseja deletar este artigo? Esta ação não pode ser desfeita e o artigo será removido permanentemente da plataforma."
+                confirmText="Deletar artigo"
             />
           </div>
         ))}

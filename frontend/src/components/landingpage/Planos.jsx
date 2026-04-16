@@ -35,7 +35,7 @@ export default function Planos() {
   return (
     <>
       <section id="planos" className="section-planos">
-        <h1>Conheça nossos Planos</h1>
+        <h1 className="section-text">Conheça nossos Planos</h1>
 
         <div className="container-plans">
 

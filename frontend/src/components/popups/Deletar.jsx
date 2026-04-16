@@ -1,7 +1,15 @@
 import { HiOutlineX } from "react-icons/hi";
 import "../../assets/styles/popups/deletar.css";
 
-export default function Deletar({ open = false, close = () => {}, onConfirm = () => {}, loading = false }) {
+export default function Deletar({ 
+  open = false, 
+  close = () => {}, 
+  onConfirm = () => {}, 
+  loading = false,
+  title = "Deletar conta",
+  message = "Você tem certeza de que quer deletar a sua conta. Isso resultará na exclusão de seus dados, visibilidade aos psicólogos e qualquer informação adquirida pelo usuário durante a utilização da plataforma",
+  confirmText = "Confirmar"
+}) {
   if (!open) return null;
   
   const handleConfirm = () => {
@@ -18,8 +26,8 @@ export default function Deletar({ open = false, close = () => {}, onConfirm = ()
             disabled={loading}>
             <HiOutlineX />
           </button>
-          <h1>Deletar conta</h1>
-          <span>Você tem certeza de que quer deletar a sua conta. Isso resultará na exclusão de seus dados, visibilidade aos psicólogos e qualquer informação adquirida pelo usuário durante a utilização da plataforma</span>
+          <h1>{title}</h1>
+          <span>{message}</span>
           <button 
             id='btnADeletarPerfil' 
             className="btn-deletar button-proceed"
@@ -30,7 +38,7 @@ export default function Deletar({ open = false, close = () => {}, onConfirm = ()
               cursor: loading ? 'not-allowed' : 'pointer'
             }}
           >
-            {loading ? 'Deletando...' : 'Confirmar'}
+            {loading ? 'Processando...' : confirmText}
           </button>
       </div>
     </>

@@ -1,9 +1,5 @@
 import "../assets/styles/addartigos/addartigos.css";
-import "../assets/styles/configuracoes/configuracoes.css"; // Utilizando de alguns layouts da página de configurações
-
 import FormArticle from "../components/addartigos/FormArticle";
-import PublishedArticle from "../components/addartigos/PublishedArticle";
-import DefaultImg from "../assets/img/articles.png";
 import SkipNavigation from "../components/SkipNavigation";
 import ArtigosPerfil from "../components/perfilpage/ArtigosPerfil";
 import { useAuth } from "../context/AuthContext";
@@ -224,7 +220,7 @@ export default function AddArtigos() {
               </ul>
             </nav>
           </div>
-          <div className="container-inputs">
+          <div className="container-form-artigo">
             <FormArticle
               imgWallpaperArtigo={imgWallpaperArtigo}
               articleData={articleData}

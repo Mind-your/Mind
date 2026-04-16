@@ -20,7 +20,7 @@ export default function FormArticle({
     <>
         <form onSubmit={handleSubmitArticle} className="containers-articles">
             <h1>{articleData.id ? "Editar artigo" : "Novo artigo"}</h1>
-            <div className="img-wallpaper">
+            <div className="img-wallpaper-addartigo">
                 <figure className="figcaption-artigo">
                     <figcaption>Definir Papel de parede</figcaption>
                     <img
@@ -43,7 +43,7 @@ export default function FormArticle({
                         type="button"
                         className="btns button-confirm btns-image"
                         onClick={() => inputRef.current.click()}>
-                        Adicionar
+                        Mudar foto
                     </button>
                 </div>
             </div>
@@ -76,7 +76,7 @@ export default function FormArticle({
                 <span id="add-referencias-btn">Compartilhe as referencias necessárias para o acesso da veracidade das informações passadas durante o artigo</span>
                 <button
                   type="button"
-                  className="btn-adicionar button-proceed"
+                  className="btn-adicionar button-proceed btn-add-references"
                   aria-describedby="add-referencias-btn"
                   onClick={() => newCardReference()}>
                   + Adicionar referências</button>

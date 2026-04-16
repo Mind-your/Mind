@@ -1,9 +1,12 @@
 .section-info > p{
     text-align: justify;
-    margin: -20px 8%;
+    padding-inline: 15%;
+    padding-bottom: 2rem;
 }
 .section-info h1{
     padding: 3rem;
+    width: 100%;
+    text-align: center;
 }
 
 .info-grid{
@@ -12,7 +15,8 @@
     gap: var(--spacing-sm);
     justify-content: center;
     align-content: center;
-    margin: var(--spacing-xl)
+    padding: 1rem;
+
 }
 
 .info{
@@ -65,9 +69,9 @@
 
 /* Responsividade ----------------- */
 
-@media(max-width:800px){
+@media(max-width:900px){
     .section-info > p{
-        margin: 10px;
+        padding: 1rem;
     }
     .info-grid{
         grid-template-columns: auto;

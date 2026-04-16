@@ -31,8 +31,7 @@ main.main::after {
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg,
-            var(--secondary-cream-700) 30%,
-            transparent);
+            var(--secondary-cream-700) 0%, rgba(242, 235, 213, 0.79) 31%, rgba(242, 235, 212, 0.14) 62%);
     z-index: -1;
     pointer-events: none;
     /* não bloqueia cliques */
@@ -80,10 +79,20 @@ main.main p {
     max-width: clamp(200px, 60vw, 380px);
 }
 
+
+.buttons-hero a{
+    flex: 1;
+    width: 100%!important;
+}
+
+.buttons-hero a button{
+    width: 100%!important;
+}
+
 .buttons-hero {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    gap: var(--spacing-sm);
 }
 
 .btn-hero {
@@ -106,7 +115,7 @@ main.main p {
     padding: var(--spacing-lg);
     padding-inline: 5%;
     color: var(--dark-default-100);
-    align-items: flex-start;
+    justify-content: center;
     height: 500px;
 }
 
@@ -118,37 +127,18 @@ main.main p {
     height: 100%;
 }
 
-.tittle-box {
-    background-color: var(--tertiary-light-green-700);
-    border-radius: var(--border-radius-md);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    text-align: center;
-    margin-bottom: var(--spacing-md);
-    height: auto;
-}
-
-.tittle-box h3 {
-    text-align: center;
-    width: 100%;
-    padding: 5px;
-}
-
 /* Conteudo de cada box da seção de apresentação*/
 
 .block-left {
-    background-color: var(--tertiary-light-green-700);
+    background-color: var(--secondary-cream-700);
     border-radius: var(--spacing-xs);
     display: flex;
     flex-direction: column;
     padding: var(--spacing-md);
     color: var(--black-950);
     height: 100%;
-    gap: var(--spacing-xs);
+    gap: 3rem;
 }
-
-
 
 /* Headings ------------------- */
 
@@ -158,8 +148,7 @@ main.main p {
     color: var(--accent-dark-green-700);
 }
 
-.block-left h4,
-.block-right h4 {
+.block-left h4{
     font-size: 1.5rem;
     font-weight: 600;
     text-align: left;
@@ -167,22 +156,32 @@ main.main p {
 }
 
 .destaque {
-    color: var(--white-200)
+    color: var(--primary-orange-700)
+}
+.block-left p {
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 /*  Botão -------------------- */
 
-.block-left span.btn-article {
-    width: 100%;
+.block-right span.btn-article {
+    width: 100%!important;
     display: flex;
-    justify-content: flex-end;
     height: 100%;
-    align-items: end;
 }
 
+.btn-article a {
+    flex: 1;
+    width: 100%;
+}
+
+.btn-article a button {
+    width: 100%!important;
+}
 
 .block-right {
-    background-color: var(--tertiary-light-green-700);
     border-radius: var(--spacing-xs);
     display: flex;
     flex-direction: column;
@@ -191,14 +190,7 @@ main.main p {
     padding: var(--spacing-md);
     color: var(--black-950);
     height: 100%;
-    gap: var(--spacing-xs);
-}
-
-.block-right h4 {
-    font-size: 1.5rem;
-    font-weight: 600;
-    text-align: center;
-    width: 100%;
+    gap: var(--spacing-md);
 }
 
 /* Imagem ------------------- */
@@ -206,7 +198,7 @@ main.main p {
 img.apres-img {
     display: flex;
     align-self: center;
-    max-width: 250px;
+    max-width: 90%;
     margin: var(--spacing-xs);
 }
 

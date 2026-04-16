@@ -124,8 +124,6 @@
   }
 
   .articles-sidebar {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
     gap: 20px;
   }
 
@@ -134,19 +132,12 @@
   }
 }
 
-@media (max-width: 700px) {
-  .articles-sidebar {
-    grid-template-columns: 1fr;
-    gap: 15px;
+@media (max-width: 800px) {
+  .articles-sidebar{
+    display: none;
   }
-
-  .search-section {
-    margin-bottom: 25px;
-    padding: 6px;
-  }
-
-  .articles-container {
-    gap: 15px;
+  .articles-main {
+    width: 100%;
   }
 }
 

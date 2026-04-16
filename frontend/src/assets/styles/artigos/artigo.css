@@ -81,3 +81,12 @@
   font-size: 0.9rem;
   color:  var(--black-900);
 }
+
+/* Conteúdo do artigo */
+.article-content {
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  white-space: pre-wrap;
+}

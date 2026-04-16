@@ -1,5 +1,6 @@
 import fotoPsi from '../../assets/img/perfil-card.png';
 
+
 export default function CardPsicologos({
     perfis,
     setSelectedPerfil,

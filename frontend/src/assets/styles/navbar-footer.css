@@ -415,7 +415,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--primary-orange-700);
+  background-color: var(--tertiary-light-green-700);
   bottom: 0;
   top: 100vh;
   width: 100%;
