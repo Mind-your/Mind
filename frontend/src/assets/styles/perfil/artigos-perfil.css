@@ -41,15 +41,14 @@
     display:flex;
     flex-direction:column;
     gap:25px;
+    width: 100%
 }
 
 .artigo-card{
     background:var(--white-200);
     border-radius:10px;
     padding:25px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    width: 100%;
 }
 
 .artigo-info{
@@ -89,9 +88,16 @@
 .btns-articles-edit{
     display:flex;
     flex-direction: row;
-    gap:10px;
+    width: 100%;
+    justify-content: space-between;
 }
-
+.container-edit-excluir{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding-inline:2rem;
+}
 .btn-publish {
     background-color: var(--green-600) !important;
 }

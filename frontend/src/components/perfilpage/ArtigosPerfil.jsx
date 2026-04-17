@@ -15,7 +15,7 @@ export default function ArtigosPerfil({ id }) {
   const [deletando, setDeletando] = useState(false);
   const [loading, setLoading] = useState(true);
   const [busca, setBusca] = useState("");
-  const [artigos, setArtigos] = useState([]); 
+  const [artigos, setArtigos] = useState([]);
 
   useEffect(() => {
     fetchArtigos();
@@ -90,8 +90,8 @@ export default function ArtigosPerfil({ id }) {
               </h3>
 
               <p>
-                {artigo.corpo?.length > 100 
-                  ? `${artigo.corpo.substring(0, 100)}...` 
+                {artigo.corpo?.length > 100
+                  ? `${artigo.corpo.substring(0, 100)}...`
                   : artigo.corpo}
               </p>
 
@@ -107,47 +107,51 @@ export default function ArtigosPerfil({ id }) {
 
                 <div className="btns-articles-edit">
 
-                  <button className="icon-attention" 
-                    onClick={() => {
-                      setOpenDeletePopup(true)
-                      setIsOpen(true);
-                      setArtigoSelecionado(artigo.id)
-                    }} 
-                    disabled={deletando}><HiOutlineTrash/>
-                  </button>
+                  <div className="container-edit-excluir">
+                    <button className="icon-attention"
+                      onClick={() => {
+                        setOpenDeletePopup(true)
+                        setIsOpen(true);
+                        setArtigoSelecionado(artigo.id)
+                      }}
+                      disabled={deletando}><HiOutlineTrash />
+                    </button>
 
-                  <button 
-                    className="icon-edit" 
-                    onClick={() => navigate(`/adicionar-artigos/${artigo.id}`)}> 
-                    <HiOutlinePencilAlt />
-                  </button>
+                    <button
+                      className="icon-edit"
+                      onClick={() => navigate(`/adicionar-artigos/${artigo.id}`)}>
+                      <HiOutlinePencilAlt />
+                    </button>
+                  </div>
 
-                  <button 
+
+                  {/* <button 
                     className={`button-confirm button-ver-artigo ${artigo.publicado ? 'btn-unpublish' : 'btn-publish'}`}
                     onClick={() => togglePublicacao(artigo.id)}>
                       {artigo.publicado ? 'Tornar Privado' : 'Publicar'}
                   </button>
+                    */}
 
-                  <button 
-                    className="button-confirm button-ver-artigo" 
+                  <button
+                    className="button-confirm button-ver-artigo"
                     onClick={() => navigate(`/artigo/${artigo.id}`)}>
-                      Ver
+                    Ver
                   </button>
                 </div>
               </div>
             </div>
-            
-            <Deletar 
-                open={isOpen && artigoSelecionado === artigo.id} 
-                close={() => {
-                  setIsOpen(false);
-                  setArtigoSelecionado(null);
-                }}
-                onConfirm={() => removePublishedArticle(artigo.id)}
-                loading={deletando}
-                title="Deletar artigo"
-                message="Você tem certeza que deseja deletar este artigo? Esta ação não pode ser desfeita e o artigo será removido permanentemente da plataforma."
-                confirmText="Deletar artigo"
+
+            <Deletar
+              open={isOpen && artigoSelecionado === artigo.id}
+              close={() => {
+                setIsOpen(false);
+                setArtigoSelecionado(null);
+              }}
+              onConfirm={() => removePublishedArticle(artigo.id)}
+              loading={deletando}
+              title="Deletar artigo"
+              message="Você tem certeza que deseja deletar este artigo? Esta ação não pode ser desfeita e o artigo será removido permanentemente da plataforma."
+              confirmText="Deletar artigo"
             />
           </div>
         ))}

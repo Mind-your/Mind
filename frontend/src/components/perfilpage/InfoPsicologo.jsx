@@ -24,7 +24,7 @@ export default function InfoPsicologo({ profileData }) {
 
           <div className="container-info">
             <p id="perfilLocal">Local:</p>
-            <label>{profileData.local || "local teste"}</label>
+            <label>{profileData.local || "Local - UF"}</label>
           </div>
 
           <div className="container-info">
@@ -55,7 +55,7 @@ export default function InfoPsicologo({ profileData }) {
             >
               <HiOutlineMail />
             </button>
-            <span>{profileData.local || "Cidade - UF"}</span>
+            <span>{profileData.email || "seuemail.com"}</span>
           </div>
         </div>
 

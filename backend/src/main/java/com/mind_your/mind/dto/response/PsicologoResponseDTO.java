@@ -14,10 +14,11 @@ public class PsicologoResponseDTO {
     private List<String> especialidades;
     private String telefone;
     private String sobreMim;
+    private String email;
 
     public PsicologoResponseDTO(String id, String nome, String sobrenome, Integer idade, String local,
                                  String imgPerfil, String crp, List<String> especialidades,
-                                 String telefone, String sobreMim) {
+                                 String telefone, String sobreMim, String email) {
 
         this.id = id;
         this.nome = nome;
@@ -29,6 +30,7 @@ public class PsicologoResponseDTO {
         this.especialidades = especialidades;
         this.telefone = telefone;
         this.sobreMim = sobreMim;
+        this.email = email;
     }
 
     public String getId() { return id; }
@@ -43,4 +45,5 @@ public class PsicologoResponseDTO {
 
     public String getTelefone() { return telefone; }
     public String getSobreMim() { return sobreMim; }
+    public String getEmail() { return email; }
 }

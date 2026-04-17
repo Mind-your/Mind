@@ -29,7 +29,8 @@ public class PsicologoMapper {
                 p.getCrp(),
                 p.getEspecialidades(),
                 p.getTelefone(),
-                p.getSobreMim()
+                p.getSobreMim(),
+                p.getEmail()
         );
     }
 
