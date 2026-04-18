@@ -2,8 +2,7 @@ import '../../assets/styles/landingpage/hero-apresentacao.css';
 
 import logomarca from '../../assets/img/logomarca.svg'
 import logo from '../../assets/img/logo.svg'
-import bg from "../../assets/img/Wallpaper01.png"
-import bg2 from "../../assets/img/Wallpaper02.png"
+import bg2 from "../../assets/img/imagem-home.png"
 
 import { useAuth } from '../../context/AuthContext';
 

@@ -17,13 +17,13 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 5px 15px;
-  background: rgba(255, 255, 255, 0.6);
+  background: transparent;
 }
 
 nav > ul,
 a {
   list-style: none;
-  color: var(--dark-100)
+  color: var(--black-950)
 }
 
 .logotipo {
@@ -39,7 +39,7 @@ a {
   width: max-content;
   border-radius: var(--border-radius-md);
   color: white;
-  background-color: var(--green-default-100);
+  background-color: var(--accent-dark-green-700);
   cursor: pointer;
 }
 
@@ -68,16 +68,16 @@ a {
   border: none;
   font-size: 1rem;
   background-color: transparent;
-  color: var(--white-default-100);
+  color: var(--white-50);
   cursor: pointer;
   padding: var(--spacing-xs);
   width: 100%;
 }
 
 .nav-login-drop button:hover {
-  background-color: var(--green-light-default-100);
+  background-color: var(--tertiary-light-green-700);
   border-radius: var(--border-radius-sm);
-  color: var(--dark-100)
+  color: var(--black-950)
 }
 
 .notif-wrapper {
@@ -113,7 +113,7 @@ a {
   top: 38px;
   right: 100%;
   width: 260px;
-  background: white;
+  background: var(--white-50);
   border-radius: 10px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   padding: 10px;
@@ -122,7 +122,7 @@ a {
 
 .notif-item {
   padding: 10px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid var(--white-500);
   font-size: 14px;
 }
 
@@ -375,7 +375,7 @@ a {
   left: 0;
   width: 100%;
   height: 60px;
-  background-color: var(--white-default-100);
+  background-color: var(--white-200);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -388,7 +388,7 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: var(--dark-100);
+  color: var(--black-950);
   text-decoration: none;
   font-size: 1.5rem;
   transition: color 0.3s;
@@ -399,12 +399,12 @@ a {
   bottom: -5px;
   width: 3px;
   height: 3px;
-  background-color: var(--green-default-100);
+  background-color: var(--accent-dark-green-700);
   border-radius: 100%;
 }
 
 .nav-mobile .nav-item.active {
-  color: var(--green-default-100);
+  color: var(--accent-dark-green-700);
 }
 
 
@@ -415,7 +415,7 @@ footer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: var(--orange-default-100);
+  background-color: var(--tertiary-light-green-700);
   bottom: 0;
   top: 100vh;
   width: 100%;
@@ -429,7 +429,7 @@ footer > nav {
 }
 
 footer hr {
-  background-color: var(--black-default-100);
+  background-color: var(--black-950);
   height: 1px;
   width: 80%;
   border: none;

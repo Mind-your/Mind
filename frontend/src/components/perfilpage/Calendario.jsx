@@ -126,7 +126,7 @@ export default function Calendario() {
 
 
       </div>
-      <div className="container-legenda">
+      <div className="container-legenda-calendario">
         <div className="block-legenda">
           <span className="consulta-marcada"></span>
           <p>Consuta-marcada</p>

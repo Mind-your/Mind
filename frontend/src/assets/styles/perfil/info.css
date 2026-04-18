@@ -95,18 +95,14 @@
 /* Botão de ("Config") do Perfil*/
 
 .button-config {
-  background: var(--green-default-100);
-  color: var(--white-default-100);
+  background: var(--accent-dark-green-700);
+  color: var(--white-200);
   border: none;
   border-radius: 8px;
   padding: 10px 22px;
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.2s;
-}
-
-.button-config:hover {
-  background: var(--sea-green-100);
 }
 
 .button-config a {

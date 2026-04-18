@@ -18,7 +18,7 @@ section.login-inputs {
     flex-direction: column;
     align-items: center;
     padding-inline: 30px;
-    justify-content: start;
+    justify-content: center;
 }
 
 
@@ -48,7 +48,7 @@ section.login-inputs {
 
 .login-titulo {
     width: 100%;
-    color: var(--dark-100);
+    color: var(--black-950);
     display: flex;
     letter-spacing: 2px;
     font-weight: 600;
@@ -108,7 +108,7 @@ input[readonly] {
     font-size: 14px;
     background: #fafafa;
     transition: 0.25s;
-    border: 1px solid var(--gray-100);
+    border: 1px solid var(--white-800);
     outline: none;
     width: 100%;
     border-radius: 10px;
@@ -139,7 +139,7 @@ input[readonly] {
     display: flex;
     margin-top: 10px;
     border-radius: var(--border-radius-lg);
-    border: 1px solid var(--gray-100);
+    border: 1px solid var(--white-800);
     width: fit-content;
     min-height: fit-content;
 }
@@ -160,13 +160,13 @@ input[readonly] {
 }
 
 .container-options button:hover {
-    background-color: var(--white-default-100);
+    background-color: var(--white-200);
 }
 
 /* Cor quando o botão estiver ativo */
 .container-options button.active {
-    background-color: var(--green-light-default-100);
-    color: var(--black-default-100);
+    background-color: var(--tertiary-light-green-700);
+    color: var(--black-950);
     transform: scale(1.05);
     font-weight: 500;
 }

@@ -1,5 +1,8 @@
 .section-landingpage{
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+}
+
+.section-landingpage > section{
+    background-color: var(--white-200);
 }

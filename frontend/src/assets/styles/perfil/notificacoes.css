@@ -5,13 +5,13 @@
 .notif-container{
   width: 100%;
   height: 100%;
-  background: var(--bege-default-100);
+  background: var(--secondary-cream-70);
   border-radius: 20px;
   padding-bottom: 20px;
 }
 
 .notif-header{
-  background: var(--orange-default-100);
+  background: var(--primary-orange-700);
   padding: 20px;
   border-radius: 20px 20px 0 0;
   text-align: center;
@@ -26,7 +26,7 @@
   display:flex;
   justify-content:space-between;
   align-items:center;
-  background:var(--grayish-white-100);
+  background:var(--white-500);
   margin:20px;
   padding:20px;
   border-radius:20px;
@@ -39,7 +39,7 @@
 }
 
 .notif-date{
-  font-size:25px;
+  font-size:1rem;
   font-weight:600;
 }
 

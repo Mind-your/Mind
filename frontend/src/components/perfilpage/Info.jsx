@@ -14,7 +14,7 @@ export default function Info({ profileData }) {
     const [imageError, setImageError] = useState(false);
 
     // URL da imagem do perfil
-    const imageUrl = imageError ? getDefaultAvatar() : getImageUrl(user?.imgPerfil);
+    const imageUrl = imageError ? getDefaultAvatar() : getImageUrl(profileData?.imgPerfil);
 
     const handleImageUpload = async (e) => {
         const file = e.target.files[0];

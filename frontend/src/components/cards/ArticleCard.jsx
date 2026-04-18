@@ -3,7 +3,7 @@ import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultArticleImg from "../../assets/img/articles.png";
-import DefaultProfileImg from "../../assets/img/perfil-default.png";
+import { getImageUrl, getDefaultAvatar } from "../../utils/imageHelper";
 
 export default function ArticleCard({ article }) {
     const navigate = useNavigate();
@@ -12,9 +12,7 @@ export default function ArticleCard({ article }) {
         ? `http://localhost:8080/api/images/articles/${article.imagem}` 
         : DefaultArticleImg;
 
-    const authorImg = article.autorAvatar 
-        ? `http://localhost:8080/api/images/${article.autorAvatar}` 
-        : DefaultProfileImg;
+    const authorImg = getImageUrl(article.autorAvatar) || getDefaultAvatar();
 
     const formattedDate = article.dataCriacao 
         ? new Date(article.dataCriacao).toLocaleDateString('pt-BR') 
@@ -29,16 +27,25 @@ export default function ArticleCard({ article }) {
             <div className="article-content">
                 <h2 className="article-title">{article.titulo}</h2>
                 <p className="article-description">
-                    {article.corpo?.length > 120 
-                        ? `${article.corpo.substring(0, 120)}...` 
+                    {article.corpo?.length > 240 
+                        ? `${article.corpo.substring(0, 220)}...` 
                         : article.corpo}
                 </p>
 
                 <div className="article-footer">
                     <div className="article-meta">
-                        <img src={authorImg} alt={article.autorNome} className="author-avatar" />
+                        <img 
+                            src={authorImg} 
+                            alt={article.autorNome} 
+                            className="author-avatar"
+                            onError={(e) => {
+                                if (e.currentTarget.src !== getDefaultAvatar()) {
+                                    e.currentTarget.src = getDefaultAvatar();
+                                }
+                            }}
+                        />
                         <div className="author-info">
-                            <span className="author-name">{article.autorNome}</span>
+                            <span className="author-name">@{article.autorNome}</span>
                             <span className="article-date">{formattedDate}</span>
                         </div>
                     </div>
@@ -46,11 +53,11 @@ export default function ArticleCard({ article }) {
                 <div className="container-likes-view">
                     <div className="article-stats">
                         <div className="stat">
-                            <AiOutlineLike className="stat-icon" />
+                            <AiOutlineLike className="stat-icon" id="IconLike" />
                             <span>{article.likes || 0}</span>
                         </div>
                         <div className="stat">
-                            <AiOutlineEye className="stat-icon" />
+                            <AiOutlineEye className="stat-icon" id="IconView"/>
                             <span>{article.views || 0}</span>
                         </div>
                     </div>

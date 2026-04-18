@@ -35,9 +35,15 @@ export default function Configuracoes() {
         sobrenome: '',
         dtNascimento: '',
         telefone: '',
-        endereco: '',
-        genero: '',
-        // Informações Gerais
+        sexo: '',
+        CPF: '',
+        // Endereço
+        cep: '',
+        rua: '',
+        numeroResidencia: '',
+        cidade: '',
+        uf: '',
+        // Credenciais
         login: '',
         email: '',
         senha: '',
@@ -68,7 +74,14 @@ export default function Configuracoes() {
                         sobrenome: data.sobrenome || '',
                         dtNascimento: data.dtNascimento || '',
                         telefone: data.telefone || '',
-                        genero: data.genero || '',
+                        sexo: data.sexo || data.genero || '',
+                        CPF: data.CPF || '',
+                        // Endereço
+                        cep: data.cep || '',
+                        numeroResidencia: data.numeroResidencia || '',
+                        cidade: data.cidade || '',
+                        uf: data.uf || '',
+                        rua: data.endereco || data.rua || '',
                         // Credenciais
                         login: data.login || '',
                         email: data.email || '',
@@ -78,12 +91,6 @@ export default function Configuracoes() {
                         medicamentos: data.medicamentos || '',
                         preferencias: data.preferencias || '',
                         especializacoes: data.especializacoes || [],
-                        // Endereço (somente paciente costuma preencher completo aqui, mas deixamos dinamico)
-                        cep: data.cep || '',
-                        numeroResidencia: data.numeroResidencia || '',
-                        cidade: data.cidade || '',
-                        uf: data.uf || '',
-                        rua: data.endereco || data.rua || ''
                     }));
                 } catch (error) {
                     toast.error("Erro ao carregar configurações completas.");

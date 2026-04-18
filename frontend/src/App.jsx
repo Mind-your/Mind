@@ -5,6 +5,7 @@
   import "../src/assets/styles//ui/icons.css";
 
   import MainLayout from "./layout/MainLayout";
+  import ScrollToTop from "./components/ScrollToTop";
   import LandingPage from "./pages/LandingPage";
   import Home from "./pages/Home";
   import Artigos from "./pages/Artigos";
@@ -26,6 +27,7 @@
 
     return (
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<MainLayout />}>
             {/* Rotas públicas */}

@@ -10,7 +10,7 @@ ul.cards-horarios li{
 }
 
 .container-agendamento {
-    background-color: var(--silver-chalice-100);
+    background-color: var(--white-700);
     padding: var(--spacing-xs);
     margin-top: var(--spacing-xs);
     border-radius: var(--border-radius-md);
