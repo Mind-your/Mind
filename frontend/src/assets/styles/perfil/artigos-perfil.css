@@ -65,6 +65,9 @@
     font-size:1rem;
     color:var(--black-950);
     padding: 10px 0;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
 .artigo-info-footer{

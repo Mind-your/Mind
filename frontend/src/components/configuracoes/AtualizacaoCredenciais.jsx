@@ -12,6 +12,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
                     placeholder="Login"
                     value={formData.login}
                     onChange={handleChange}
+                    autoComplete="username"
                 />
             </div>
             <div className="input-e-span">
@@ -24,6 +25,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
                     placeholder="E-mail"
                     value={formData.email}
                     onChange={handleChange}
+                    autoComplete="email"
                 />
             </div>
             <div className="input-e-span">
@@ -36,6 +38,7 @@ export default function AtualizacaoCredenciais({ formData, handleChange }) {
                     placeholder="Nova senha"
                     value={formData.senha}
                     onChange={handleChange}
+                    autoComplete="new-password"
                 />    
             </div>
         </div>

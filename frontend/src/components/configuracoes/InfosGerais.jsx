@@ -28,6 +28,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         name="nome"
                         value={formData.nome}
                         onChange={handleChange}
+                        autoComplete="given-name"
                     />
                 </div>
 
@@ -41,6 +42,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         placeholder="Sobrenome"
                         value={formData.sobrenome}
                         onChange={handleChange}
+                        autoComplete="family-name"
                     />
                 </div>
 
@@ -54,6 +56,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         placeholder="Data de nascimento"
                         value={formatarData(formData.dtNascimento)}
                         onChange={handleChange}
+                        autoComplete="bday"
                     />
                 </div>
 
@@ -67,6 +70,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         placeholder="Telefone"
                         value={formData.telefone}
                         onChange={handleChange}
+                        autoComplete="tel"
                     />
                 </div>
 
@@ -80,6 +84,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         placeholder="CPF"
                         value={formData.CPF}
                         onChange={handleChange}
+                        autoComplete="off"
                     />
                 </div>
 
@@ -110,6 +115,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         value={formData.cep}
                         onChange={handleChange}
                         onBlur={handleCepBlur}
+                        autoComplete="postal-code"
                     />
                 </div>
 
@@ -153,6 +159,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         onChange={handleChange}
                         onBlur={handleEnderecoBlur}
                         readOnly={isCepValid}
+                        autoComplete="address-level2"
                     />
                 </div>
 
@@ -168,6 +175,7 @@ export default function InfosGerais({ formData, handleChange, handleCepBlur, han
                         onChange={handleChange}
                         onBlur={handleEnderecoBlur}
                         readOnly={isCepValid}
+                        autoComplete="address-level1"
                     />
                 </div>
             </div>

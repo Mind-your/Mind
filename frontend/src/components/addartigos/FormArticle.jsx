@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import CardReferencias from "../cards/CardReferencias";
+import "../../assets/styles/components/toggle-switch.css";
 
 export default function FormArticle({
     imgWallpaperArtigo,
@@ -89,17 +90,30 @@ export default function FormArticle({
                     />
                 ))}
             </div>
-            <div className="containers-articles checkbox-container">
-                <label className="checkbox-label">
-                    <input 
-                        id="publicado" 
-                        name="publicado"
-                        type="checkbox" 
-                        checked={articleData.publicado || false}
-                        onChange={handleChange}
-                    />
-                    <span>Publicar artigo imediatamente</span>
-                </label>
+            <div className="containers-articles toggle-container">
+                <label>Visibilidade do artigo</label>
+                <div className="toggle-switch">
+                    <button
+                        type="button"
+                        className={`toggle-btn ${articleData.publicado ? 'public' : 'private'}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleChange({
+                                target: {
+                                    id: 'publicado',
+                                    value: !articleData.publicado,
+                                    type: 'checkbox',
+                                    checked: !articleData.publicado
+                                }
+                            });
+                        }}
+                    >
+                        <span className="toggle-label">
+                            {articleData.publicado ? 'Público' : 'Privado'}
+                        </span>
+                        <span className="toggle-circle"></span>
+                    </button>
+                </div>
             </div>
             <div className="container-atualizar-article">
                 <button id="btnAtualizarPerfil" type="submit" className="btns button-confirm" disabled={salvando}>

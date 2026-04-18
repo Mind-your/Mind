@@ -3,7 +3,7 @@ import { AiOutlineLike, AiOutlineEye } from "react-icons/ai";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import DefaultArticleImg from "../../assets/img/articles.png";
-import DefaultProfileImg from "../../assets/img/perfil-default.png";
+import { getImageUrl, getDefaultAvatar } from "../../utils/imageHelper";
 
 export default function ArticleCard({ article }) {
     const navigate = useNavigate();
@@ -12,9 +12,7 @@ export default function ArticleCard({ article }) {
         ? `http://localhost:8080/api/images/articles/${article.imagem}` 
         : DefaultArticleImg;
 
-    const authorImg = article.autorAvatar 
-        ? `http://localhost:8080/api/images/${article.autorAvatar}` 
-        : DefaultProfileImg;
+    const authorImg = getImageUrl(article.autorAvatar) || getDefaultAvatar();
 
     const formattedDate = article.dataCriacao 
         ? new Date(article.dataCriacao).toLocaleDateString('pt-BR') 
@@ -36,7 +34,16 @@ export default function ArticleCard({ article }) {
 
                 <div className="article-footer">
                     <div className="article-meta">
-                        <img src={authorImg} alt={article.autorNome} className="author-avatar" />
+                        <img 
+                            src={authorImg} 
+                            alt={article.autorNome} 
+                            className="author-avatar"
+                            onError={(e) => {
+                                if (e.currentTarget.src !== getDefaultAvatar()) {
+                                    e.currentTarget.src = getDefaultAvatar();
+                                }
+                            }}
+                        />
                         <div className="author-info">
                             <span className="author-name">@{article.autorNome}</span>
                             <span className="article-date">{formattedDate}</span>

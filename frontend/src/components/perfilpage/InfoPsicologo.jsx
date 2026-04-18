@@ -1,6 +1,7 @@
 import { useAuth } from "../../context/AuthContext";
 import { HiOutlinePhone, HiOutlineMail } from "react-icons/hi";
 import fotoPsi from '../../assets/img/perfil-default.png';
+import { getImageUrl, getDefaultAvatar } from "../../utils/imageHelper";
 import "../../assets/styles/perfil/info.css";
 import { Link } from "react-router-dom";
 
@@ -13,7 +14,16 @@ export default function InfoPsicologo({ profileData }) {
     <div className="card-perfil-content">
       <div className="foto-perfil">
         <div className="banner-perfil"></div>
-        <img id="perfilFoto" src={profileData.foto || fotoPsi} alt="Foto do Psicólogo" />
+        <img 
+          id="perfilFoto" 
+          src={getImageUrl(profileData.imgPerfil) || getDefaultAvatar()} 
+          alt="Foto do Psicólogo"
+          onError={(e) => {
+            if (e.currentTarget.src !== getDefaultAvatar()) {
+              e.currentTarget.src = getDefaultAvatar();
+            }
+          }}
+        />
         <div className="info-perfil">
           <h3 id="perfilNome">{profileData.nome}</h3>
 

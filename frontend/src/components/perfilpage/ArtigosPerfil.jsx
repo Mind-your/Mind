@@ -110,7 +110,6 @@ export default function ArtigosPerfil({ id }) {
                   <div className="container-edit-excluir">
                     <button className="icon-attention"
                       onClick={() => {
-                        setOpenDeletePopup(true)
                         setIsOpen(true);
                         setArtigoSelecionado(artigo.id)
                       }}
@@ -123,6 +122,7 @@ export default function ArtigosPerfil({ id }) {
                       <HiOutlinePencilAlt />
                     </button>
                   </div>
+                  
 
 
                   {/* <button 
