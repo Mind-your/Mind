@@ -1,4 +1,4 @@
-import fotoPsi from '../../assets/img/perfil-card.png';
+import fotoPsi from '../../assets/img/perfil-default.png';
 
 
 export default function CardPsicologos({

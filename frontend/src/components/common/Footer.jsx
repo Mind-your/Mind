@@ -74,7 +74,7 @@ export default function Footer() {
                 </div>
             </nav>
             <hr/>
-            <p className="footer-copyright">&copy; 2025 All rights reserved - Mind</p>
+            <p className="footer-copyright">&copy; 2026 All rights reserved - Mind</p>
         </footer>
     </>
   )

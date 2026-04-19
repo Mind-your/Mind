@@ -51,6 +51,11 @@ export default function InfoPublicoPsicologo() {
                             <p>Local:</p>
                             <label>{perfil.local || "—"}</label>
                         </div>
+
+                        <div className="container-info">
+                            <p>CRP:</p>
+                            <label>{perfil.crp || "—"}</label>
+                        </div>
                     </div>
                 </div>
 
