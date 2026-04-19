@@ -36,7 +36,7 @@ export default function PerfilPublicoPsicologo() {
     <div className="container-section-perfil">
       <div className="sobre-notif-container">
         <InfoPublicoPsicologo />
-        <SobrePsicologo />
+        <SobrePsicologo profileData={psicologos}/>
       </div>
 
       <div className="perfil-container">

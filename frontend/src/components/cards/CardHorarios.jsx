@@ -1,5 +1,5 @@
 import { HiChevronDown } from "react-icons/hi";
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { criarHorario, deletarHorario } from "../../services/horarioService";
 import { useAuth } from "../../context/AuthContext";
 
