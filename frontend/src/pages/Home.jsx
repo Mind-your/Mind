@@ -2,6 +2,7 @@ import SearchSection from "../components/homepage/SearchSection";
 import AreaCards from "../components/homepage/AreaCards";
 import VerPsi from "../components/popups/Verpsi";
 import ActiveFilters from "../components/homepage/ActiveFilters";
+import SkipNavigation from "../components/SkipNavigation";
 import { useState, useEffect } from "react";
 import { usePsicologos } from "../context/Psicologos";
 import '../assets/styles/home/filtros-home.css';
@@ -71,6 +72,7 @@ export default function Home() {
   if (loading) {
     return (
       <>
+        <SkipNavigation mainContent="sectionHome" />
         <SearchSection 
           selectedSpecialities={selectedSpecialities}
           setSelectedSpecialities={setSelectedSpecialities}
@@ -102,6 +104,7 @@ export default function Home() {
   if (error) {
     return (
       <>
+        <SkipNavigation mainContent="sectionHome" />
         <SearchSection 
           selectedSpecialities={selectedSpecialities}
           setSelectedSpecialities={setSelectedSpecialities}
@@ -131,6 +134,7 @@ export default function Home() {
 
   return (
     <>
+      <SkipNavigation mainContent="sectionHome" />
       <SearchSection 
         selectedSpecialities={selectedSpecialities}
         setSelectedSpecialities={setSelectedSpecialities}

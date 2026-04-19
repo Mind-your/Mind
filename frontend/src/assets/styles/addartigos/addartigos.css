@@ -50,6 +50,8 @@ section.config{
 /* Tipografia da página ---------------------------- */
 .containers-articles label{
     font-weight: 500;
+    display: flex;
+    gap: var(--spacing-xs)
 }
 
 .container-edit-artigo > h3{
