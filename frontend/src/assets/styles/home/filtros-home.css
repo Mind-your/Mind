@@ -10,7 +10,7 @@ section.section-filter{
     
 }
 .section-filters-searchbox{
-    background-color: var(--alabaster-100);
+    background-color: var(--white-300);
     border-radius: var(--border-radius-md);
     margin: var(--spacing-xs);
     padding-top: var(--spacing-xs);
@@ -39,14 +39,14 @@ section.section-filter{
     width: 100%;
     padding: 11px;
     border-radius: 10px 0px 0px 10px;
-    border: 1px solid var(--alto-100);
+    border: 1px solid var(--white-600);
 }
 .search-boxes input:focus{
     outline: none;
-    border: 1px solid var(--green-default-100);
+    border: 1px solid var(--accent-dark-green-700);
 }
 .search-boxes input::placeholder {
-    color: var(--dove-gray-100);
+    color: var(--white-700);
     font-size: 1rem;
 }
 
@@ -94,8 +94,8 @@ button.btn-searchbox{
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--green-default-100);
-  color: var(--white-default-100);
+  background: var(--accent-dark-green-700);
+  color: var(--white-200);
   border: none;
   border-radius: 8px;
   padding: 10px 14px;
@@ -106,7 +106,7 @@ button.btn-searchbox{
 }
 
 .btn-searchbox:hover {
-  background: var(--green-light-default-100);
+  background: var(--tertiary-light-green-700);
 }
 
 .seta-filtro {
@@ -121,7 +121,7 @@ button.btn-searchbox{
     width: 100%;
     display: flex;
     flex-direction: column;
-    background: var(--green-default-100);
+    background: var(--accent-dark-green-700);
     border-radius: var(--border-radius-md);
     gap: 8px;
     padding: 10px 12px;
@@ -155,19 +155,19 @@ button.btn-searchbox{
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: 2px solid var(--green-light-default-100);
+  border: 2px solid var(--tertiary-light-green-700);
   margin-right: 6px;
   vertical-align: middle;
   transition: background 0.2s ease;
 }
 
 .checkbox-input input:checked + span::before {
-  background-color: var(--green-light-default-100);
+  background-color: var(--tertiary-light-green-700);
 }
 
 .titulo-checkbox {
   font-size: 0.8rem;
-  color: var(--white-default-100);
+  color: var(--white-200);
   font-family: "Poppins", sans-serif;
   font-weight: 600;
   cursor: pointer;
@@ -178,7 +178,7 @@ button.btn-searchbox{
 }
 
 .titulo-checkbox:hover {
-  color: var(--green-light-default-100);
+  color: var(--tertiary-light-green-700);
 }
 
 
@@ -211,14 +211,14 @@ button.btn-searchbox{
 
 .button-col:not(.active),
 .button-row:not(.active){
-    background-color: var(--silver-chalice-100);
-    color: var(--white-default-100);
+    background-color: var(--white-700);
+    color: var(--white-200);
 }
 
 .button-col.active,
 .button-row.active {
-    background: var(--green-light-default-100) !important;
-    color: var(--dark-100);
+    background: var(--tertiary-light-green-700) !important;
+    color: var(--black-950);
 }
 
 /*--------------BUTTON MAIS-------------*/

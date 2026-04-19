@@ -1,32 +1,45 @@
-import "../../assets/styles/artigos/articles-sidebar.css";
-import { AiOutlineEye } from "react-icons/ai";
+  import "../../assets/styles/artigos/articles-sidebar.css";
+  import { AiOutlineEye } from "react-icons/ai";
+  import DefaultProfileImg from "../../assets/img/perfil-default.png";
+  import { Link } from "react-router-dom";
 
-export default function ArticlesMostViewed({ articles }) {
-  const topViewed = articles
-    .slice()
-    .sort((a, b) => b.views - a.views)
-    .slice(0, 4);
+  export default function ArticlesMostViewed({ articles }) {
+    const topViewed = articles
+      .slice()
+      .sort((a, b) => b.views - a.views)
+      .slice(0, 4);
 
-  return (
-    <aside className="sidebar-box">
-      <div className="sidebar-header">
-        <AiOutlineEye className="sidebar-icon" />
-        <h3>ARTIGOS MAIS VISTOS</h3>
-      </div>
+    return (
+      <aside className="sidebar-box">
+        <div className="sidebar-header">
+          <AiOutlineEye className="sidebar-icon" />
+          <h3>ARTIGOS MAIS VISTOS</h3>
+        </div>
 
-      <div className="sidebar-articles">
-        {topViewed.map((article) => (
-          <div key={article.id} className="sidebar-article-card">
-            <img src={article.avatar} alt={article.autor} className="avatar" />
-            <div className="sidebar-article-info">
-              <h4>{article.title}</h4>
-              <span className="view-count">
-                <AiOutlineEye /> {article.views}
-              </span>
-            </div>
-          </div>
-        ))}
-      </div>
-    </aside>
-  );
-}
+        <div className="sidebar-articles">
+          {topViewed.map((article) => {
+            const authorImg = article.autorAvatar
+              ? `http://localhost:8080/api/images/${article.autorAvatar}`
+              : DefaultProfileImg;
+
+            return (
+              <Link
+                key={article.id}
+                to={`/artigo/${article.id}`}
+                className="sidebar-article-card"
+              >
+                <img src={authorImg} alt={article.autorNome} className="avatar" />
+
+                <div className="sidebar-article-info">
+                  <h4>{article.titulo}</h4>
+                  <span className="view-count">
+                    <AiOutlineEye /> {article.views}
+                  </span>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </aside>
+    );
+  }

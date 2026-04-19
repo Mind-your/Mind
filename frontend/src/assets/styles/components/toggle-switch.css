@@ -1,0 +1,75 @@
+/* Toggle Switch Style */
+.toggle-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.toggle-switch {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-btn {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    background-color: #e0e0e0;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding: 0;
+}
+
+/* Estado Privado (esquerda) */
+.toggle-btn.private {
+    background-color: var(--primary-orange-900);
+}
+
+/* Estado Público (direita) */
+.toggle-btn.public {
+    background-color: var(--tertiary-light-green-700);
+}
+
+.toggle-circle {
+    position: absolute;
+    top: 50%;
+    left: 4px;
+    width: 18px;
+    height: 18px;
+    background-color: white;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    transition: left 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn.public .toggle-circle {
+    left: calc(100% - 22px);
+}
+
+.toggle-label {
+    position: absolute;
+    top: 50%;
+    left: 120%;
+    width: 100%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--black-700);
+    text-align: center;
+    pointer-events: none;
+    letter-spacing: 0.5px;
+}
+
+/* Hover effect */
+.toggle-btn:hover {
+    opacity: 0.9;
+}
+
+/* Focus state para acessibilidade */
+.toggle-btn:focus {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}

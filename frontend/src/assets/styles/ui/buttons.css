@@ -57,7 +57,7 @@
 }
 
 .button-proceed:hover{
-    background-color: var(--accent-mid-orange-700);
+    background-color: var(--primary-orange-700);
 }
 
 /* Botão (atenção) */
@@ -113,7 +113,7 @@
 
 .button-open-pop-up{
     background-color: var(--white-600);
-    color: var(--dark-100);
+    color: var(--black-900);
     padding:10px 20px;
     font-weight: 500;
     font-size: 1rem;
@@ -133,8 +133,8 @@
 /* Botão de ("ver") dos card psi*/
 .button-ver-card-psi {
     cursor: pointer;
-    color: var(--white-default-100);
-    background-color: var(--red-default-100);
+    color: var(--white-50);
+    background-color: var(--accent-dark-green-700);
     padding:10px 20px;
     font-weight: 500;
     font-size: 1rem;
@@ -142,13 +142,13 @@
     border-radius: var(--border-radius-md);
 }
 .button-ver-card-psi:hover {
-    background-color: var(--paarl-100);
+    background-color: var(--accent-dark-green-600);
 }
 
 /* Botão de ("mais") da home*/
 .button-mais {
-    background-color: var(--green-default-100);
-    color: var(--white-default-100);
+    background-color: var(--accent-dark-green-700);
+    color: var(--white-50);
     padding:10px 25px;
     font-weight: 500;
     font-size: 1.1rem;
@@ -161,8 +161,7 @@
     align-content: center;
 }
 .button-mais:hover {
-    background-color: var(--green-light-default-100);
-    color: var(--black-default-100);
+    background-color: var(--accent-dark-green-600);
 }
 /* Botão de ("seta-calendario") do Perfil*/
 

@@ -10,7 +10,6 @@ export default function CardReferencias({
     <>
         <div className="container-referencias">
             <div>
-                <label htmlFor="name-reference">Nome da Referência</label>
                 <input 
                     id="name-reference" 
                     type="text" 
@@ -21,7 +20,6 @@ export default function CardReferencias({
             </div>
 
             <div>
-                <label htmlFor="link-reference">Link</label>
                 <input 
                     className="input-with-icon"
                     id="link-reference" 

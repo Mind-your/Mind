@@ -46,6 +46,7 @@ export default function Artigos() {
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
             className="search-input"
+            
           />
           <button type="submit" className="search-button">
             <HiOutlineSearch className="search-icon" />

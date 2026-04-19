@@ -1,9 +1,15 @@
+.section-info{
+    background-color: var(--white-200);
+}
 .section-info > p{
     text-align: justify;
-    margin: -20px 8%;
+    padding-inline: 15%;
+    padding-bottom: 2rem;
 }
 .section-info h1{
     padding: 3rem;
+    width: 100%;
+    text-align: center;
 }
 
 .info-grid{
@@ -12,7 +18,8 @@
     gap: var(--spacing-sm);
     justify-content: center;
     align-content: center;
-    margin: var(--spacing-xl)
+    padding: 1rem;
+
 }
 
 .info{
@@ -27,13 +34,13 @@
     background-color:#F2F2F2;
 }
 .info-1 > h2{
-    color: var(--green-default-100)
+    color: var(--accent-dark-green-700)
 }
 
 .info-2 > h2,
 .info-3 > h2,
 .info-4 > h2{
-    color: var(--metallic-copper-100);
+    color: var(--accent-mid-orange-950);
 }
 
 /* Botão --------------------- */
@@ -50,7 +57,7 @@
     border:none;
     background-color: transparent;
     font-size: 1rem;
-    color: var(--green-default-100);
+    color: var(--accent-dark-green-700);
     cursor: pointer;
     font-weight: 600;
 }
@@ -65,9 +72,9 @@
 
 /* Responsividade ----------------- */
 
-@media(max-width:800px){
+@media(max-width:900px){
     .section-info > p{
-        margin: 10px;
+        padding: 1rem;
     }
     .info-grid{
         grid-template-columns: auto;

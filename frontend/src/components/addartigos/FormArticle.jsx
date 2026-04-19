@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import CardReferencias from "../cards/CardReferencias";
+import "../../assets/styles/components/toggle-switch.css";
 
 export default function FormArticle({
     imgWallpaperArtigo,
@@ -20,7 +21,7 @@ export default function FormArticle({
     <>
         <form onSubmit={handleSubmitArticle} className="containers-articles">
             <h1>{articleData.id ? "Editar artigo" : "Novo artigo"}</h1>
-            <div className="img-wallpaper">
+            <div className="img-wallpaper-addartigo">
                 <figure className="figcaption-artigo">
                     <figcaption>Definir Papel de parede</figcaption>
                     <img
@@ -43,7 +44,7 @@ export default function FormArticle({
                         type="button"
                         className="btns button-confirm btns-image"
                         onClick={() => inputRef.current.click()}>
-                        Adicionar
+                        Mudar foto
                     </button>
                 </div>
             </div>
@@ -76,7 +77,7 @@ export default function FormArticle({
                 <span id="add-referencias-btn">Compartilhe as referencias necessárias para o acesso da veracidade das informações passadas durante o artigo</span>
                 <button
                   type="button"
-                  className="btn-adicionar button-proceed"
+                  className="btn-adicionar button-proceed btn-add-references"
                   aria-describedby="add-referencias-btn"
                   onClick={() => newCardReference()}>
                   + Adicionar referências</button>
@@ -89,17 +90,30 @@ export default function FormArticle({
                     />
                 ))}
             </div>
-            <div className="containers-articles checkbox-container">
-                <label className="checkbox-label">
-                    <input 
-                        id="publicado" 
-                        name="publicado"
-                        type="checkbox" 
-                        checked={articleData.publicado || false}
-                        onChange={handleChange}
-                    />
-                    <span>Publicar artigo imediatamente</span>
-                </label>
+            <div className="containers-articles toggle-container">
+                <label>Visibilidade do artigo</label>
+                <div className="toggle-switch">
+                    <button
+                        type="button"
+                        className={`toggle-btn ${articleData.publicado ? 'public' : 'private'}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            handleChange({
+                                target: {
+                                    id: 'publicado',
+                                    value: !articleData.publicado,
+                                    type: 'checkbox',
+                                    checked: !articleData.publicado
+                                }
+                            });
+                        }}
+                    >
+                        <span className="toggle-label">
+                            {articleData.publicado ? 'Público' : 'Privado'}
+                        </span>
+                        <span className="toggle-circle"></span>
+                    </button>
+                </div>
             </div>
             <div className="container-atualizar-article">
                 <button id="btnAtualizarPerfil" type="submit" className="btns button-confirm" disabled={salvando}>

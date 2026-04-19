@@ -1,5 +1,7 @@
 import "../../assets/styles/artigos/articles-sidebar.css";
 import { AiOutlineLike } from "react-icons/ai";
+import DefaultProfileImg from "../../assets/img/perfil-default.png";
+import { Link } from "react-router-dom";
 
 export default function ArticlesMostLiked({ articles }) {
   const topLiked = articles
@@ -15,17 +17,28 @@ export default function ArticlesMostLiked({ articles }) {
       </div>
 
       <div className="sidebar-articles">
-        {topLiked.map((article) => (
-          <div key={article.id} className="sidebar-article-card">
-            <img src={article.avatar} alt={article.autor} className="avatar" />
-            <div className="sidebar-article-info">
-              <h4>{article.title}</h4>
-              <span className="like-count">
-                <AiOutlineLike /> {article.likes}
-              </span>
-            </div>
-          </div>
-        ))}
+        {topLiked.map((article) => {
+          const authorImg = article.autorAvatar
+            ? `http://localhost:8080/api/images/${article.autorAvatar}`
+            : DefaultProfileImg;
+
+          return (
+            <Link
+              key={article.id}
+              to={`/artigo/${article.id}`}
+              className="sidebar-article-card"
+            >
+              <img src={authorImg} alt={article.autorNome} className="avatar" />
+              
+              <div className="sidebar-article-info">
+                <h4>{article.titulo}</h4>
+                <span className="like-count">
+                  <AiOutlineLike /> {article.likes}
+                </span>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </aside>
   );

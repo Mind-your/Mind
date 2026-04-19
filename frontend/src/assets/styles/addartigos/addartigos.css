@@ -1,7 +1,40 @@
+section.config{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    padding-inline: 3rem;
+}
+
+.container-section{
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-lg);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.container-form-artigo{
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+    width: 100%;
+}
+
+
 .containers-articles{
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs)
+    gap: var(--spacing-xs);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.containers-articles * {
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 /* Indice Página de edit/add artigos ----------------*/
@@ -9,9 +42,9 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
-    margin-left:0px;
-    padding:10px;
-    width: 250px;
+    width: 20%;
+    box-sizing: border-box;
+    
 }
 
 /* Tipografia da página ---------------------------- */
@@ -31,25 +64,36 @@
 .containers-articles > h2{
     font-weight: 600;
     font-size: 1.6rem;
-    border-bottom: 3px solid var(--green-kelp-100);
+    border-bottom: 3px solid var(--black-700);
     margin:30px 0;
 }
 
 /* Imagem de perfil ---------------------------------*/
+
+.img-wallpaper-addartigo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+}
+
 .img-wallpaper-artigo{
-    width: clamp(300px, 50vw, 800px);
+    width: 100%;
     height: 180px;
     border-radius: 10px;
-    background-color: #29292969;
     border: 1px solid #ccc;
     object-fit: cover;
     object-position: center;
+    box-sizing: border-box;
 }
 
-.img-wallpaper figure.figcaption-artigo{
+.img-wallpaper-addartigo figure.figcaption-artigo{
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 /* Inputs de informação para criação de artigos ---- */
@@ -57,28 +101,32 @@
     width:100%;
     padding: var(--spacing-xs);
     border-radius: var(--border-radius-sm);
-    border: 1px solid var(--gray-100);
+    border: 1px solid var(--white-800);
     font-size: 1rem;
     margin-top:2px;
+    box-sizing: border-box;
 }
 
 /* Area de adicionar referencias ----------------- */
 .container-referencias{
-    background-color: var(--silver-chalice-100);
-    padding: var(--spacing-xs);
-    margin-top: var(--spacing-xs);
+    background-color: var(--white-600);
+    padding: var(--spacing-sm);
     border-radius: var(--border-radius-md);
     height: 100%;
     display: grid;
-    grid-template-columns: auto auto 40px;
+    grid-template-columns: 1fr 1fr 40px;
     align-items: center;
-    gap: var(--spacing-xs);
+    gap: var(--spacing-md);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .container-referencias input{
-    border: none!important;
+    border: 2px solid var(--white-800);
     border-radius: var(--border-radius-sm);
     padding: var(--spacing-xs);
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .container-referencias > div{
@@ -114,17 +162,28 @@
 .button-ver-artigo{
     font-size: 1.2rem !important;
 }
+.btn-add-references{
+    background: var(--tertiary-light-green-700)!important;
+}
+.btn-add-references:hover{
+    background: var(--tertiary-light-green-600)!important;
+}
 
 
 /* Responsividade -------------------------- */
 @media(max-width:800px){
+    .containers-articles {
+        padding: 0;
+        margin: 0;
+    }
+
     .container-atualizar{
         justify-content: end;
     }
 
     .container-referencias{
-        grid-template-columns: auto;
-        grid-template-rows: auto auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
     }   
 
     .close-icon-reference-card{
@@ -134,5 +193,9 @@
 
     .container-edit-artigo > h3{
         margin-top: 0px
+    }
+
+    .img-wallpaper-artigo {
+        width: 100%;
     }
 }
