@@ -1,0 +1,32 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: mind-mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  backend:
+    build:
+      context: ./backend
+    container_name: mind-backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongodb
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://mongodb:27017/mindDB
+      # Adicione outras variáveis de ambiente aqui se necessário
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: mind-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongodb_data:
