@@ -41,13 +41,14 @@ jobs:
           SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/mindDB
 
       - name: Gerar JAR
-        if: github.ref == 'refs/heads/main'
+        # Permite gerar o JAR tanto na main quanto na dev para testes
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         run: cd backend && mvn clean package -DskipTests
         env:
           SPRING_DATA_MONGODB_URI: mongodb://localhost:27017/mindDB
 
       - name: Upload JAR como artefato
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         uses: actions/upload-artifact@v4
         with:
           name: backend-jar
@@ -76,18 +77,19 @@ jobs:
         run: cd frontend && npm run build
 
       - name: Upload build como artefato
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
         uses: actions/upload-artifact@v4
         with:
           name: frontend-build
           path: frontend/dist
 
-  # DOCKER — Build & Push (Somente na Main)
+  # DOCKER — Build & Push
   docker-build-push:
     name: Docker Build & Push
     runs-on: ubuntu-latest
     needs: [backend, frontend]
-    if: github.ref == 'refs/heads/main'
+    # Liberado para main e dev
+    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/dev'
 
     steps:
       - name: Checkout código
@@ -105,19 +107,28 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
 
+      - name: Definir Tag da Imagem
+        id: vars
+        run: |
+          if [ "${{ github.ref_name }}" = "main" ]; then
+            echo "tag=latest" >> $GITHUB_OUTPUT
+          else
+            echo "tag=dev" >> $GITHUB_OUTPUT
+          fi
+
       - name: Build and push Backend
         uses: docker/build-push-action@v5
         with:
           context: ./backend
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/mind-backend:latest
+          tags: ${{ secrets.DOCKER_USER }}/mind-backend:${{ steps.vars.outputs.tag }}
 
       - name: Build and push Frontend
         uses: docker/build-push-action@v5
         with:
           context: ./frontend
           push: true
-          tags: ${{ secrets.DOCKER_USER }}/mind-frontend:latest
+          tags: ${{ secrets.DOCKER_USER }}/mind-frontend:${{ steps.vars.outputs.tag }}
 
   # DEPLOY — só na main
   deploy:
@@ -129,6 +140,5 @@ jobs:
     steps:
       - name: Deploy via Docker Compose
         run: |
-          echo "Para o deploy real, você pode usar um passo de SSH para rodar o comando no servidor:"
+          echo "Simulando deploy para a produção (Sempre via tag :latest)"
           echo "ssh user@ip 'docker-compose pull && docker-compose up -d'"
-          echo "Simulando deploy..."
